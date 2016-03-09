@@ -9,6 +9,8 @@ git commit -m 'testing...'
 #  git init
 #  git add .
 #  git commit -m 'first commit'
+#  git remote add origin https://github.com/Go-Live-Labs/hrboost.git
+#  git push -u origin master
 #  heroku login
 #  git remote -v
 #  heroku git:remote -a hrboost
