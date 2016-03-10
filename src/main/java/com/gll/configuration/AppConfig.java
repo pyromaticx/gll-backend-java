@@ -45,10 +45,14 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 	@Autowired
 	WebApplicationContext context;
 	
-	
 	@Autowired
 	private Environment environment;
 	
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/static/**").addResourceLocations("/static/");
+    }
+
 	@Bean
 	public OAuthServiceConfig getOAuthServiceConfig(){
 		OAuthServiceConfig linkedInServiceConfig = new OAuthServiceConfig();
@@ -70,7 +74,8 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 	 */
 	@Override
 	public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
-		configurer.ignoreAcceptHeader(true).defaultContentType(MediaType.TEXT_HTML);
+		//configurer.ignoreAcceptHeader(true).defaultContentType(MediaType.TEXT_HTML);
+		configurer.ignoreAcceptHeader(true).defaultContentType(MediaType.APPLICATION_JSON_UTF8);
 	}
 	
 	/*
@@ -165,14 +170,5 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     	tilesConfigurer.setDefinitions(arr);
     	tilesConfigurer.setPreparerFactoryClass(org.springframework.web.servlet.view.tiles3.SpringBeanPreparerFactory.class);
     	return tilesConfigurer;	
-    }
-    
-	
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/**").addResourceLocations("/static/");
-    }
-    
-    
-    
+    }    
 }

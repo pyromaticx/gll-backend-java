@@ -1,8 +1,8 @@
 package com.gll.controller;
 
-
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -22,6 +22,8 @@ import com.gll.service.UserService;
 @RestController
 public class UserController {
  
+	private static final Logger logger = Logger.getLogger(UserController.class);
+
     @Autowired
     UserService userService;  //Service which will do all data retrieval/manipulation work
  
@@ -31,6 +33,9 @@ public class UserController {
     @RequestMapping(value = "/users/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<UserModel>> listAllUser() {
         List<UserModel> userList = userService.getAllUser();
+        for(UserModel i : userList){
+    		logger.info(i);
+        }
         if(userList.isEmpty()){
             return new ResponseEntity<List<UserModel>>(HttpStatus.NO_CONTENT);//You many decide to return HttpStatus.NOT_FOUND
         }
@@ -79,7 +84,7 @@ public class UserController {
         System.out.println("Updating UserModel " + id);
          
         UserModel currentUserModel = userService.getUser(id);
-         
+         System.out.println("Going to update user : " + currentUserModel);
         if (currentUserModel==null) {
             System.out.println("UserModel with id " + id + " not found");
             return new ResponseEntity<UserModel>(HttpStatus.NOT_FOUND);

@@ -38,7 +38,8 @@ public class PersonController {
 	/* ============= Person Section Start ==================== */
 
 //	@RequestMapping(value = {"/person.html", "/person.json", "/person.xml", "/person.pdf", "/person.xls"}, method = RequestMethod.GET)
-	@RequestMapping(value = {"/person.html", "*"}, method = RequestMethod.GET)
+//	@RequestMapping(value = {"/person.html", "*"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/person.html"}, method = RequestMethod.GET)
 	public ModelAndView personPage(@ModelAttribute("person") Person person) {
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("person", person);

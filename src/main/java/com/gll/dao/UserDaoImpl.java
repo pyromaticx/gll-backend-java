@@ -18,8 +18,8 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public void postUser(UserModel UserModel) {
-		//sessionFactory.getCurrentSession().saveOrUpdate(UserModel);
-		sessionFactory.getCurrentSession().persist(UserModel);
+		sessionFactory.getCurrentSession().saveOrUpdate(UserModel);
+		//sessionFactory.getCurrentSession().persist(UserModel);
 	}
 
 	@Override
@@ -35,7 +35,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public void putUser(UserModel UserModel) {
-		// TODO Auto-generated method stub
+		sessionFactory.getCurrentSession().saveOrUpdate(UserModel);
 
 	}
 
@@ -48,7 +48,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public void deleteUser(String UserId) {
 		sessionFactory.getCurrentSession()
-				.createQuery("DELETE FROM UserModel WHERE UserId = " + UserId).executeUpdate();
+				.createQuery("DELETE FROM UserModel WHERE id = " + UserId).executeUpdate();
 
 	}
 

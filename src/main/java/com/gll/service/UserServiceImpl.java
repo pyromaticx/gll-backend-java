@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void putUser(UserModel UserModel) {
-		// TODO Auto-generated method stub
+		UserDao.putUser(UserModel);
 		
 	}
 
