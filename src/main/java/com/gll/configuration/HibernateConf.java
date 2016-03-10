@@ -43,7 +43,30 @@ public class HibernateConf {
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 
-		if (environment.getRequiredProperty("database.driver").equals("org.postgresql.Driver")) {
+		if (environment.getRequiredProperty("database.name").equals("mysql_development")) {
+			logger.info("...............registering mysql.......");
+			dataSource.setDriverClassName(environment.getRequiredProperty("database.driver"));
+			dataSource.setUrl(environment.getRequiredProperty("database.url"));
+			dataSource.setUsername(environment.getRequiredProperty("database.user"));
+			dataSource.setPassword(environment.getRequiredProperty("database.password"));
+			logger.info("...............mysql registered.......");
+		
+		}else if(environment.getRequiredProperty("database.name").equals("postgres_test")){
+			logger.info("...............postgres driver detected.......");
+			dataSource.setDriverClassName(environment.getRequiredProperty("database.driver"));
+			try {
+				Class.forName("org.postgresql.Driver");
+				logger.info("...............postgres driver registered.......");
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+				logger.info("...............some error in postgres driver registration.......");
+			}
+			//dataSource.setUrl(environment.getRequiredProperty("database.url"));
+			//dataSource.setUsername(environment.getRequiredProperty("database.user"));
+			//dataSource.setPassword(environment.getRequiredProperty("database.password"));
+			dataSource.setUrl("postgres://czfqcikbflcyrz:ref7RkTr08xzUrVEP5CLeZU4gX@ec2-107-20-136-89.compute-1.amazonaws.com:5432/d9bgeojprit0cq");
+
+		}else if(environment.getRequiredProperty("database.name").equals("postgres_production")){
 			logger.info("...............postgres driver detected.......");
 			dataSource.setDriverClassName("org.postgresql.Driver");
 			try {
@@ -54,13 +77,6 @@ public class HibernateConf {
 				logger.info("...............some error in postgres driver registration.......");
 			}
 			dataSource.setUrl(System.getenv("JDBC_DATABASE_URL"));
-		} else {
-			logger.info("...............registering mysql.......");
-			dataSource.setDriverClassName(environment.getRequiredProperty("database.driver"));
-			dataSource.setUrl(environment.getRequiredProperty("database.url"));
-			dataSource.setUsername(environment.getRequiredProperty("database.user"));
-			dataSource.setPassword(environment.getRequiredProperty("database.password"));
-			logger.info("...............mysql registered.......");
 		}
 		return dataSource;
 	}

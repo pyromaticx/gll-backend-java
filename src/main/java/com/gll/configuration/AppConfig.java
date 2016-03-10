@@ -94,7 +94,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		//resolvers.add(jspViewResolver());
 		resolvers.add(pdfViewResolver());
 		resolvers.add(excelViewResolver());
-		resolvers.add(tilesViewResolver());
+	//	resolvers.add(tilesViewResolver());
 		
 		resolver.setViewResolvers(resolvers);
 		return resolver;
@@ -152,7 +152,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 	}
 
 	/*Tiles Configuration for Templating */
-	@Bean
+/*	@Bean
     TilesViewResolver tilesViewResolver(){
     	TilesViewResolver tilesViewResolver = new TilesViewResolver();
         return tilesViewResolver;
@@ -170,5 +170,5 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     	tilesConfigurer.setDefinitions(arr);
     	tilesConfigurer.setPreparerFactoryClass(org.springframework.web.servlet.view.tiles3.SpringBeanPreparerFactory.class);
     	return tilesConfigurer;	
-    }    
+    }*/    
 }

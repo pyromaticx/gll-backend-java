@@ -14,6 +14,7 @@
 		<profile>
 			<id>development</id>
 			<properties>
+				<database.name>mysql_development</database.name>
 				<database.driver>com.mysql.jdbc.Driver</database.driver>
 				<database.url>jdbc:mysql://localhost:3306/gllDB</database.url>
 				<database.user>root</database.user>
@@ -49,6 +50,47 @@
 				</plugins>
 			</build>
 		</profile>
+		
+		<profile>
+			<id>test</id>
+			<properties>
+				<database.name>postgres_test</database.name>
+				<database.driver>org.postgresql.Driver</database.driver>
+				<database.url>jdbc:postgresql://ec2-107-20-136-89.compute-1.amazonaws.com:5432/d9bgeojprit0cq</database.url>
+				<database.user>czfqcikbflcyrz</database.user>
+				<database.password>ref7RkTr08xzUrVEP5CLeZU4gX</database.password>
+				<hibernate.dialect>org.hibernate.dialect.PostgreSQLDialect</hibernate.dialect>
+				<hibernate.show_sql>true</hibernate.show_sql>
+				<hibernate.format_sql>true</hibernate.format_sql>
+				<hibernate.hbm2ddl.auto>update</hibernate.hbm2ddl.auto>
+				<logo.image>production_mylogo.png</logo.image>
+			</properties>
+
+			<dependencies>
+				<!-- Postgres -->
+				<dependency>
+					<groupId>postgresql</groupId>
+					<artifactId>postgresql</artifactId>
+					<version>9.1-901-1.jdbc4</version>
+					<scope>compile</scope>
+				</dependency>
+			</dependencies>
+
+			<build>
+				<plugins>
+					<!-- Tomcat 7 plugin for Local Testing... -->
+					<plugin>
+						<groupId>org.apache.tomcat.maven</groupId>
+						<artifactId>tomcat7-maven-plugin</artifactId>
+						<version>2.2</version>
+						<configuration>
+							<port>9090</port>
+							<path>/</path>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
 
 		<!-- Production Profile Starts Here -->
 
@@ -58,6 +100,7 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
+				<database.name>postgres_production</database.name>
 				<database.driver>org.postgresql.Driver</database.driver>
 				<database.url>jdbc:postgresql://ec2-107-20-136-89.compute-1.amazonaws.com:5432/d9bgeojprit0cq</database.url>
 				<database.user>czfqcikbflcyrz</database.user>
