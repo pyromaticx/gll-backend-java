@@ -1,5 +1,6 @@
 clear
 choice=""
+message=""
 echo "Where to run ? "
 echo " "
 echo "1. local machine "
@@ -21,8 +22,10 @@ then
         clear
         echo "Adding to GIT..."
         git add .
+        echo "Enter commit message... "
+        read message
         echo "Commiting to GIT...."
-        git commit -m 'testing...'
+        git commit -m $message
 
         # if you want to reset remote repo.
         #  rm -rf .git
