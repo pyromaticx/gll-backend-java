@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.gll.model.uxfeed.AnnotationModel;
-import com.gll.model.uxfeed.WebsiteModel;
 import com.gll.service.uxfeed.AnnotationService;
 
 @RestController
@@ -54,7 +53,7 @@ public class AnnotationController {
 	// -------------------Create a Record -----------------------
 
 	@RequestMapping(value = "/users/{userId}/websites/{websiteId}/annotations", method = RequestMethod.POST)
-	public ResponseEntity<Void> save(@RequestBody AnnotationModel annotationModel, UriComponentsBuilder ucBuilder) {
+	public ResponseEntity<Void> save(@PathVariable("userId") int userId, @PathVariable("websiteId") int websiteId, @RequestBody AnnotationModel annotationModel, UriComponentsBuilder ucBuilder) {
 		System.out.println("Creating AnnotationModel " + annotationModel.getAnnotationText());
 
 		if (annotationService.display(annotationModel.getAnnotationId()) != null) {

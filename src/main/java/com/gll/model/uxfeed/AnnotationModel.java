@@ -3,20 +3,22 @@ package com.gll.model.uxfeed;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import com.gll.bean.uxfeed.AnnotationBean;
+
 @Entity
 public class AnnotationModel {
 	@Id
-//	@GeneratedValue(strategy = GenerationType.AUTO)
+	// @GeneratedValue(strategy = GenerationType.AUTO)
 	private int annotationId;
 	private int userId;
 	private int websiteId;
-	private int annotationText;
+	private String annotationText;
 
 	public AnnotationModel() {
-
+		// TODO Auto-generated constructor stub
 	}
 
-	public AnnotationModel(int annotationId, int userId, int websiteId, int annotationText) {
+	public AnnotationModel(int annotationId, int userId, int websiteId, String annotationText) {
 		super();
 		this.annotationId = annotationId;
 		this.userId = userId;
@@ -48,18 +50,12 @@ public class AnnotationModel {
 		this.websiteId = websiteId;
 	}
 
-	public int getAnnotationText() {
+	public String getAnnotationText() {
 		return annotationText;
 	}
 
-	public void setAnnotationText(int annotationText) {
+	public void setAnnotationText(String annotationText) {
 		this.annotationText = annotationText;
-	}
-
-	@Override
-	public String toString() {
-		return "AnnotationBean [annotationId=" + annotationId + ", userId=" + userId + ", websiteId=" + websiteId
-				+ ", annotationText=" + annotationText + "]";
 	}
 
 	@Override
@@ -67,7 +63,7 @@ public class AnnotationModel {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + annotationId;
-		result = prime * result + annotationText;
+		result = prime * result + ((annotationText == null) ? 0 : annotationText.hashCode());
 		result = prime * result + userId;
 		result = prime * result + websiteId;
 		return result;
@@ -84,7 +80,10 @@ public class AnnotationModel {
 		AnnotationModel other = (AnnotationModel) obj;
 		if (annotationId != other.annotationId)
 			return false;
-		if (annotationText != other.annotationText)
+		if (annotationText == null) {
+			if (other.annotationText != null)
+				return false;
+		} else if (!annotationText.equals(other.annotationText))
 			return false;
 		if (userId != other.userId)
 			return false;
@@ -93,5 +92,10 @@ public class AnnotationModel {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "AnnotationBean [annotationId=" + annotationId + ", userId=" + userId + ", websiteId=" + websiteId
+				+ ", annotationText=" + annotationText + "]";
+	}
 
 }

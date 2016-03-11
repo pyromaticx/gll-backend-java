@@ -5,13 +5,13 @@ public class AnnotationBean {
 	private int annotationId;
 	private int userId;
 	private int websiteId;
-	private int annotationText;
-	
+	private String annotationText;
+
 	public AnnotationBean() {
-		
+
 	}
 
-	public AnnotationBean(int annotationId, int userId, int websiteId, int annotationText) {
+	public AnnotationBean(int annotationId, int userId, int websiteId, String annotationText) {
 		super();
 		this.annotationId = annotationId;
 		this.userId = userId;
@@ -43,18 +43,12 @@ public class AnnotationBean {
 		this.websiteId = websiteId;
 	}
 
-	public int getAnnotationText() {
+	public String getAnnotationText() {
 		return annotationText;
 	}
 
-	public void setAnnotationText(int annotationText) {
+	public void setAnnotationText(String annotationText) {
 		this.annotationText = annotationText;
-	}
-
-	@Override
-	public String toString() {
-		return "AnnotationBean [annotationId=" + annotationId + ", userId=" + userId + ", websiteId=" + websiteId
-				+ ", annotationText=" + annotationText + "]";
 	}
 
 	@Override
@@ -62,7 +56,7 @@ public class AnnotationBean {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + annotationId;
-		result = prime * result + annotationText;
+		result = prime * result + ((annotationText == null) ? 0 : annotationText.hashCode());
 		result = prime * result + userId;
 		result = prime * result + websiteId;
 		return result;
@@ -79,7 +73,10 @@ public class AnnotationBean {
 		AnnotationBean other = (AnnotationBean) obj;
 		if (annotationId != other.annotationId)
 			return false;
-		if (annotationText != other.annotationText)
+		if (annotationText == null) {
+			if (other.annotationText != null)
+				return false;
+		} else if (!annotationText.equals(other.annotationText))
 			return false;
 		if (userId != other.userId)
 			return false;
@@ -87,8 +84,11 @@ public class AnnotationBean {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
+
+	@Override
+	public String toString() {
+		return "AnnotationBean [annotationId=" + annotationId + ", userId=" + userId + ", websiteId=" + websiteId
+				+ ", annotationText=" + annotationText + "]";
+	}
+
 }
