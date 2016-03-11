@@ -41,9 +41,9 @@ then
         #  git push --force --set-upstream origin master
 
         echo "Pushing to GIT..."
-        git push -u origin master
+        git push --force origin master
         echo "Pushing to Heroku..."
-        git push heroku master
+        git push --force heroku master
         echo "Scaling Dyno..."
         heroku ps:scale web=1
         echo "Opening App..."
