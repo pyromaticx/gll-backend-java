@@ -1,4 +1,7 @@
 clear
+RED='\033[0;31m'
+NC='\033[0m'
+
 choice=""
 message=""
 echo "Where to run ? "
@@ -10,7 +13,10 @@ read choice;
 if [ "$choice" = "1" ] 
 then
         clear
+        printf "${RED}Running on Local Server....${NC}\n"
+        echo "${RED}Compling....${NC}\n"
         mvn clean install
+        echo "${RED}Now Going To Run....${NC}\n"
         mvn tomcat7:run -P development
 elif [ "$choice" = "2" ]
 then
@@ -20,9 +26,10 @@ then
 elif [ "$choice" = "3" ]
 then
         clear
-        echo "Adding to GIT..."
+        printf "${RED}Running on Production Server....${NC}\n"
+        echo "${RED} Adding to GIT...${NC}\n"
         git add .
-        echo "Enter commit message... "
+        echo "${RED} Enter commit message...${NC} \n"
         read message
         echo "Commiting to GIT...."
         git commit -m $message
@@ -42,14 +49,14 @@ then
 
         echo "Pushing to GIT..."
         git push --force origin master
-        echo "Pushing to Heroku..."
+        echo "${YELLOW}Pushing to Heroku...${NC}"
         git push --force heroku master
-        echo "Scaling Dyno..."
+        printf "${RED}Scaling Dyno...${NC}\n"
         heroku ps:scale web=1
         echo "Opening App..."
         heroku open
         choice=""
-        echo "Do you want to see logs? "
+        echo -e "\033[33;5;7m Do you want to see logs? \033[0m"
         read choice
         if [ "$choice" = "y" ] 
         then
