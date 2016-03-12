@@ -47,15 +47,14 @@ then
         #  git remote add origin https://github.com/Go-Live-Labs/hrboost.git
         #  git push --force --set-upstream origin master
 
-        echo "Pushing to GIT..."
+        echo -e "\033[33;5;7m Pushing to GIT... \033[0m"
         git push --force origin master
-        echo "${YELLOW}Pushing to Heroku...${NC}"
+        echo "${RED} Pushing to Heroku...${NC}"
         git push --force heroku master
-        printf "${RED}Scaling Dyno...${NC}\n"
+        printf "${RED} Going to Start http://hrboost.herokuapp.com ...${NC}\n"
         heroku ps:scale web=1
-        echo "Opening App..."
+        echo -e "\033[33;5;7m Opening Application in browser...\033[0m"
         heroku open
-        choice=""
         echo -e "\033[33;5;7m Do you want to see logs? \033[0m"
         read choice
         if [ "$choice" = "y" ] 
