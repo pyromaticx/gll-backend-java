@@ -64,7 +64,7 @@ public class HistoryController {
 		historyService.save(historyModel);
 
 		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(ucBuilder.path("/users/{userid}/websites/{websiteid}/visits").buildAndExpand(historyModel.getHistoryId()).toUri());
+		headers.setLocation(ucBuilder.path("/users/{userId}/websites/{websiteId}/visits").buildAndExpand(historyModel.getHistoryId()).toUri());
 		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 	}
 
