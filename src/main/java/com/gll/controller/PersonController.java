@@ -197,23 +197,4 @@ public class PersonController {
 		addressType.add("Current Address");
 		return addressType;
 	}
-	
-	/* =============(Rest Client by RestTemplate) Create Person Section Start ==================== */
-	
-	 @RequestMapping(value = "/createPerson/", method = RequestMethod.POST)
-	    public ResponseEntity<Void> createUser(@RequestBody Person person,    UriComponentsBuilder ucBuilder) {
-	        System.out.println("Creating Person " + person.getPersonName());
-	 
-	    /*    if (userService.isUserExist(user)) {
-	            System.out.println("A User with name " + user.getName() + " already exist");
-	            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
-	        }
-	 */
-	        PersonModel personModel = preparePersonModel(person);
-			personService.postPerson(personModel);
-	 
-	        HttpHeaders headers = new HttpHeaders();
-	        headers.setLocation(ucBuilder.path("/person/{personId}").buildAndExpand(person.getPersonId()).toUri());
-	        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
-	    }
 }

@@ -112,7 +112,7 @@ public class WebsiteController {
      
     //------------------- Delete All --------------------------------------------
      
-    @RequestMapping(value = "/users/{userId}/websites/", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/users/{userId}/websites", method = RequestMethod.DELETE)
     public ResponseEntity<WebsiteModel> deleteAll() {
         System.out.println("Deleting All WebsiteModels");
         websiteService.deleteWebsite(1);

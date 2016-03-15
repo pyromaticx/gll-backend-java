@@ -105,7 +105,7 @@ public class AnnotationController {
 
 	// ------------------- Delete All ---------------
 
-	@RequestMapping(value = "/users/{userId}/websites/{websiteId}/annotations/", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/users/{userId}/websites/{websiteId}/annotations", method = RequestMethod.DELETE)
 	public ResponseEntity<AnnotationModel> deleteAll() {
 		System.out.println("Deleting All AnnotationModels");
 		annotationService.delete(1);

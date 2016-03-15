@@ -35,7 +35,7 @@ then
         clear
         printf "${RED}[www.golivelabs.io] Running on Production Server....${NC}\n"
         echo "${RED} [ Go-Live-Labs ] Adding to GIT...${NC}\n"
-        git add .
+        git add --all
         echo "${RED} Enter commit message...${NC} \n"
         read message
         echo "Commiting to GIT...."
@@ -44,7 +44,7 @@ then
         # if you want to reset remote repo.
         #  rm -rf .git
         #  git init
-        #  git add .
+        #  git add --all
         #  git commit -m 'first commit'
         #  git remote add origin https://github.com/Go-Live-Labs/hrboost.git
         #  git push -u origin master
