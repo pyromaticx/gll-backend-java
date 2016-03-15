@@ -1,4 +1,11 @@
 clear
+echo "    #######  #######          #        ###  #           #  #######          #              #        #######  ####### "
+echo "    #        #     #          #         #    #         #   #                #             # #       #     #  #       "
+echo "    #        #     #          #         #     #       #    #                #            #   #      #     #  #       "
+echo "    #  ####  #     #          #         #      #     #     #######          #           #######     ######   ####### "
+echo "    #  #  #  #     #          #         #       #   #      #                #          #       #    #     #        # "
+echo "    #  #  #  #     #          #         #        # #       #                #         #         #   #     #        # "
+echo "    ####  #  #######          #######  ###        #        #######          #######  #           #  #######  ####### "
 RED='\033[0;31m'
 NC='\033[0m'
 
@@ -26,8 +33,8 @@ then
 elif [ "$choice" = "3" ]
 then
         clear
-        printf "${RED}Running on Production Server....${NC}\n"
-        echo "${RED} Adding to GIT...${NC}\n"
+        printf "${RED}[www.golivelabs.io] Running on Production Server....${NC}\n"
+        echo "${RED} [ Go-Live-Labs ] Adding to GIT...${NC}\n"
         git add .
         echo "${RED} Enter commit message...${NC} \n"
         read message
@@ -47,7 +54,7 @@ then
         #  git remote add origin https://github.com/Go-Live-Labs/hrboost.git
         #  git push --force --set-upstream origin master
 
-        echo -e "\033[33;5;7m Pushing to GIT... \033[0m"
+        echo -e "\033[33;5;7m Pushing to GIT [ Go-Live-Labs ] ... \033[0m"
         git push --force origin master
         echo "${RED} Pushing to Heroku...${NC}"
         git push --force heroku master

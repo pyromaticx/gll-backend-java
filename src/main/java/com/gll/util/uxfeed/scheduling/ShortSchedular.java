@@ -5,7 +5,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 
 @Repository
 public class ShortSchedular {
-	@Scheduled(fixedRate=2500)
+	@Scheduled(fixedRate=1000*60*10)
 	public void printMessage() {
 		System.out.println("I am frequent checker!!!");
 	}
