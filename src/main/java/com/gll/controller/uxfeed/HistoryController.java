@@ -28,7 +28,7 @@ public class HistoryController {
 
 	// -------------------Retrieve All -----------------------------------
 
-	@RequestMapping(value = "/users/{userid}/websites/{websiteid}/visits", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/users/{userId}/websites/{websiteId}/visits", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<HistoryModel>> displayAll(@PathVariable("userId") int userId, @PathVariable("websiteId") int websiteId) {
 		List<HistoryModel> historyList = historyService.displayAll();
 		if (historyList.isEmpty()) {
@@ -52,7 +52,7 @@ public class HistoryController {
 
 	// -------------------Create a Record -----------------------
 
-	@RequestMapping(value = "/users/{userid}/websites/{websiteid}/visits", method = RequestMethod.POST)
+	@RequestMapping(value = "/users/{userId}/websites/{websiteId}/visits", method = RequestMethod.POST)
 	public ResponseEntity<Void> save(@PathVariable("userId") int userId, @PathVariable("websiteId") int websiteId, @RequestBody HistoryModel historyModel, UriComponentsBuilder ucBuilder) {
 		System.out.println("Creating HistoryModel " + historyModel.getHistoryId());
 
