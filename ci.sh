@@ -56,6 +56,10 @@ then
 
         echo -e "\033[33;5;7m Pushing to GIT [ Go-Live-Labs ] ... \033[0m"
         git push --force origin master
+        
+        echo "${RED} Determining hrboost application usage... ${NC}\n"
+        heroku ps -a hrboost
+        
         echo "${RED} Pushing to Heroku...${NC}"
         git push --force heroku master
         printf "${RED} Going to Start http://hrboost.herokuapp.com ...${NC}\n"
