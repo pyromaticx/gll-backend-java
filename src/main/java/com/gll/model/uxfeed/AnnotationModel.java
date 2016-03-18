@@ -1,14 +1,14 @@
 package com.gll.model.uxfeed;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import com.gll.bean.uxfeed.AnnotationBean;
 
 @Entity
 public class AnnotationModel {
 	@Id
-	// @GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int annotationId;
 	private int userId;
 	private int websiteId;
