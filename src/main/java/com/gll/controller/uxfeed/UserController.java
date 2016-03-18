@@ -1,4 +1,4 @@
-package com.gll.controller;
+package com.gll.controller.uxfeed;
 
 import java.util.List;
 
@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.gll.model.UserModel;
-import com.gll.service.UserService;
+import com.gll.model.uxfeed.UserModel;
+import com.gll.service.uxfeed.UserService;
  
 
 @RestController
@@ -62,10 +62,10 @@ public class UserController {
      
     @RequestMapping(value = "/users/", method = RequestMethod.POST)
     public ResponseEntity<Void> createUserModel(@RequestBody UserModel userModel,    UriComponentsBuilder ucBuilder) {
-        System.out.println("Creating UserModel " + userModel.getName());
+        System.out.println("Creating UserModel " + userModel.getFirstName());
         
         if (userService.getUser(userModel.getId()) != null) {
-            System.out.println("A UserModel with name " + userModel.getName() + " already exist");
+            System.out.println("A UserModel with name " + userModel.getFirstName() + " already exist");
             return new ResponseEntity<Void>(HttpStatus.CONFLICT);
         }
  
@@ -91,8 +91,10 @@ public class UserController {
         }
  
         currentUserModel.setId(UserModel.getId());
-        currentUserModel.setName(UserModel.getName());
+        currentUserModel.setFirstName(UserModel.getFirstName());
+        currentUserModel.setLastName(UserModel.getLastName());
         currentUserModel.setEmail(UserModel.getEmail());
+        currentUserModel.setPassword(UserModel.getPassword());
          
         userService.putUser(currentUserModel);
         return new ResponseEntity<UserModel>(currentUserModel, HttpStatus.OK);

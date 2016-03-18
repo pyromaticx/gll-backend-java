@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.gll.dao.UserDao;
+import com.gll.dao.uxfeed.UserDao;
 import com.gll.dao.uxfeed.WebsiteDao;
-import com.gll.model.UserModel;
+import com.gll.model.uxfeed.UserModel;
 import com.gll.model.uxfeed.WebsiteModel;
 
 @Service("websiteService")

@@ -1,9 +1,9 @@
-package com.gll.dao;
+package com.gll.dao.uxfeed;
 
 
 import java.util.List;
 
-import com.gll.model.UserModel;
+import com.gll.model.uxfeed.UserModel;
 
 public interface UserDao {
 	public void postUser(UserModel UserModel);

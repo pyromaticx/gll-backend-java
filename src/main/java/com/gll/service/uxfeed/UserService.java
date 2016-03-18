@@ -1,8 +1,8 @@
-package com.gll.service;
+package com.gll.service.uxfeed;
 
 import java.util.List;
 
-import com.gll.model.UserModel;
+import com.gll.model.uxfeed.UserModel;
 
 public interface UserService {
 	public void postUser(UserModel UserModel);

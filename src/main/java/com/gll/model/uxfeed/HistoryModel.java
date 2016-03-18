@@ -11,7 +11,7 @@ import javax.persistence.Id;
 public class HistoryModel {
 
 	@Id
-//	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int historyId;
 	private int userId;
 	private int websiteId;

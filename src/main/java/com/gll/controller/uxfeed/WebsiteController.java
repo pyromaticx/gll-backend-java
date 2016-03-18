@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.gll.model.UserModel;
+import com.gll.model.uxfeed.UserModel;
 import com.gll.model.uxfeed.WebsiteModel;
 import com.gll.service.uxfeed.WebsiteService;
 
