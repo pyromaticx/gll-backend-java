@@ -1,4 +1,4 @@
-package com.gll.service;
+package com.gll.service.hrboost;
 
 import java.util.List;
 
@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.gll.dao.PersonDao;
-import com.gll.model.PersonModel;
+import com.gll.dao.hrboost.PersonDao;
+import com.gll.model.hrboost.PersonModel;
 
 @Service("personService")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = false)

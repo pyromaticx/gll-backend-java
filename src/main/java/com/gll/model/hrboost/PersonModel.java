@@ -1,4 +1,4 @@
-package com.gll.model;
+package com.gll.model.hrboost;
 
 import java.util.Date;
 import java.util.Set;

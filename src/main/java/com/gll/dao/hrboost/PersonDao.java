@@ -1,10 +1,11 @@
-package com.gll.service;
+package com.gll.dao.hrboost;
 
 import java.util.List;
 
-import com.gll.model.PersonModel;
+import com.gll.model.hrboost.PersonModel;
 
-public interface PersonService {
+public interface PersonDao {
+	
 	public void postPerson(PersonModel personModel);
 	public List<PersonModel> getAllPerson();
 	public PersonModel getPerson(int personId);

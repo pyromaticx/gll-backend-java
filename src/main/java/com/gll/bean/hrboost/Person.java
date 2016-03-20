@@ -1,4 +1,4 @@
-package com.gll.bean;
+package com.gll.bean.hrboost;
 
 import java.io.Serializable;
 import java.util.Date;

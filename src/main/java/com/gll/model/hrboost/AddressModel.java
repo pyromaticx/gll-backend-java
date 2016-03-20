@@ -1,33 +1,33 @@
-package com.gll.bean;
+package com.gll.model.hrboost;
 
-import java.io.Serializable;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
-import javax.validation.constraints.NotNull;
+@Entity
+public class AddressModel {
 
-import org.hibernate.validator.constraints.NotEmpty;
-
-public class Address implements Serializable {
-
-	private static final long serialVersionUID = 7406870150481458935L;
-
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int addressId;
-	@NotEmpty
 	private String line1;
-	@NotEmpty
 	private String line2;
 	private String line3;
-	@NotEmpty
 	private String city;
 	private String province;
 	private String country;
 	private String otherDetails;
-	@NotEmpty
-	@NotNull
 	private String addressType; // history address or current address
 
-	private Person person;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "personId_addressId")
+	private PersonModel person;
 
-	public Address() {
+	public AddressModel() {
 		super();
 	}
 
@@ -96,11 +96,11 @@ public class Address implements Serializable {
 	}
 
 
-	public Person getPerson() {
+	public PersonModel getPerson() {
 		return person;
 	}
 
-	public void setPerson(Person person) {
+	public void setPerson(PersonModel person) {
 		this.person = person;
 	}
 

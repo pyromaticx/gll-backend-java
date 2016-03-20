@@ -24,8 +24,8 @@ import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
-import com.gll.bean.Person;
-import com.gll.controller.FrontController;
+import com.gll.bean.hrboost.Person;
+import com.gll.controller.hrboost.FrontController;
 import com.gll.viewResolvers.ExcelViewResolver;
 import com.gll.viewResolvers.Jaxb2MarshallingXmlViewResolver;
 import com.gll.viewResolvers.JsonViewResolver;

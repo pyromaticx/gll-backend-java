@@ -1,3 +1,4 @@
+package com.gll.controller.hrboost;
 /*package com.gll.controller;
 
 
@@ -25,35 +26,36 @@ import org.springframework.web.servlet.ModelAndView;
 import com.gll.configuration.OAuthServiceProvider;
 
 @Controller
-public class FacebookController {
+public class TwitterController {
 	
 	@Autowired
-	@Qualifier("facebookServiceProvider")
-	private OAuthServiceProvider facebookServiceProvider;
+	@Qualifier("twitterServiceProvider")
+	private OAuthServiceProvider twitterServiceProvider;
 	
-	private static final Token EMPTY_TOKEN = null;
-	
-	@RequestMapping(value={"/login-facebook"}, method = RequestMethod.GET)
+	@RequestMapping(value={"/login-twitter"}, method = RequestMethod.GET)
 	public String login(WebRequest request) {
 		
 		// getting request and access token from session
+		Token requestToken = (Token) request.getAttribute(ATTR_OAUTH_REQUEST_TOKEN, SCOPE_SESSION);
 		Token accessToken = (Token) request.getAttribute(ATTR_OAUTH_ACCESS_TOKEN, SCOPE_SESSION);
-		if(accessToken == null) {
+		if(requestToken == null || accessToken == null) {
 			// generate new request token
-			OAuthService service = facebookServiceProvider.getService();
-			request.setAttribute(ATTR_OAUTH_REQUEST_TOKEN, EMPTY_TOKEN, SCOPE_SESSION);
+			OAuthService service = twitterServiceProvider.getService();
+			requestToken = service.getRequestToken();
+			request.setAttribute(ATTR_OAUTH_REQUEST_TOKEN, requestToken, SCOPE_SESSION);
 			
-			// redirect to facebook auth page
-			return "redirect:" + service.getAuthorizationUrl(EMPTY_TOKEN);
+			// redirect to twitter auth page
+			return "redirect:" + service.getAuthorizationUrl(requestToken);
 		}
 		return "welcomePage";
 	}
 	
-	@RequestMapping(value={"/facebook-callback"}, method = RequestMethod.GET)
-	public ModelAndView callback(@RequestParam(value="code", required=false) String oauthVerifier, WebRequest request) {
+	@RequestMapping(value={"/twitter-callback"}, method = RequestMethod.GET)
+	public ModelAndView callback(@RequestParam(value="oauth_token", required=false) String oauthToken,
+			@RequestParam(value="oauth_verifier", required=false) String oauthVerifier, WebRequest request) {
 		
 		// getting request token
-		OAuthService service = facebookServiceProvider.getService();
+		OAuthService service = twitterServiceProvider.getService();
 		Token requestToken = (Token) request.getAttribute(ATTR_OAUTH_REQUEST_TOKEN, SCOPE_SESSION);
 		
 		// getting access token
@@ -64,8 +66,8 @@ public class FacebookController {
 		request.setAttribute(ATTR_OAUTH_ACCESS_TOKEN, accessToken, SCOPE_SESSION);
 		
 		// getting user profile
-		OAuthRequest oauthRequest = new OAuthRequest(Verb.GET, "https://graph.facebook.com/me");
-		service.signRequest(accessToken, oauthRequest);
+		OAuthRequest oauthRequest = new OAuthRequest(Verb.GET, "http://api.twitter.com/1/account/verify_credentials.xml");
+		service.signRequest(accessToken, oauthRequest); // the access token from step 4
 		Response oauthResponse = oauthRequest.send();
 		System.out.println(oauthResponse.getBody());
 

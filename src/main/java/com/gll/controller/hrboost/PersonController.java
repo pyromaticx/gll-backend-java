@@ -1,4 +1,4 @@
-package com.gll.controller;
+package com.gll.controller.hrboost;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,11 +23,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.gll.bean.Address;
-import com.gll.bean.Person;
-import com.gll.model.AddressModel;
-import com.gll.model.PersonModel;
-import com.gll.service.PersonService;
+import com.gll.bean.hrboost.Address;
+import com.gll.bean.hrboost.Person;
+import com.gll.model.hrboost.AddressModel;
+import com.gll.model.hrboost.PersonModel;
+import com.gll.service.hrboost.PersonService;
 
 @Controller
 public class PersonController {

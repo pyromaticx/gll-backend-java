@@ -8,8 +8,8 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.gll.bean.Address;
-import com.gll.bean.Person;
+import com.gll.bean.hrboost.Address;
+import com.gll.bean.hrboost.Person;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.pdf.PdfPTable;

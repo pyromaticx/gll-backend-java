@@ -1,4 +1,4 @@
-package com.gll.dao;
+package com.gll.dao.hrboost;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.gll.model.PersonModel;
+import com.gll.model.hrboost.PersonModel;
 
 @Repository("personDao")
 public class PersonDaoImpl implements PersonDao {

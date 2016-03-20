@@ -14,7 +14,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.springframework.web.servlet.view.document.AbstractExcelView;
 
-import com.gll.bean.Person;
+import com.gll.bean.hrboost.Person;
 
 
 public class ExcelView extends AbstractExcelView {

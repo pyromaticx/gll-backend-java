@@ -1,4 +1,4 @@
-package com.gll.restclient;
+package com.gll.restclient.hrboost;
 
 import java.net.URI;
 import java.util.LinkedHashMap;
@@ -6,7 +6,7 @@ import java.util.List;
  
 import org.springframework.web.client.RestTemplate;
 
-import com.gll.bean.Person;
+import com.gll.bean.hrboost.Person;
  
  
 public class PersonClient {

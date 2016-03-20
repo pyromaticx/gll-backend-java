@@ -1,4 +1,4 @@
-package com.gll.controller;
+package com.gll.controller.hrboost;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;

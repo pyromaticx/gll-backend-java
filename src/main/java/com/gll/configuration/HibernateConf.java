@@ -17,7 +17,7 @@ import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import com.gll.controller.FrontController;
+import com.gll.controller.hrboost.FrontController;
 
 @Configuration
 @EnableTransactionManagement

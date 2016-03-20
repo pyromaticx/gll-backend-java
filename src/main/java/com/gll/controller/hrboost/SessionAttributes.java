@@ -1,4 +1,4 @@
-package com.gll.controller;
+package com.gll.controller.hrboost;
 
 
 public interface SessionAttributes {
