@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.scribe.builder.api.LinkedInApi;
+/*import org.scribe.builder.api.LinkedInApi;*/
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -50,7 +50,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         registry.addResourceHandler("/static/**").addResourceLocations("/static/");
     }
 
-	@Bean
+/*	@Bean
 	public OAuthServiceConfig getOAuthServiceConfig(){
 		OAuthServiceConfig linkedInServiceConfig = new OAuthServiceConfig();
 		linkedInServiceConfig.setApiKey(environment.getRequiredProperty("app.config.oauth.linkedin.apikey"));
@@ -59,14 +59,14 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		linkedInServiceConfig.setApiClass(LinkedInApi.class);
 		return linkedInServiceConfig;
 	}
-	
-	@Bean
+*/	
+/*	@Bean
 	public OAuthServiceProvider getOAuthServiceProvider(){
 		OAuthServiceProvider linkedInServiceProvider = new OAuthServiceProvider(getOAuthServiceConfig());
 		return linkedInServiceProvider;
 		
 	}
-	/*
+*/	/*
 	 * Configure ContentNegotiationManager
 	 */
 	@Override

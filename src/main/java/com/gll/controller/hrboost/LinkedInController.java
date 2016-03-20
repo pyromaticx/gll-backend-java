@@ -1,4 +1,4 @@
-package com.gll.controller.hrboost;
+/*package com.gll.controller.hrboost;
 
 import static com.gll.controller.hrboost.SessionAttributes.ATTR_OAUTH_ACCESS_TOKEN;
 import static com.gll.controller.hrboost.SessionAttributes.ATTR_OAUTH_REQUEST_TOKEN;
@@ -69,4 +69,4 @@ public class LinkedInController {
 		ModelAndView mav = new ModelAndView("redirect:loginPage");
 		return mav;
 	}
-}
+}*/
