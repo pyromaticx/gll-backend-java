@@ -146,11 +146,17 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     
     @Bean
     TilesConfigurer tilesConfigurer(){
-    	String arr[] = new String[] { 
+    	/*String arr[] = new String[] { 
     			context.getServletContext().getContextPath()+"/WEB-INF/views/tiles/tiles.xml",
     			context.getServletContext().getContextPath()+"/WEB-INF/views/tiles/person.xml",
     			context.getServletContext().getContextPath()+"/WEB-INF/views/tiles/index.xml",
     			context.getServletContext().getContextPath()+"/WEB-INF/views/tiles/login.xml"
+    			};*/
+    	String arr[] = new String[] { 
+    			"WEB-INF/views/tiles/tiles.xml",
+    			"WEB-INF/views/tiles/person.xml",
+    			"WEB-INF/views/tiles/index.xml",
+    			"WEB-INF/views/tiles/login.xml"
     			};
     	TilesConfigurer tilesConfigurer = new TilesConfigurer();
     	tilesConfigurer.setDefinitions(arr);
