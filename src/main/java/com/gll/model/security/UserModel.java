@@ -1,19 +1,28 @@
-package com.gll.bean.uxfeed;
+package com.gll.model.security;
+
 
 import java.util.Arrays;
 
-public class UserBean {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+public class UserModel {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String firstName;
 	private String lastName;
 	private String email;
 	private char password[] = new char[25];
 
-	public UserBean() {
+	public UserModel() {
 
 	}
 
-	public UserBean(int id, String firstName, String lastName, String email, char[] password) {
+	public UserModel(int id, String firstName, String lastName, String email, char[] password) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -82,7 +91,7 @@ public class UserBean {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		UserBean other = (UserBean) obj;
+		UserModel other = (UserModel) obj;
 		if (email == null) {
 			if (other.email != null)
 				return false;

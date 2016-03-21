@@ -2,7 +2,7 @@ package com.gll.service.uxfeed;
 
 import java.util.List;
 
-import com.gll.model.uxfeed.UserModel;
+import com.gll.model.security.UserModel;
 import com.gll.model.uxfeed.WebsiteModel;
 
 public interface WebsiteService {

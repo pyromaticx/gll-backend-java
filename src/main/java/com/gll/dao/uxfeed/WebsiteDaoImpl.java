@@ -7,7 +7,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.gll.model.uxfeed.UserModel;
+import com.gll.model.security.UserModel;
 import com.gll.model.uxfeed.WebsiteModel;
 
 

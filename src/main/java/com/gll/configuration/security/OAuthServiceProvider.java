@@ -1,4 +1,4 @@
-/*package com.gll.configuration;
+package com.gll.configuration.security;
 
 import org.scribe.builder.ServiceBuilder;
 import org.scribe.oauth.OAuthService;
@@ -20,4 +20,4 @@ public class OAuthServiceProvider {
 				.apiSecret(config.getApiSecret()).callback(config.getCallback()).build();
 	}
 
-}*/
+}

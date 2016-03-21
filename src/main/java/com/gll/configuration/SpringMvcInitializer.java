@@ -5,13 +5,15 @@ import javax.servlet.ServletException;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import com.gll.configuration.security.OAuthConfig;
+import com.gll.configuration.security.OAuthServiceProvider;
 import com.gll.util.uxfeed.scheduling.SchedularConfig;
 
 public class SpringMvcInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return new Class[] { AppConfig.class, SchedularConfig.class};
+		return new Class[] {AppConfig.class, SchedularConfig.class};
 	}
  
 	@Override

@@ -1,11 +1,8 @@
-package com.gll.controller.hrboost;
-/*package com.gll.controller;
+/*package com.gll.controller.security;
 
-
+import static com.gll.controller.security.SessionAttributes.ATTR_OAUTH_ACCESS_TOKEN;
+import static com.gll.controller.security.SessionAttributes.ATTR_OAUTH_REQUEST_TOKEN;
 import static org.springframework.web.context.request.RequestAttributes.SCOPE_SESSION;
-import static com.gll.controller.SessionAttributes.ATTR_OAUTH_REQUEST_TOKEN;
-import static com.gll.controller.SessionAttributes.ATTR_OAUTH_ACCESS_TOKEN;
-
 import static org.springframework.web.context.request.RequestAttributes.SCOPE_SESSION;
 
 import org.scribe.model.OAuthRequest;
@@ -23,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.gll.configuration.OAuthServiceProvider;
+import com.gll.configuration.security.OAuthServiceProvider;
 
 @Controller
 public class FacebookController {

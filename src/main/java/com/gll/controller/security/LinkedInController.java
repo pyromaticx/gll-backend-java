@@ -1,11 +1,7 @@
-package com.gll.controller.hrboost;
-/*package com.gll.controller;
+package com.gll.controller.security;
 
-
-import static org.springframework.web.context.request.RequestAttributes.SCOPE_SESSION;
-import static com.gll.controller.SessionAttributes.ATTR_OAUTH_REQUEST_TOKEN;
-import static com.gll.controller.SessionAttributes.ATTR_OAUTH_ACCESS_TOKEN;
-
+import static com.gll.controller.security.SessionAttributes.ATTR_OAUTH_ACCESS_TOKEN;
+import static com.gll.controller.security.SessionAttributes.ATTR_OAUTH_REQUEST_TOKEN;
 import static org.springframework.web.context.request.RequestAttributes.SCOPE_SESSION;
 
 import org.scribe.model.OAuthRequest;
@@ -23,16 +19,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.gll.configuration.OAuthServiceProvider;
+import com.gll.configuration.security.OAuthServiceProvider;
 
 @Controller
-public class TwitterController {
+public class LinkedInController {
 	
 	@Autowired
-	@Qualifier("twitterServiceProvider")
-	private OAuthServiceProvider twitterServiceProvider;
+	//@Qualifier("linkedInServiceProvider")
+	private OAuthServiceProvider linkedInServiceProvider;
 	
-	@RequestMapping(value={"/login-twitter"}, method = RequestMethod.GET)
+	@RequestMapping(value={"/login-linkedin"}, method = RequestMethod.GET)
 	public String login(WebRequest request) {
 		
 		// getting request and access token from session
@@ -40,22 +36,21 @@ public class TwitterController {
 		Token accessToken = (Token) request.getAttribute(ATTR_OAUTH_ACCESS_TOKEN, SCOPE_SESSION);
 		if(requestToken == null || accessToken == null) {
 			// generate new request token
-			OAuthService service = twitterServiceProvider.getService();
+			OAuthService service = linkedInServiceProvider.getService();
 			requestToken = service.getRequestToken();
 			request.setAttribute(ATTR_OAUTH_REQUEST_TOKEN, requestToken, SCOPE_SESSION);
 			
-			// redirect to twitter auth page
+			// redirect to linkedin auth page
 			return "redirect:" + service.getAuthorizationUrl(requestToken);
 		}
-		return "welcomePage";
+		return "person.html";
 	}
 	
-	@RequestMapping(value={"/twitter-callback"}, method = RequestMethod.GET)
-	public ModelAndView callback(@RequestParam(value="oauth_token", required=false) String oauthToken,
-			@RequestParam(value="oauth_verifier", required=false) String oauthVerifier, WebRequest request) {
+	@RequestMapping(value={"/linkedin-callback"}, method = RequestMethod.GET)
+	public ModelAndView callback(@RequestParam(value="oauth_verifier", required=false) String oauthVerifier, WebRequest request) {
 		
-		// getting request token
-		OAuthService service = twitterServiceProvider.getService();
+		// getting request tocken
+		OAuthService service = linkedInServiceProvider.getService();
 		Token requestToken = (Token) request.getAttribute(ATTR_OAUTH_REQUEST_TOKEN, SCOPE_SESSION);
 		
 		// getting access token
@@ -66,12 +61,12 @@ public class TwitterController {
 		request.setAttribute(ATTR_OAUTH_ACCESS_TOKEN, accessToken, SCOPE_SESSION);
 		
 		// getting user profile
-		OAuthRequest oauthRequest = new OAuthRequest(Verb.GET, "http://api.twitter.com/1/account/verify_credentials.xml");
-		service.signRequest(accessToken, oauthRequest); // the access token from step 4
+		OAuthRequest oauthRequest = new OAuthRequest(Verb.GET, "http://api.linkedin.com/v1/people/~:(id,first-name,last-name,industry,headline)");
+		service.signRequest(accessToken, oauthRequest);
 		Response oauthResponse = oauthRequest.send();
 		System.out.println(oauthResponse.getBody());
 
 		ModelAndView mav = new ModelAndView("redirect:loginPage");
 		return mav;
 	}
-}*/
+}

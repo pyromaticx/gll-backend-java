@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.scribe.builder.api.LinkedInApi;
 /*import org.scribe.builder.api.LinkedInApi;*/
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -23,8 +24,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
+import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
 import com.gll.bean.hrboost.Person;
+import com.gll.configuration.security.OAuthServiceConfig;
+import com.gll.configuration.security.OAuthServiceProvider;
 import com.gll.controller.hrboost.FrontController;
 import com.gll.viewResolvers.ExcelViewResolver;
 import com.gll.viewResolvers.Jaxb2MarshallingXmlViewResolver;
@@ -42,35 +47,21 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 	@Autowired
 	WebApplicationContext context;
 	
+	@Autowired
+	Environment environment;
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**").addResourceLocations("/static/");
     }
-
-/*	@Bean
-	public OAuthServiceConfig getOAuthServiceConfig(){
-		OAuthServiceConfig linkedInServiceConfig = new OAuthServiceConfig();
-		linkedInServiceConfig.setApiKey(environment.getRequiredProperty("app.config.oauth.linkedin.apikey"));
-		linkedInServiceConfig.setApiSecret(environment.getRequiredProperty("app.config.oauth.linkedin.apisecret"));
-		linkedInServiceConfig.setCallback(environment.getRequiredProperty("app.config.oauth.linkedin.callback"));
-		linkedInServiceConfig.setApiClass(LinkedInApi.class);
-		return linkedInServiceConfig;
-	}
-*/	
-/*	@Bean
-	public OAuthServiceProvider getOAuthServiceProvider(){
-		OAuthServiceProvider linkedInServiceProvider = new OAuthServiceProvider(getOAuthServiceConfig());
-		return linkedInServiceProvider;
-		
-	}
-*/	/*
+	
+	/*
 	 * Configure ContentNegotiationManager
 	 */
 	@Override
 	public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
-		//configurer.ignoreAcceptHeader(true).defaultContentType(MediaType.TEXT_HTML);
-		configurer.ignoreAcceptHeader(true).defaultContentType(MediaType.APPLICATION_JSON_UTF8);
+		configurer.ignoreAcceptHeader(false).defaultContentType(MediaType.TEXT_HTML);
+	//	configurer.ignoreAcceptHeader(true).defaultContentType(MediaType.APPLICATION_JSON_UTF8);
 	}
 	
 	/*
@@ -89,7 +80,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		//resolvers.add(jspViewResolver());
 		resolvers.add(pdfViewResolver());
 		resolvers.add(excelViewResolver());
-	//	resolvers.add(tilesViewResolver());
+		resolvers.add(tilesViewResolver());
 		
 		resolver.setViewResolvers(resolvers);
 		return resolver;
@@ -147,7 +138,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 	}
 
 	/*Tiles Configuration for Templating */
-/*	@Bean
+	@Bean
     TilesViewResolver tilesViewResolver(){
     	TilesViewResolver tilesViewResolver = new TilesViewResolver();
         return tilesViewResolver;
@@ -165,5 +156,5 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     	tilesConfigurer.setDefinitions(arr);
     	tilesConfigurer.setPreparerFactoryClass(org.springframework.web.servlet.view.tiles3.SpringBeanPreparerFactory.class);
     	return tilesConfigurer;	
-    }*/    
+    }    
 }

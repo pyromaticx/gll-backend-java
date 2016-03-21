@@ -1,4 +1,4 @@
-package com.gll.controller.hrboost;
+package com.gll.controller.security;
 
 
 import org.springframework.stereotype.Controller;
