@@ -60,8 +60,8 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 	 */
 	@Override
 	public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
-		configurer.ignoreAcceptHeader(false).defaultContentType(MediaType.TEXT_HTML);
-	//	configurer.ignoreAcceptHeader(true).defaultContentType(MediaType.APPLICATION_JSON_UTF8);
+		//configurer.ignoreAcceptHeader(false).defaultContentType(MediaType.TEXT_HTML);
+		configurer.ignoreAcceptHeader(true).defaultContentType(MediaType.APPLICATION_JSON_UTF8);
 	}
 	
 	/*
@@ -80,7 +80,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		//resolvers.add(jspViewResolver());
 		resolvers.add(pdfViewResolver());
 		resolvers.add(excelViewResolver());
-		resolvers.add(tilesViewResolver());
+		//resolvers.add(tilesViewResolver());
 		
 		resolver.setViewResolvers(resolvers);
 		return resolver;
@@ -137,7 +137,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		return viewResolver;
 	}
 
-	/*Tiles Configuration for Templating */
+/*	Tiles Configuration for Templating 
 	@Bean
     TilesViewResolver tilesViewResolver(){
     	TilesViewResolver tilesViewResolver = new TilesViewResolver();
@@ -146,21 +146,21 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     
     @Bean
     TilesConfigurer tilesConfigurer(){
-    	/*String arr[] = new String[] { 
+    	String arr[] = new String[] { 
     			context.getServletContext().getContextPath()+"/WEB-INF/views/tiles/tiles.xml",
     			context.getServletContext().getContextPath()+"/WEB-INF/views/tiles/person.xml",
     			context.getServletContext().getContextPath()+"/WEB-INF/views/tiles/index.xml",
     			context.getServletContext().getContextPath()+"/WEB-INF/views/tiles/login.xml"
-    			};*/
+    			};
     	String arr[] = new String[] { 
-    			"WEB-INF/views/tiles/tiles.xml",
-    			"WEB-INF/views/tiles/person.xml",
-    			"WEB-INF/views/tiles/index.xml",
-    			"WEB-INF/views/tiles/login.xml"
+    			"classpath:/WEB-INF/views/tiles/tiles.xml",
+    			"classpath:/WEB-INF/views/tiles/person.xml",
+    			"classpath:/WEB-INF/views/tiles/index.xml",
+    			"classpath:/WEB-INF/views/tiles/login.xml"
     			};
     	TilesConfigurer tilesConfigurer = new TilesConfigurer();
     	tilesConfigurer.setDefinitions(arr);
     	tilesConfigurer.setPreparerFactoryClass(org.springframework.web.servlet.view.tiles3.SpringBeanPreparerFactory.class);
     	return tilesConfigurer;	
-    }    
+    }    */
 }
