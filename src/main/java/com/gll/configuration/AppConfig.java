@@ -18,6 +18,7 @@ import org.springframework.web.accept.ContentNegotiationManager;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -41,29 +42,40 @@ import com.gll.viewResolvers.PdfViewResolver;
 @ComponentScan(basePackages = "com.gll")
 @PropertySource(value = { "classpath:social.properties" })
 public class AppConfig extends WebMvcConfigurerAdapter {
-	
+
 	private static final Logger logger = Logger.getLogger(FrontController.class);
 
 	@Autowired
 	WebApplicationContext context;
-	
+
 	@Autowired
 	Environment environment;
 
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/**").addResourceLocations("/static/");
-    }
-	
+	@Override
+	public void addCorsMappings(CorsRegistry registry) {
+		registry.addMapping("/**")
+		//.registry.addMapping("/api/**")
+		//.allowedOrigins("http://domain2.com")
+		.allowedMethods("GET", "POST", "PUT", "DELETE")
+		.allowedHeaders("header1", "header2", "header3")
+		.exposedHeaders("header1", "header2")
+		.allowCredentials(false).maxAge(3600);
+	}
+
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/static/**").addResourceLocations("/static/");
+	}
+
 	/*
 	 * Configure ContentNegotiationManager
 	 */
 	@Override
 	public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
-		//configurer.ignoreAcceptHeader(false).defaultContentType(MediaType.TEXT_HTML);
+		// configurer.ignoreAcceptHeader(false).defaultContentType(MediaType.TEXT_HTML);
 		configurer.ignoreAcceptHeader(true).defaultContentType(MediaType.APPLICATION_JSON_UTF8);
 	}
-	
+
 	/*
 	 * Configure ContentNegotiatingViewResolver
 	 */
@@ -77,15 +89,15 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 
 		resolvers.add(jaxb2MarshallingXmlViewResolver());
 		resolvers.add(jsonViewResolver());
-		//resolvers.add(jspViewResolver());
+		// resolvers.add(jspViewResolver());
 		resolvers.add(pdfViewResolver());
 		resolvers.add(excelViewResolver());
-		//resolvers.add(tilesViewResolver());
-		
+		// resolvers.add(tilesViewResolver());
+
 		resolver.setViewResolvers(resolvers);
 		return resolver;
 	}
-	
+
 	/*
 	 * Configure View resolver to provide XML output Uses JAXB2 marshaller to
 	 * marshall/unmarshall POJO's (with JAXB annotations) to XML
@@ -107,8 +119,8 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 	}
 
 	/*
-	 * Configure View resolver to provide PDF output using lowagie pdf library to
-	 * generate PDF output for an object content
+	 * Configure View resolver to provide PDF output using lowagie pdf library
+	 * to generate PDF output for an object content
 	 */
 	@Bean
 	public ViewResolver pdfViewResolver() {
@@ -137,30 +149,28 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		return viewResolver;
 	}
 
-/*	Tiles Configuration for Templating 
-	@Bean
-    TilesViewResolver tilesViewResolver(){
-    	TilesViewResolver tilesViewResolver = new TilesViewResolver();
-        return tilesViewResolver;
-    }
-    
-    @Bean
-    TilesConfigurer tilesConfigurer(){
-    	String arr[] = new String[] { 
-    			context.getServletContext().getContextPath()+"/WEB-INF/views/tiles/tiles.xml",
-    			context.getServletContext().getContextPath()+"/WEB-INF/views/tiles/person.xml",
-    			context.getServletContext().getContextPath()+"/WEB-INF/views/tiles/index.xml",
-    			context.getServletContext().getContextPath()+"/WEB-INF/views/tiles/login.xml"
-    			};
-    	String arr[] = new String[] { 
-    			"classpath:/WEB-INF/views/tiles/tiles.xml",
-    			"classpath:/WEB-INF/views/tiles/person.xml",
-    			"classpath:/WEB-INF/views/tiles/index.xml",
-    			"classpath:/WEB-INF/views/tiles/login.xml"
-    			};
-    	TilesConfigurer tilesConfigurer = new TilesConfigurer();
-    	tilesConfigurer.setDefinitions(arr);
-    	tilesConfigurer.setPreparerFactoryClass(org.springframework.web.servlet.view.tiles3.SpringBeanPreparerFactory.class);
-    	return tilesConfigurer;	
-    }    */
+	/*
+	 * Tiles Configuration for Templating
+	 * 
+	 * @Bean TilesViewResolver tilesViewResolver(){ TilesViewResolver
+	 * tilesViewResolver = new TilesViewResolver(); return tilesViewResolver; }
+	 * 
+	 * @Bean TilesConfigurer tilesConfigurer(){ String arr[] = new String[] {
+	 * context.getServletContext().getContextPath()+
+	 * "/WEB-INF/views/tiles/tiles.xml",
+	 * context.getServletContext().getContextPath()+
+	 * "/WEB-INF/views/tiles/person.xml",
+	 * context.getServletContext().getContextPath()+
+	 * "/WEB-INF/views/tiles/index.xml",
+	 * context.getServletContext().getContextPath()+
+	 * "/WEB-INF/views/tiles/login.xml" }; String arr[] = new String[] {
+	 * "classpath:/WEB-INF/views/tiles/tiles.xml",
+	 * "classpath:/WEB-INF/views/tiles/person.xml",
+	 * "classpath:/WEB-INF/views/tiles/index.xml",
+	 * "classpath:/WEB-INF/views/tiles/login.xml" }; TilesConfigurer
+	 * tilesConfigurer = new TilesConfigurer();
+	 * tilesConfigurer.setDefinitions(arr);
+	 * tilesConfigurer.setPreparerFactoryClass(org.springframework.web.servlet.
+	 * view.tiles3.SpringBeanPreparerFactory.class); return tilesConfigurer; }
+	 */
 }

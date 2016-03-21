@@ -157,6 +157,8 @@
 
 	<dependencies>
 
+<!-- Scribe -->
+
 	<dependency>
 		<groupId>org.scribe</groupId>
 		<artifactId>scribe</artifactId>
