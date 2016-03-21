@@ -42,9 +42,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 	@Autowired
 	WebApplicationContext context;
 	
-	@Autowired
-	private Environment environment;
-	
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**").addResourceLocations("/static/");
