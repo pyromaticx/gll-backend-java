@@ -17,15 +17,13 @@ import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import com.gll.controller.hrboost.FrontController;
-
 @Configuration
 @EnableTransactionManagement
-@ComponentScan({ "com.gll" })
+//@ComponentScan({ "com.gll" })
 @PropertySource(value = { "classpath:db.properties" })
 public class HibernateConf {
 
-	private static final Logger logger = Logger.getLogger(FrontController.class);
+	private static final Logger logger = Logger.getLogger(HibernateConf.class);
 
 	@Autowired
 	private Environment environment;

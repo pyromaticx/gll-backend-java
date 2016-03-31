@@ -1,19 +1,12 @@
 package com.gll.configuration;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
-
-import com.gll.configuration.security.OAuthConfig;
-import com.gll.configuration.security.OAuthServiceProvider;
-import com.gll.util.uxfeed.scheduling.SchedularConfig;
 
 public class SpringMvcInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return new Class[] {AppConfig.class, SchedularConfig.class};
+		return new Class[] {AppConfig.class};
 	}
  
 	@Override
@@ -26,9 +19,4 @@ public class SpringMvcInitializer extends AbstractAnnotationConfigDispatcherServ
 		return new String[] { "/" };
 	}
 	
-	@Override
-	public void onStartup(ServletContext servletContext) throws ServletException {
-		super.onStartup(servletContext);
-		//servletContext.addListener("");
-	}
 }
