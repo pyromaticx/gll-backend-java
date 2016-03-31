@@ -42,15 +42,18 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 
 	@Autowired
 	Environment environment;
-/*
+
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
-		registry.addMapping("/**")
-				// .registry.addMapping("/api/**")
-				// .allowedOrigins("http://domain2.com")
-				.allowedMethods("GET", "POST", "PUT", "DELETE").allowedHeaders("header1", "header2", "header3")
-				.exposedHeaders("header1", "header2").allowCredentials(false).maxAge(3600);
-	}*/
+		registry
+			.addMapping("/**")
+			//.allowedOrigins("http://xyz.com")
+			.allowedMethods("GET", "POST", "PUT", "DELETE")
+			.allowedHeaders("header1", "header2", "header3","header4", "header5", "header6")
+			.exposedHeaders("header1", "header2", "header3","header4", "header5", "header6")
+			.allowCredentials(false)
+			.maxAge(3600);
+	}
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
