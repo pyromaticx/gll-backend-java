@@ -51,7 +51,6 @@ public class UserController {
     }
      
     //-------------------Retrieve All Users--------------------------------------------------------
-    @CrossOrigin 
     @RequestMapping(value = "/users/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<User>> listAllUser() {
         List<User> userList = userService.getAllUser();
@@ -59,7 +58,7 @@ public class UserController {
     		logger.info(i);
         }
         if(userList.isEmpty()){
-            return new ResponseEntity<List<User>>(HttpStatus.NO_CONTENT);//You many decide to return HttpStatus.NOT_FOUND
+            return new ResponseEntity<List<User>>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<List<User>>(userList, HttpStatus.OK);
     }

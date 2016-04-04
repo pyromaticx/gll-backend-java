@@ -12,6 +12,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.core.env.Environment;
 import org.springframework.http.MediaType;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.accept.ContentNegotiationManager;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.ViewResolver;
@@ -23,16 +25,21 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gll.controller.UserController;
 import com.gll.service.UserService;
 import com.gll.service.UserServiceImpl;
 
-@Configuration
-@EnableWebMvc
-@ComponentScan(basePackages = { "com.gll" }, excludeFilters = {
+/*@ComponentScan(basePackages = { "com.gll" }, excludeFilters = {
 		@Filter(type = FilterType.REGEX, pattern = "com.gll.security.*"),
 		@Filter(type = FilterType.ASSIGNABLE_TYPE, classes = UserServiceImpl.class),
 		@Filter(type = FilterType.ASSIGNABLE_TYPE, classes = UserController.class) }, includeFilters = @Filter(type = FilterType.ASSIGNABLE_TYPE, classes = UserService.class) )
+*/
+
+@Configuration
+@EnableWebMvc
+@ComponentScan(basePackages = { "com.gll" })
 public class AppConfig extends WebMvcConfigurerAdapter {
 
 	private static final Logger logger = Logger.getLogger(AppConfig.class);
@@ -43,17 +50,17 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 	@Autowired
 	Environment environment;
 
-	@Override
+	/*@Override
 	public void addCorsMappings(CorsRegistry registry) {
 		registry
 			.addMapping("/**")
 			//.allowedOrigins("http://xyz.com")
 			.allowedMethods("GET", "POST", "PUT", "DELETE")
-			.allowedHeaders("header1", "header2", "header3","header4", "header5", "header6")
-			.exposedHeaders("header1", "header2", "header3","header4", "header5", "header6")
+			.allowedHeaders("header1", "header2", "header3","header4", "header5", "header6", "header7", "header8", "header9","header10", "header11", "header12")
+			.exposedHeaders("header1", "header2", "header3","header4", "header5", "header6", "header7", "header8", "header9","header10", "header11", "header12")
 			.allowCredentials(false)
 			.maxAge(3600);
-	}
+	}*/
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -84,5 +91,17 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 	 public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer){
 	   configurer.enable();
 	 }
+	
+	@Override
+    public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
+        converters.add(mappingJackson2HttpMessageConverter());
+    }
+     
+    @Bean
+    public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {
+        MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter = new MappingJackson2HttpMessageConverter();
+        mappingJackson2HttpMessageConverter.setObjectMapper(new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false));
+        return mappingJackson2HttpMessageConverter;
+    }
 
 }

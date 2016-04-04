@@ -1,5 +1,6 @@
 package com.gll.model;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,6 +8,7 @@ import javax.persistence.Id;
 
 @Entity
 public class AnnotationModel {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int pinId;
@@ -22,13 +24,16 @@ public class AnnotationModel {
 	private int image;
 	private String comments;
 	private boolean isPrivate;
+	@Embedded
+	private ThumbnailDot thumbnailDot;
 
 	public AnnotationModel() {
-		
+
 	}
 
 	public AnnotationModel(int pinId, int userId, int websiteId, String title, String text, int timeStamp, String type,
-			int pinX, int pinY, String emoji, int image, String comments, boolean isPrivate) {
+			int pinX, int pinY, String emoji, int image, String comments, boolean isPrivate,
+			ThumbnailDot thumbnailDot) {
 		super();
 		this.pinId = pinId;
 		this.userId = userId;
@@ -43,6 +48,7 @@ public class AnnotationModel {
 		this.image = image;
 		this.comments = comments;
 		this.isPrivate = isPrivate;
+		this.thumbnailDot = thumbnailDot;
 	}
 
 	public int getPinId() {
@@ -149,12 +155,20 @@ public class AnnotationModel {
 		this.isPrivate = isPrivate;
 	}
 
+	public ThumbnailDot getThumbnailDot() {
+		return thumbnailDot;
+	}
+
+	public void setThumbnailDot(ThumbnailDot thumbnailDot) {
+		this.thumbnailDot = thumbnailDot;
+	}
+
 	@Override
 	public String toString() {
 		return "AnnotationModel [pinId=" + pinId + ", userId=" + userId + ", websiteId=" + websiteId + ", title="
 				+ title + ", text=" + text + ", timeStamp=" + timeStamp + ", type=" + type + ", pinX=" + pinX
 				+ ", pinY=" + pinY + ", emoji=" + emoji + ", image=" + image + ", comments=" + comments + ", isPrivate="
-				+ isPrivate + "]";
+				+ isPrivate + ", thumbnailDot=" + thumbnailDot + "]";
 	}
 
 	@Override
@@ -169,6 +183,7 @@ public class AnnotationModel {
 		result = prime * result + pinX;
 		result = prime * result + pinY;
 		result = prime * result + ((text == null) ? 0 : text.hashCode());
+		result = prime * result + ((thumbnailDot == null) ? 0 : thumbnailDot.hashCode());
 		result = prime * result + timeStamp;
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
@@ -211,6 +226,11 @@ public class AnnotationModel {
 				return false;
 		} else if (!text.equals(other.text))
 			return false;
+		if (thumbnailDot == null) {
+			if (other.thumbnailDot != null)
+				return false;
+		} else if (!thumbnailDot.equals(other.thumbnailDot))
+			return false;
 		if (timeStamp != other.timeStamp)
 			return false;
 		if (title == null) {
@@ -230,6 +250,4 @@ public class AnnotationModel {
 		return true;
 	}
 
-	
-	
 }

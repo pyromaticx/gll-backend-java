@@ -19,20 +19,16 @@ import com.gll.model.User;
 
 @Component
 public class AuthSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
+
 	private static final Logger logger = Logger.getLogger(AuthSuccessHandler.class);
-
-    private final ObjectMapper mapper;
-
-    @Autowired
-    AuthSuccessHandler(MappingJackson2HttpMessageConverter messageConverter) {
-        this.mapper = messageConverter.getObjectMapper();
-    }
-
+    
+	@Autowired
+    private MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter;
+	
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-            Authentication authentication) throws IOException, ServletException {
-        response.setStatus(HttpServletResponse.SC_OK);
-
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+        
+    	response.setStatus(HttpServletResponse.SC_OK);
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
         User user = userDetails.getUser();
         userDetails.setUser(user);
@@ -40,6 +36,7 @@ public class AuthSuccessHandler extends SavedRequestAwareAuthenticationSuccessHa
         logger.info(userDetails.getUsername() + " got is connected ");
 
         PrintWriter writer = response.getWriter();
+        ObjectMapper mapper= mappingJackson2HttpMessageConverter.getObjectMapper();
         mapper.writeValue(writer, user);
         writer.flush();
     }

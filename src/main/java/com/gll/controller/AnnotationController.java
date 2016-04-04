@@ -10,6 +10,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -80,22 +81,22 @@ public class AnnotationController {
 	// ------------------- Update a Record -------------------------------
 
 	@RequestMapping(value = "/users/{userId}/websites/{websiteId}/annotations/{annotationId}", method = RequestMethod.PUT)
-	public ResponseEntity<AnnotationModel> update(@PathVariable("userId") int userId,	@PathVariable("websiteId") int websiteId, @PathVariable("annotationId") int annotationId, @RequestBody AnnotationModel annotationModel) {
-		System.out.println("Updating AnnotationModel " + annotationId);
-		AnnotationModel currentAnnotationModel = annotationService.display(annotationId);
-		System.out.println("Going to update AnnotationModel : " + currentAnnotationModel);
+	public ResponseEntity<AnnotationModel> update(@PathVariable("userId") int userId,	@PathVariable("websiteId") int websiteId, @PathVariable("pinId") int pinId, @RequestBody AnnotationModel annotationModel) {
+		logger.info("Updating AnnotationModel " + pinId);
+		AnnotationModel currentAnnotationModel = annotationService.display(pinId);
+		logger.info("Going to update AnnotationModel : " + currentAnnotationModel);
 		if (currentAnnotationModel == null) {
-			System.out.println("AnnotationModel with annotationId " + annotationId + " not found");
+			logger.info("AnnotationModel with pinId " + pinId + " not found");
 			return new ResponseEntity<AnnotationModel>(HttpStatus.NOT_FOUND);
 		}
 
-		currentAnnotationModel.setPinId(annotationModel.getPinId());
+		/*currentAnnotationModel.setPinId(annotationModel.getPinId());
 		currentAnnotationModel.setUserId(annotationModel.getUserId());
 		currentAnnotationModel.setWebsiteId(annotationModel.getWebsiteId());
-		currentAnnotationModel.setText(annotationModel.getText());
+		currentAnnotationModel.setText(annotationModel.getText());*/
 		
-		annotationService.update(currentAnnotationModel);
-		return new ResponseEntity<AnnotationModel>(currentAnnotationModel, HttpStatus.OK);
+		annotationService.update(annotationModel);
+		return new ResponseEntity<AnnotationModel>(annotationModel, HttpStatus.OK);
 	}
 
 	// ------------------- Delete a Record ----------------

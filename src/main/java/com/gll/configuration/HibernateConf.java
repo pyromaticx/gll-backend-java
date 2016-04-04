@@ -19,7 +19,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-//@ComponentScan({ "com.gll" })
 @PropertySource(value = { "classpath:db.properties" })
 public class HibernateConf {
 
