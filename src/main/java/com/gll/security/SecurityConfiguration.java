@@ -1,5 +1,6 @@
 package com.gll.security;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -23,7 +24,9 @@ import com.gll.service.UserService;
 @EnableGlobalMethodSecurity(securedEnabled = true)
 //@ComponentScan(value = "com.gll")
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
- 
+	
+	private static final Logger logger = Logger.getLogger(SecurityConfiguration.class); 
+	
     @Autowired
     private UserService userService;
     @Autowired
@@ -68,6 +71,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+    	logger.info("************** : Entering SecurityConfiguration--> configure(HttpSecurity http) " );
         http.csrf().disable()
                 .authenticationProvider(authenticationProvider())
                 .exceptionHandling()
@@ -75,7 +79,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .permitAll()
-                .loginProcessingUrl("/user/login")
+                /*.loginProcessingUrl("/user/login")*/
+                .loginProcessingUrl("/users/1/websites/1/annotations")
                 .usernameParameter("ssoId")
                 .passwordParameter("password")
                 .successHandler(authSuccessHandler)
@@ -83,12 +88,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .permitAll()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/user/login", "DELETE"))
+                .logoutRequestMatcher(new AntPathRequestMatcher("/users/1/websites/1/annotations", "DELETE"))
                 .logoutSuccessHandler(logoutSuccessHandler)
                 .and()
                 .sessionManagement()
                 .maximumSessions(1);
 
         http.authorizeRequests().anyRequest().authenticated();
+        
+        logger.info("************** : Exiting SecurityConfiguration--> configure(HttpSecurity http) " );
     }
 }

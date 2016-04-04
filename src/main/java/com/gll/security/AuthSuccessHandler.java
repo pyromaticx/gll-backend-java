@@ -27,7 +27,7 @@ public class AuthSuccessHandler extends SavedRequestAwareAuthenticationSuccessHa
 	
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        
+    	logger.info("************** : Entering AuthSuccessHandler--> onAuthenticationSuccess() " );
     	response.setStatus(HttpServletResponse.SC_OK);
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
         User user = userDetails.getUser();
@@ -39,5 +39,6 @@ public class AuthSuccessHandler extends SavedRequestAwareAuthenticationSuccessHa
         ObjectMapper mapper= mappingJackson2HttpMessageConverter.getObjectMapper();
         mapper.writeValue(writer, user);
         writer.flush();
+        logger.info("************** : Exiting AuthSuccessHandler--> onAuthenticationSuccess() " );
     }
 }

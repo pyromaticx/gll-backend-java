@@ -16,12 +16,12 @@ public class AnnotationModel {
 	private int websiteId;
 	private String title;
 	private String text;
-	private int timeStamp;
+	private String timeStamp;
 	private String type;
-	private int pinX;
-	private int pinY;
+	private String pinX;
+	private String pinY;
 	private String emoji;
-	private int image;
+	private String image;
 	private String comments;
 	private boolean isPrivate;
 	@Embedded
@@ -31,8 +31,8 @@ public class AnnotationModel {
 
 	}
 
-	public AnnotationModel(int pinId, int userId, int websiteId, String title, String text, int timeStamp, String type,
-			int pinX, int pinY, String emoji, int image, String comments, boolean isPrivate,
+	public AnnotationModel(int pinId, int userId, int websiteId, String title, String text, String timeStamp,
+			String type, String pinX, String pinY, String emoji, String image, String comments, boolean isPrivate,
 			ThumbnailDot thumbnailDot) {
 		super();
 		this.pinId = pinId;
@@ -50,6 +50,8 @@ public class AnnotationModel {
 		this.isPrivate = isPrivate;
 		this.thumbnailDot = thumbnailDot;
 	}
+
+
 
 	public int getPinId() {
 		return pinId;
@@ -91,11 +93,12 @@ public class AnnotationModel {
 		this.text = text;
 	}
 
-	public int getTimeStamp() {
+
+	public String getTimeStamp() {
 		return timeStamp;
 	}
 
-	public void setTimeStamp(int timeStamp) {
+	public void setTimeStamp(String timeStamp) {
 		this.timeStamp = timeStamp;
 	}
 
@@ -107,19 +110,19 @@ public class AnnotationModel {
 		this.type = type;
 	}
 
-	public int getPinX() {
+	public String getPinX() {
 		return pinX;
 	}
 
-	public void setPinX(int pinX) {
+	public void setPinX(String pinX) {
 		this.pinX = pinX;
 	}
 
-	public int getPinY() {
+	public String getPinY() {
 		return pinY;
 	}
 
-	public void setPinY(int pinY) {
+	public void setPinY(String pinY) {
 		this.pinY = pinY;
 	}
 
@@ -131,11 +134,11 @@ public class AnnotationModel {
 		this.emoji = emoji;
 	}
 
-	public int getImage() {
+	public String getImage() {
 		return image;
 	}
 
-	public void setImage(int image) {
+	public void setImage(String image) {
 		this.image = image;
 	}
 
@@ -177,14 +180,14 @@ public class AnnotationModel {
 		int result = 1;
 		result = prime * result + ((comments == null) ? 0 : comments.hashCode());
 		result = prime * result + ((emoji == null) ? 0 : emoji.hashCode());
-		result = prime * result + image;
+		result = prime * result + ((image == null) ? 0 : image.hashCode());
 		result = prime * result + (isPrivate ? 1231 : 1237);
 		result = prime * result + pinId;
-		result = prime * result + pinX;
-		result = prime * result + pinY;
+		result = prime * result + ((pinX == null) ? 0 : pinX.hashCode());
+		result = prime * result + ((pinY == null) ? 0 : pinY.hashCode());
 		result = prime * result + ((text == null) ? 0 : text.hashCode());
 		result = prime * result + ((thumbnailDot == null) ? 0 : thumbnailDot.hashCode());
-		result = prime * result + timeStamp;
+		result = prime * result + ((timeStamp == null) ? 0 : timeStamp.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		result = prime * result + userId;
@@ -211,15 +214,24 @@ public class AnnotationModel {
 				return false;
 		} else if (!emoji.equals(other.emoji))
 			return false;
-		if (image != other.image)
+		if (image == null) {
+			if (other.image != null)
+				return false;
+		} else if (!image.equals(other.image))
 			return false;
 		if (isPrivate != other.isPrivate)
 			return false;
 		if (pinId != other.pinId)
 			return false;
-		if (pinX != other.pinX)
+		if (pinX == null) {
+			if (other.pinX != null)
+				return false;
+		} else if (!pinX.equals(other.pinX))
 			return false;
-		if (pinY != other.pinY)
+		if (pinY == null) {
+			if (other.pinY != null)
+				return false;
+		} else if (!pinY.equals(other.pinY))
 			return false;
 		if (text == null) {
 			if (other.text != null)
@@ -231,7 +243,10 @@ public class AnnotationModel {
 				return false;
 		} else if (!thumbnailDot.equals(other.thumbnailDot))
 			return false;
-		if (timeStamp != other.timeStamp)
+		if (timeStamp == null) {
+			if (other.timeStamp != null)
+				return false;
+		} else if (!timeStamp.equals(other.timeStamp))
 			return false;
 		if (title == null) {
 			if (other.title != null)
@@ -250,4 +265,5 @@ public class AnnotationModel {
 		return true;
 	}
 
+	
 }

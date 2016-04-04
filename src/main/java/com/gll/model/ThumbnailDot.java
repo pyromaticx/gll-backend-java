@@ -1,23 +1,26 @@
 package com.gll.model;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
 public class ThumbnailDot {
 	private String background;
 	private String border;
-	private String xtop;
-	private String yleft;
+	@Column(name="xTop")
+	private String top;
+	@Column(name="yLeft")
+	private String left;
 
 	public ThumbnailDot() {
 	}
 
-	public ThumbnailDot(String background, String border, String xtop, String yleft) {
+	public ThumbnailDot(String background, String border, String top, String left) {
 		super();
 		this.background = background;
 		this.border = border;
-		this.xtop = xtop;
-		this.yleft = yleft;
+		this.top = top;
+		this.left = left;
 	}
 
 	public String getBackground() {
@@ -36,27 +39,25 @@ public class ThumbnailDot {
 		this.border = border;
 	}
 
-	
-
-	public String getXtop() {
-		return xtop;
+	public String getTop() {
+		return top;
 	}
 
-	public void setXtop(String xtop) {
-		this.xtop = xtop;
+	public void setTop(String top) {
+		this.top = top;
 	}
 
-	public String getYleft() {
-		return yleft;
+	public String getLeft() {
+		return left;
 	}
 
-	public void setYleft(String yleft) {
-		this.yleft = yleft;
+	public void setLeft(String left) {
+		this.left = left;
 	}
 
 	@Override
 	public String toString() {
-		return "ThumbnailDot [background=" + background + ", border=" + border + ", xtop=" + xtop + ", yleft=" + yleft
+		return "ThumbnailDot [background=" + background + ", border=" + border + ", top=" + top + ", left=" + left
 				+ "]";
 	}
 
@@ -66,8 +67,8 @@ public class ThumbnailDot {
 		int result = 1;
 		result = prime * result + ((background == null) ? 0 : background.hashCode());
 		result = prime * result + ((border == null) ? 0 : border.hashCode());
-		result = prime * result + ((xtop == null) ? 0 : xtop.hashCode());
-		result = prime * result + ((yleft == null) ? 0 : yleft.hashCode());
+		result = prime * result + ((top == null) ? 0 : top.hashCode());
+		result = prime * result + ((left == null) ? 0 : left.hashCode());
 		return result;
 	}
 
@@ -90,15 +91,15 @@ public class ThumbnailDot {
 				return false;
 		} else if (!border.equals(other.border))
 			return false;
-		if (xtop == null) {
-			if (other.xtop != null)
+		if (top == null) {
+			if (other.top != null)
 				return false;
-		} else if (!xtop.equals(other.xtop))
+		} else if (!top.equals(other.top))
 			return false;
-		if (yleft == null) {
-			if (other.yleft != null)
+		if (left == null) {
+			if (other.left != null)
 				return false;
-		} else if (!yleft.equals(other.yleft))
+		} else if (!left.equals(other.left))
 			return false;
 		return true;
 	}

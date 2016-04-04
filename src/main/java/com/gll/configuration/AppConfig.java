@@ -50,7 +50,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 	@Autowired
 	Environment environment;
 
-	/*@Override
+	@Override
 	public void addCorsMappings(CorsRegistry registry) {
 		registry
 			.addMapping("/**")
@@ -60,7 +60,8 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 			.exposedHeaders("header1", "header2", "header3","header4", "header5", "header6", "header7", "header8", "header9","header10", "header11", "header12")
 			.allowCredentials(false)
 			.maxAge(3600);
-	}*/
+			
+	}
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
