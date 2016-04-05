@@ -12,6 +12,7 @@ public class AnnotationModel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int pinId;
+	private String pinAttribute;
 	private int userId;
 	private int websiteId;
 	private String title;
@@ -31,11 +32,13 @@ public class AnnotationModel {
 
 	}
 
-	public AnnotationModel(int pinId, int userId, int websiteId, String title, String text, String timeStamp,
-			String type, String pinX, String pinY, String emoji, String image, String comments, boolean isPrivate,
-			ThumbnailDot thumbnailDot) {
+	
+	public AnnotationModel(int pinId, String pinAttribute, int userId, int websiteId, String title, String text,
+			String timeStamp, String type, String pinX, String pinY, String emoji, String image, String comments,
+			boolean isPrivate, ThumbnailDot thumbnailDot) {
 		super();
 		this.pinId = pinId;
+		this.pinAttribute = pinAttribute;
 		this.userId = userId;
 		this.websiteId = websiteId;
 		this.title = title;
@@ -53,6 +56,8 @@ public class AnnotationModel {
 
 
 
+
+
 	public int getPinId() {
 		return pinId;
 	}
@@ -60,6 +65,17 @@ public class AnnotationModel {
 	public void setPinId(int pinId) {
 		this.pinId = pinId;
 	}
+
+	
+	public String getPinAttribute() {
+		return pinAttribute;
+	}
+
+
+	public void setPinAttribute(String pinAttribute) {
+		this.pinAttribute = pinAttribute;
+	}
+
 
 	public int getUserId() {
 		return userId;
@@ -166,13 +182,15 @@ public class AnnotationModel {
 		this.thumbnailDot = thumbnailDot;
 	}
 
+	
 	@Override
 	public String toString() {
-		return "AnnotationModel [pinId=" + pinId + ", userId=" + userId + ", websiteId=" + websiteId + ", title="
-				+ title + ", text=" + text + ", timeStamp=" + timeStamp + ", type=" + type + ", pinX=" + pinX
-				+ ", pinY=" + pinY + ", emoji=" + emoji + ", image=" + image + ", comments=" + comments + ", isPrivate="
-				+ isPrivate + ", thumbnailDot=" + thumbnailDot + "]";
+		return "AnnotationModel [pinId=" + pinId + ", pinAttribute=" + pinAttribute + ", userId=" + userId
+				+ ", websiteId=" + websiteId + ", title=" + title + ", text=" + text + ", timeStamp=" + timeStamp
+				+ ", type=" + type + ", pinX=" + pinX + ", pinY=" + pinY + ", emoji=" + emoji + ", image=" + image
+				+ ", comments=" + comments + ", isPrivate=" + isPrivate + ", thumbnailDot=" + thumbnailDot + "]";
 	}
+
 
 	@Override
 	public int hashCode() {
@@ -182,6 +200,7 @@ public class AnnotationModel {
 		result = prime * result + ((emoji == null) ? 0 : emoji.hashCode());
 		result = prime * result + ((image == null) ? 0 : image.hashCode());
 		result = prime * result + (isPrivate ? 1231 : 1237);
+		result = prime * result + ((pinAttribute == null) ? 0 : pinAttribute.hashCode());
 		result = prime * result + pinId;
 		result = prime * result + ((pinX == null) ? 0 : pinX.hashCode());
 		result = prime * result + ((pinY == null) ? 0 : pinY.hashCode());
@@ -194,6 +213,7 @@ public class AnnotationModel {
 		result = prime * result + websiteId;
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -220,6 +240,11 @@ public class AnnotationModel {
 		} else if (!image.equals(other.image))
 			return false;
 		if (isPrivate != other.isPrivate)
+			return false;
+		if (pinAttribute == null) {
+			if (other.pinAttribute != null)
+				return false;
+		} else if (!pinAttribute.equals(other.pinAttribute))
 			return false;
 		if (pinId != other.pinId)
 			return false;
@@ -264,6 +289,8 @@ public class AnnotationModel {
 			return false;
 		return true;
 	}
+
+
 
 	
 }
