@@ -40,6 +40,16 @@ public class AnnotationController {
 		}
 		return new ResponseEntity<List<AnnotationModel>>(annotationList, HttpStatus.OK);
 	}
+	
+	// -------------------Retrieve All -----------------------------------
+	@RequestMapping(value = "/annotations", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<AnnotationModel>> displayAll() {
+		List<AnnotationModel> annotationList = annotationService.displayAll();
+		if (annotationList.isEmpty()) {
+			return new ResponseEntity<List<AnnotationModel>>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<AnnotationModel>>(annotationList, HttpStatus.OK);
+	}
 
 	// -------------------Retrieve Single Record -----------------------
 
