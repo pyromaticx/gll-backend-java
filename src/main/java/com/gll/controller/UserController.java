@@ -110,13 +110,6 @@ public class UserController {
             System.out.println("User with id " + id + " not found");
             return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
         }
- 
-        currentUser.setId(user.getId());
-        currentUser.setFirstName(user.getFirstName());
-        currentUser.setLastName(user.getLastName());
-        currentUser.setEmail(user.getEmail());
-        currentUser.setPassword(user.getPassword());
-         
         userService.putUser(currentUser);
         return new ResponseEntity<User>(currentUser, HttpStatus.OK);
     }

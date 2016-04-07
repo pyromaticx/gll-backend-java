@@ -21,11 +21,8 @@ public class User {
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
-	@Column(name="SSO_ID", unique=true, nullable=false)
-	private String ssoId;
-	
-	@Column(name="LOGIN", unique=true, nullable=false)
-	private String login;
+	@Column(name="USER_NAME", unique=true, nullable=false)
+	private String userName;
 	
 	@Column(name="PASSWORD", nullable=false)
 	private String password;
@@ -56,22 +53,14 @@ public class User {
 		this.id = id;
 	}
 
-	public String getSsoId() {
-		return ssoId;
+	public String getuserName() {
+		return userName;
 	}
 
-	public void setSsoId(String ssoId) {
-		this.ssoId = ssoId;
+	public void setuserName(String userName) {
+		this.userName = userName;
 	}
 
-	public String getLogin() {
-		return login;
-	}
-	
-	public void setLogin(String login) {
-		this.login = login;
-	}
-	
 	public String getPassword() {
 		return password;
 	}
@@ -125,7 +114,7 @@ public class User {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + id;
-		result = prime * result + ((ssoId == null) ? 0 : ssoId.hashCode());
+		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
 		return result;
 	}
 
@@ -140,17 +129,17 @@ public class User {
 		User other = (User) obj;
 		if (id != other.id)
 			return false;
-		if (ssoId == null) {
-			if (other.ssoId != null)
+		if (userName == null) {
+			if (other.userName != null)
 				return false;
-		} else if (!ssoId.equals(other.ssoId))
+		} else if (!userName.equals(other.userName))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", ssoId=" + ssoId + ", password=" + password
+		return "User [id=" + id + ", userName=" + userName + ", password=" + password
 				+ ", firstName=" + firstName + ", lastName=" + lastName
 				+ ", email=" + email + ", state=" + state + ", userProfiles=" + userProfiles +"]";
 	}

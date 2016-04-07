@@ -23,6 +23,8 @@ public class AnnotationModel {
 	private String pinY;
 	private String emoji;
 	private StringBuilder image;
+	private long imageH;
+	private long imageW;
 	private String comments;
 	private boolean isPrivate;
 	@Embedded
@@ -34,8 +36,8 @@ public class AnnotationModel {
 
 	
 	public AnnotationModel(int pinId, String pinAttribute, int userId, int websiteId, String title, String text,
-			String timeStamp, String type, String pinX, String pinY, String emoji, StringBuilder image, String comments,
-			boolean isPrivate, ThumbnailDot thumbnailDot) {
+			String timeStamp, String type, String pinX, String pinY, String emoji, StringBuilder image, long imageH,
+			long imageW, String comments, boolean isPrivate, ThumbnailDot thumbnailDot) {
 		super();
 		this.pinId = pinId;
 		this.pinAttribute = pinAttribute;
@@ -49,24 +51,24 @@ public class AnnotationModel {
 		this.pinY = pinY;
 		this.emoji = emoji;
 		this.image = image;
+		this.imageH = imageH;
+		this.imageW = imageW;
 		this.comments = comments;
 		this.isPrivate = isPrivate;
 		this.thumbnailDot = thumbnailDot;
 	}
 
 
-
-
-
 	public int getPinId() {
 		return pinId;
 	}
+
 
 	public void setPinId(int pinId) {
 		this.pinId = pinId;
 	}
 
-	
+
 	public String getPinAttribute() {
 		return pinAttribute;
 	}
@@ -81,29 +83,36 @@ public class AnnotationModel {
 		return userId;
 	}
 
+
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
+
 
 	public int getWebsiteId() {
 		return websiteId;
 	}
 
+
 	public void setWebsiteId(int websiteId) {
 		this.websiteId = websiteId;
 	}
+
 
 	public String getTitle() {
 		return title;
 	}
 
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
+
 	public String getText() {
 		return text;
 	}
+
 
 	public void setText(String text) {
 		this.text = text;
@@ -114,81 +123,109 @@ public class AnnotationModel {
 		return timeStamp;
 	}
 
+
 	public void setTimeStamp(String timeStamp) {
 		this.timeStamp = timeStamp;
 	}
+
 
 	public String getType() {
 		return type;
 	}
 
+
 	public void setType(String type) {
 		this.type = type;
 	}
+
 
 	public String getPinX() {
 		return pinX;
 	}
 
+
 	public void setPinX(String pinX) {
 		this.pinX = pinX;
 	}
+
 
 	public String getPinY() {
 		return pinY;
 	}
 
+
 	public void setPinY(String pinY) {
 		this.pinY = pinY;
 	}
+
 
 	public String getEmoji() {
 		return emoji;
 	}
 
+
 	public void setEmoji(String emoji) {
 		this.emoji = emoji;
 	}
+
 
 	public StringBuilder getImage() {
 		return image;
 	}
 
+
 	public void setImage(StringBuilder image) {
 		this.image = image;
 	}
+
+
+	public long getImageH() {
+		return imageH;
+	}
+
+
+	public void setImageH(long imageH) {
+		this.imageH = imageH;
+	}
+
+
+	public long getImageW() {
+		return imageW;
+	}
+
+
+	public void setImageW(long imageW) {
+		this.imageW = imageW;
+	}
+
 
 	public String getComments() {
 		return comments;
 	}
 
+
 	public void setComments(String comments) {
 		this.comments = comments;
 	}
+
 
 	public boolean isPrivate() {
 		return isPrivate;
 	}
 
+
 	public void setPrivate(boolean isPrivate) {
 		this.isPrivate = isPrivate;
 	}
+
 
 	public ThumbnailDot getThumbnailDot() {
 		return thumbnailDot;
 	}
 
+
 	public void setThumbnailDot(ThumbnailDot thumbnailDot) {
 		this.thumbnailDot = thumbnailDot;
-	}
-
-	
-	@Override
-	public String toString() {
-		return "AnnotationModel [pinId=" + pinId + ", pinAttribute=" + pinAttribute + ", userId=" + userId
-				+ ", websiteId=" + websiteId + ", title=" + title + ", text=" + text + ", timeStamp=" + timeStamp
-				+ ", type=" + type + ", pinX=" + pinX + ", pinY=" + pinY + ", emoji=" + emoji + ", image=" + image
-				+ ", comments=" + comments + ", isPrivate=" + isPrivate + ", thumbnailDot=" + thumbnailDot + "]";
 	}
 
 
@@ -199,6 +236,8 @@ public class AnnotationModel {
 		result = prime * result + ((comments == null) ? 0 : comments.hashCode());
 		result = prime * result + ((emoji == null) ? 0 : emoji.hashCode());
 		result = prime * result + ((image == null) ? 0 : image.hashCode());
+		result = prime * result + (int) (imageH ^ (imageH >>> 32));
+		result = prime * result + (int) (imageW ^ (imageW >>> 32));
 		result = prime * result + (isPrivate ? 1231 : 1237);
 		result = prime * result + ((pinAttribute == null) ? 0 : pinAttribute.hashCode());
 		result = prime * result + pinId;
@@ -238,6 +277,10 @@ public class AnnotationModel {
 			if (other.image != null)
 				return false;
 		} else if (!image.equals(other.image))
+			return false;
+		if (imageH != other.imageH)
+			return false;
+		if (imageW != other.imageW)
 			return false;
 		if (isPrivate != other.isPrivate)
 			return false;
@@ -290,7 +333,4 @@ public class AnnotationModel {
 		return true;
 	}
 
-
-
-	
 }
