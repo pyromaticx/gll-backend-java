@@ -2,6 +2,7 @@ package com.gll.dao;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -48,8 +49,9 @@ public class WebsiteDaoImpl implements WebsiteDao {
 
 	@Override
 	public WebsiteModel findByDomainName(String domainName) {
-		return (WebsiteModel) sessionFactory.getCurrentSession().createQuery("SELECT FROM WebsiteModel WHERE domainName = " + domainName).uniqueResult();
-		
+		Query query =  sessionFactory.getCurrentSession().createQuery("FROM WebsiteModel WHERE domainName =:domainName");
+		query.setString("domainName", domainName);
+		 return (WebsiteModel) query.uniqueResult();
 	}
 
 }
