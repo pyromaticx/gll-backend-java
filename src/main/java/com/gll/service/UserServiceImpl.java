@@ -74,15 +74,15 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User findBySSO(String ssoId) {
-		logger.info("********************************** UserServiceImpl.java : findBySSO() ");
-		return userDao.findBySSO(ssoId);
+	public User findByUserName(String userName){
+		logger.info("********************************** UserServiceImpl.java : findByUserName() ");
+		return userDao.findByUserName(userName);
 	}
 
 	@Transactional(readOnly = true)
-	public UserDetails loadUserByUsername(String ssoId) throws UsernameNotFoundException {
-		logger.info("************************* CustomUserDetailsService: loadUserByUsername()" + ssoId);
-		User user = findBySSO(ssoId);
+	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+		logger.info("************************* CustomUserDetailsService: loadUserByUsername()" + userName);
+		User user = findByUserName(userName);
 		logger.info("************************* " + "User : " + user);
 		if (user == null) {
 			logger.info("************************* User not found");

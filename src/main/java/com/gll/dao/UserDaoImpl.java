@@ -61,13 +61,13 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public User findBySSO(String ssoId) {
-		logger.info("****************************: UserDaoImpl---->> findBySSO() ");
+	public User findByUserName(String userName) {
+		logger.info("****************************: UserDaoImpl---->> findByUserName() ");
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(User.class);
-		criteria.add(Restrictions.eq("ssoId", ssoId));
+		criteria.add(Restrictions.eq("userName", userName));
 		List<User> results = criteria.list();
 		User user = results.get(0);
-		logger.info("*************** UserDaoImpl: findBySSO() : User : " + user);
+		logger.info("*************** UserDaoImpl: findByUserName() : User : " + user);
 		return user;
 	}
 

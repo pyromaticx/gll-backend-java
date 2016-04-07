@@ -22,7 +22,7 @@ public interface UserService extends UserDetailsService {
 
 	User findById(int id);
 
-	User findBySSO(String sso);
+	User findByUserName(String userName);
 	
 	List<String> getPermissions(String username);
 

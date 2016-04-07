@@ -19,5 +19,5 @@ public interface UserDao {
 
 	User findById(int id);
 
-	User findBySSO(String ssoId);
+	User findByUserName(String userName);
 }
