@@ -85,7 +85,7 @@ public class UserController {
     public ResponseEntity<Void> createUser(@RequestBody User user,    UriComponentsBuilder ucBuilder) {
         System.out.println("Creating User " + user.getFirstName());
         
-        if (userService.getUser(user.getId()) != null) {
+        if (userService.getUser(user.getUserId()) != null) {
             System.out.println("A User with name " + user.getFirstName() + " already exist");
             return new ResponseEntity<Void>(HttpStatus.CONFLICT);
         }
@@ -93,7 +93,7 @@ public class UserController {
         userService.postUser(user);
  
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/users/{id}").buildAndExpand(user.getId()).toUri());
+        headers.setLocation(ucBuilder.path("/users/{id}").buildAndExpand(user.getUserId()).toUri());
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
  

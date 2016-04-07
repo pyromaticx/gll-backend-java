@@ -46,4 +46,9 @@ public class AnnotationServiceImpl implements AnnotationService {
 		annotationDao.delete(annotationId);
 	}
 
+	@Override
+	public List<AnnotationModel> getAnnotationsByUserName(String userName) {
+		return annotationDao.getAnnotationsByUserName(userName);
+	}
+
 }

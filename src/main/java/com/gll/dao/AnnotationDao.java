@@ -12,4 +12,5 @@ public interface AnnotationDao {
 	public void update(AnnotationModel annotationModel);
 	public void patch(AnnotationModel annotationModel);
 	public void delete(int annotationId);
+	public List<AnnotationModel> getAnnotationsByUserName(String userName);
 }

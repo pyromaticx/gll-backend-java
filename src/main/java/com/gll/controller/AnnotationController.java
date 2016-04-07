@@ -54,6 +54,17 @@ public class AnnotationController {
 		return new ResponseEntity<AnnotationModel>(annotationModel, HttpStatus.OK);
 	}
 
+	// -------------------Retrieve Annotation by User Name -----------------------
+
+	@RequestMapping(value = "/annotations/{userName}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<AnnotationModel>> getAnnotationsByUserName(@PathVariable("userName") String userName) {
+		List<AnnotationModel> annotationList = annotationService.getAnnotationsByUserName(userName);
+		if (annotationList.isEmpty()) {
+			return new ResponseEntity<List<AnnotationModel>>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<AnnotationModel>>(annotationList, HttpStatus.OK);
+	}
+
 	// -------------------Create a Record -----------------------
 
 	@RequestMapping(value = "/users/{userId}/websites/{websiteId}/annotations", method = RequestMethod.POST)
@@ -90,11 +101,6 @@ public class AnnotationController {
 			return new ResponseEntity<AnnotationModel>(HttpStatus.NOT_FOUND);
 		}
 
-		/*currentAnnotationModel.setPinId(annotationModel.getPinId());
-		currentAnnotationModel.setUserId(annotationModel.getUserId());
-		currentAnnotationModel.setWebsiteId(annotationModel.getWebsiteId());
-		currentAnnotationModel.setText(annotationModel.getText());*/
-		
 		annotationService.update(annotationModel);
 		return new ResponseEntity<AnnotationModel>(annotationModel, HttpStatus.OK);
 	}
