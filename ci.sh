@@ -24,14 +24,12 @@ then
         echo "${RED}Compling....${NC}\n"
         mvn clean install
         echo "${RED}Now Going To Run....${NC}\n"
-        #mvn tomcat7:run -P development
-        mvn spring-boot:run
+        mvn tomcat7:run -P development
 elif [ "$choice" = "2" ]
 then
         clear
         mvn clean install
-        #mvn tomcat7:run -P test
-        mvn spring-boot:run
+        mvn tomcat7:run -P test
 elif [ "$choice" = "3" ]
 then
         clear
