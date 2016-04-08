@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -30,7 +31,7 @@ public class AnnotationController {
 	@Autowired
 	AnnotationService annotationService;
 
-	// -------------------Retrieve All -----------------------------------
+	// -------------------Retrieve All userId and websiteId -----------------------------------
 
 	@RequestMapping(value = "/users/{userId}/websites/{websiteId}/annotations", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<AnnotationModel>> displayAll(@PathVariable("userId") int userId, @PathVariable("websiteId") int websiteId) {
@@ -41,7 +42,7 @@ public class AnnotationController {
 		return new ResponseEntity<List<AnnotationModel>>(annotationList, HttpStatus.OK);
 	}
 	
-	// -------------------Retrieve All -----------------------------------
+	// -------------------Retrieve All Annotations-----------------------------------
 	@RequestMapping(value = "/annotations", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<AnnotationModel>> displayAll() {
 		List<AnnotationModel> annotationList = annotationService.displayAll();
@@ -75,6 +76,18 @@ public class AnnotationController {
 		return new ResponseEntity<List<AnnotationModel>>(annotationList, HttpStatus.OK);
 	}
 
+	// -------------------Retrieve All Annotations by Domain Name -----------------------
+
+		@RequestMapping(value = "/annotations/domainName", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+		public ResponseEntity<List<AnnotationModel>> getAnnotationsByDomainName(@RequestParam(value="domainName", required=true) String domainName) {
+			logger.debug("********************** :Controller->getAnnotationsByDomainName()->domainName = " + domainName);
+			List<AnnotationModel> annotationList = annotationService.getAnnotationsByDomainName(domainName);
+			if (annotationList.isEmpty()) {
+				return new ResponseEntity<List<AnnotationModel>>(HttpStatus.NO_CONTENT);
+			}
+			return new ResponseEntity<List<AnnotationModel>>(annotationList, HttpStatus.OK);
+		}
+		
 	// -------------------Create a Record -----------------------
 
 	@RequestMapping(value = "/users/{userId}/websites/{websiteId}/annotations", method = RequestMethod.POST)

@@ -1,8 +1,6 @@
 package com.gll.dao;
 
-
 import java.util.List;
-
 import com.gll.model.AnnotationModel;
 
 public interface AnnotationDao {
@@ -13,4 +11,5 @@ public interface AnnotationDao {
 	public void patch(AnnotationModel annotationModel);
 	public void delete(int annotationId);
 	public List<AnnotationModel> getAnnotationsByUserName(String userName);
+	public List<AnnotationModel> getAnnotationsByDomainName(String domainName);
 }

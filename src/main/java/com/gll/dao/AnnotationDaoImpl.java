@@ -3,18 +3,19 @@ package com.gll.dao;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.gll.model.AnnotationModel;
-import com.gll.model.WebsiteModel;
-
 
 @Repository("annotationDao")
 public class AnnotationDaoImpl implements AnnotationDao {
 
+	private static final Logger logger = Logger.getLogger(AnnotationDaoImpl.class);
+	
 	@Autowired
 	private SessionFactory sessionFactory;
 	
@@ -57,6 +58,15 @@ public class AnnotationDaoImpl implements AnnotationDao {
 		String hql = "FROM AnnotationModel A, User U FETCH ALL PROPERTIES WHERE A.userId = U.userId AND U.userName = :userName";
 		Query query =  sessionFactory.getCurrentSession().createQuery(hql);
 		query.setString("userName", userName);
+		 return (List<AnnotationModel>) query.list();
+	}
+
+	@Override
+	public List<AnnotationModel> getAnnotationsByDomainName(String domainName) {
+		logger.debug("********************** :DaoImpl->getAnnotationsByDomainName()->domainName = " + domainName);
+		String hql = "FROM AnnotationModel A, WebsiteModel W FETCH ALL PROPERTIES WHERE A.websiteId = W.websiteId AND W.domainName = :domainName";
+		Query query =  sessionFactory.getCurrentSession().createQuery(hql);
+		query.setString("domainName", domainName);
 		 return (List<AnnotationModel>) query.list();
 	}
 
