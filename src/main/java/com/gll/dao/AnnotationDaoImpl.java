@@ -70,4 +70,12 @@ public class AnnotationDaoImpl implements AnnotationDao {
 		 return (List<AnnotationModel>) query.list();
 	}
 
+	@Override
+	public List<AnnotationModel> getAnnotationsByRootDomain(String rootDomain) {
+			String hql = "FROM AnnotationModel A, WebsiteModel W FETCH ALL PROPERTIES WHERE A.websiteId = W.websiteId AND W.rootDomain = :rootDomain";
+			Query query =  sessionFactory.getCurrentSession().createQuery(hql);
+			query.setString("rootDomain", rootDomain);
+			 return (List<AnnotationModel>) query.list();
+	}
+
 }

@@ -56,4 +56,9 @@ public class AnnotationServiceImpl implements AnnotationService {
 		return annotationDao.getAnnotationsByDomainName(domainName);
 	}
 
+	@Override
+	public List<AnnotationModel> getAnnotationsByRootDomain(String rootDomain) {
+		return annotationDao.getAnnotationsByRootDomain(rootDomain);
+	}
+
 }

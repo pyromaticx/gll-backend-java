@@ -13,4 +13,5 @@ public interface AnnotationService {
 	public void delete(int annotationId);
 	public List<AnnotationModel> getAnnotationsByUserName(String userName);
 	public List<AnnotationModel> getAnnotationsByDomainName(String domainName);
+	public List<AnnotationModel> getAnnotationsByRootDomain(String rootDomain);
 }

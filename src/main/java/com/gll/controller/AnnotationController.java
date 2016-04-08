@@ -88,7 +88,19 @@ public class AnnotationController {
 			return new ResponseEntity<List<AnnotationModel>>(annotationList, HttpStatus.OK);
 		}
 		
-	// -------------------Create a Record -----------------------
+		// -------------------Retrieve All Annotations by Root Domain Name -----------------------
+
+		@RequestMapping(value = "/annotations/rootDomain", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+		public ResponseEntity<List<AnnotationModel>> getAnnotationsByRootDomain(@RequestParam(value="rootDomain", required=true) String rootDomain) {
+			List<AnnotationModel> annotationList = annotationService.getAnnotationsByRootDomain(rootDomain);
+			if (annotationList.isEmpty()) {
+				return new ResponseEntity<List<AnnotationModel>>(HttpStatus.NO_CONTENT);
+			}
+			return new ResponseEntity<List<AnnotationModel>>(annotationList, HttpStatus.OK);
+		}
+
+		
+		// -------------------Create a Record -----------------------
 
 	@RequestMapping(value = "/users/{userId}/websites/{websiteId}/annotations", method = RequestMethod.POST)
 	public ResponseEntity<Void> save(@PathVariable("userId") int userId, @PathVariable("websiteId") int websiteId, @RequestBody AnnotationModel annotationModel, UriComponentsBuilder ucBuilder) {
@@ -113,7 +125,6 @@ public class AnnotationController {
 	}
 
 	// ------------------- Update a Record -------------------------------
-
 	@RequestMapping(value = "/users/{userId}/websites/{websiteId}/annotations/{annotationId}", method = RequestMethod.PUT)
 	public ResponseEntity<AnnotationModel> update(@PathVariable("userId") int userId,	@PathVariable("websiteId") int websiteId, @PathVariable("pinId") int pinId, @RequestBody AnnotationModel annotationModel) {
 		logger.info("Updating AnnotationModel " + pinId);
