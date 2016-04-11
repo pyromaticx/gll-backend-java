@@ -1,14 +1,29 @@
 package com.gll.model;
 
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OrderColumn;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
-public class AnnotationModel {
-	
+public class AnnotationModel implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int pinId;
@@ -22,7 +37,7 @@ public class AnnotationModel {
 	private String pinX;
 	private String pinY;
 	private String emoji;
-	private StringBuilder image;
+	private StringBuffer image;
 	private long imageH;
 	private long imageW;
 	private String comments;
@@ -30,14 +45,21 @@ public class AnnotationModel {
 	@Embedded
 	private ThumbnailDot thumbnailDot;
 
+	@ElementCollection(fetch=FetchType.EAGER)
+	@CollectionTable(name = "SocialTopic", joinColumns = @JoinColumn(name = "pinId"))
+	@OrderColumn(name = "pinId_faster") // for faster processing
+//	@Enumerated(EnumType.STRING)
+//	@Fetch(FetchMode.SELECT)
+    protected Set<String> topics = new HashSet();
+
 	public AnnotationModel() {
 
 	}
 
-	
+
 	public AnnotationModel(int pinId, String pinAttribute, int userId, int websiteId, String title, String text,
-			String timeStamp, String type, String pinX, String pinY, String emoji, StringBuilder image, long imageH,
-			long imageW, String comments, boolean isPrivate, ThumbnailDot thumbnailDot) {
+			String timeStamp, String type, String pinX, String pinY, String emoji, StringBuffer image, long imageH,
+			long imageW, String comments, boolean isPrivate, ThumbnailDot thumbnailDot, Set<String> topics) {
 		super();
 		this.pinId = pinId;
 		this.pinAttribute = pinAttribute;
@@ -56,6 +78,7 @@ public class AnnotationModel {
 		this.comments = comments;
 		this.isPrivate = isPrivate;
 		this.thumbnailDot = thumbnailDot;
+		this.topics = topics;
 	}
 
 
@@ -169,13 +192,19 @@ public class AnnotationModel {
 	}
 
 
-	public StringBuilder getImage() {
+
+	public StringBuffer getImage() {
 		return image;
 	}
 
 
-	public void setImage(StringBuilder image) {
+	public void setImage(StringBuffer image) {
 		this.image = image;
+	}
+
+
+	public void setTopics(Set<String> topics) {
+		this.topics = topics;
 	}
 
 
@@ -228,6 +257,17 @@ public class AnnotationModel {
 		this.thumbnailDot = thumbnailDot;
 	}
 
+	
+
+	@Override
+	public String toString() {
+		return "AnnotationModel [pinId=" + pinId + ", pinAttribute=" + pinAttribute + ", userId=" + userId
+				+ ", websiteId=" + websiteId + ", title=" + title + ", text=" + text + ", timeStamp=" + timeStamp
+				+ ", type=" + type + ", pinX=" + pinX + ", pinY=" + pinY + ", emoji=" + emoji + ", image=" + image
+				+ ", imageH=" + imageH + ", imageW=" + imageW + ", comments=" + comments + ", isPrivate=" + isPrivate
+				+ ", thumbnailDot=" + thumbnailDot + ", topics=" + topics + "]";
+	}
+
 
 	@Override
 	public int hashCode() {
@@ -247,6 +287,7 @@ public class AnnotationModel {
 		result = prime * result + ((thumbnailDot == null) ? 0 : thumbnailDot.hashCode());
 		result = prime * result + ((timeStamp == null) ? 0 : timeStamp.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
+		result = prime * result + ((topics == null) ? 0 : topics.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		result = prime * result + userId;
 		result = prime * result + websiteId;
@@ -321,6 +362,11 @@ public class AnnotationModel {
 				return false;
 		} else if (!title.equals(other.title))
 			return false;
+		if (topics == null) {
+			if (other.topics != null)
+				return false;
+		} else if (!topics.equals(other.topics))
+			return false;
 		if (type == null) {
 			if (other.type != null)
 				return false;
@@ -332,5 +378,8 @@ public class AnnotationModel {
 			return false;
 		return true;
 	}
+
+
+
 
 }

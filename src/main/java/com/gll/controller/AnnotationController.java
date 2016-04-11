@@ -31,6 +31,16 @@ public class AnnotationController {
 	@Autowired
 	AnnotationService annotationService;
 
+	// -------------------Retrieve by topic name -----------------------------------
+		@RequestMapping(value = "/annotations/topics/{topicName}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+		public ResponseEntity<List<AnnotationModel>> getByTopic(@PathVariable("topicName") String topicName) {
+			List<AnnotationModel> annotationList = annotationService.getByTopicName(topicName);
+			if (annotationList.isEmpty()) {
+				return new ResponseEntity<List<AnnotationModel>>(HttpStatus.NO_CONTENT);
+			}
+			return new ResponseEntity<List<AnnotationModel>>(annotationList, HttpStatus.OK);
+		}
+		
 	// -------------------Retrieve All userId and websiteId -----------------------------------
 
 	@RequestMapping(value = "/users/{userId}/websites/{websiteId}/annotations", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

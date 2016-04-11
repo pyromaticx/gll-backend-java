@@ -19,7 +19,6 @@ public class WebsiteDaoImpl implements WebsiteDao {
 	@Override
 	public void postWebsite(WebsiteModel websiteModel) {
 		sessionFactory.getCurrentSession().saveOrUpdate(websiteModel);
-		
 	}
 
 	@Override
@@ -35,7 +34,12 @@ public class WebsiteDaoImpl implements WebsiteDao {
 
 	@Override
 	public void putWebsite(WebsiteModel websiteModel) {
+		try{
 		sessionFactory.getCurrentSession().saveOrUpdate(websiteModel);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 
 	@Override

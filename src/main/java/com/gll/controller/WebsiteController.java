@@ -76,17 +76,19 @@ public class WebsiteController {
      
     @RequestMapping(value = "/users/{userId}/websites/{websiteId}", method = RequestMethod.PUT)
     public ResponseEntity<WebsiteModel> update(@PathVariable("userId") int userId, @PathVariable("websiteId") int websiteId, @RequestBody WebsiteModel websiteModel) {
-        System.out.println("Updating WebsiteModel " + websiteId);
+        logger.info("Updating WebsiteModel " + websiteId);
         WebsiteModel currentWebsiteModel = websiteService.getWebsite(websiteId);
-         System.out.println("Going to update WebsiteModel : " + currentWebsiteModel);
+        System.out.println("****************************** : " + currentWebsiteModel);
+         logger.debug("Going to update WebsiteModel : " + currentWebsiteModel);
         if (currentWebsiteModel==null) {
-            System.out.println("WebsiteModel with websiteId " + websiteId + " not found");
+            logger.debug("WebsiteModel with websiteId " + websiteId + " not found");
             return new ResponseEntity<WebsiteModel>(HttpStatus.NOT_FOUND);
         }
  
         currentWebsiteModel.setUserId(websiteModel.getUserId());
         currentWebsiteModel.setWebsiteId(websiteModel.getWebsiteId());
         currentWebsiteModel.setDomainName(websiteModel.getDomainName());
+        currentWebsiteModel.setRootDomain(websiteModel.getRootDomain());
          
         websiteService.putWebsite(currentWebsiteModel);
         return new ResponseEntity<WebsiteModel>(currentWebsiteModel, HttpStatus.OK);
