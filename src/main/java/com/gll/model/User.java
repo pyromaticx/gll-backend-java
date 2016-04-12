@@ -1,6 +1,8 @@
 package com.gll.model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -35,6 +37,9 @@ public class User {
 
 	@Column(name="EMAIL", nullable=false)
 	private String email;
+	
+	@Column(name="EXPERTISE", nullable=false)
+	private String expertise[];
 
 	@Column(name="STATE", nullable=false)
 	private String state=State.ACTIVE.getState();
@@ -50,8 +55,9 @@ public class User {
 		// TODO Auto-generated constructor stub
 	}
 
+
 	public User(int userId, String userName, String password, String firstName, String lastName, String email,
-			String state, Set<UserProfile> userProfiles) {
+			String expertise[], String state, Set<UserProfile> userProfiles) {
 		super();
 		this.userId = userId;
 		this.userName = userName;
@@ -59,9 +65,11 @@ public class User {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
+		this.expertise = expertise;
 		this.state = state;
 		this.userProfiles = userProfiles;
 	}
+
 
 	public int getUserId() {
 		return userId;
@@ -110,6 +118,17 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	
+	public String[] getExpertise() {
+		return expertise;
+	}
+
+
+	public void setExpertise(String[] expertise) {
+		this.expertise = expertise;
+	}
+
 
 	public String getState() {
 		return state;

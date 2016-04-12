@@ -1,11 +1,19 @@
 package com.gll.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OrderColumn;
 
 @Entity
 public class AnnotationModel implements Serializable {
@@ -30,7 +38,12 @@ public class AnnotationModel implements Serializable {
 	private String domainName; //
 	private long imageH;//
 	private long imageW;//
-	private String comments;//
+	
+	@ElementCollection(fetch=FetchType.EAGER)
+	@CollectionTable(name = "Comment", joinColumns = @JoinColumn(name = "pinId"))
+	@OrderColumn(name = "pinId_faster") // for faster processing
+    protected Set<Comment> comments = new HashSet<Comment>();
+
 	private boolean privateStatus; //
 	@Embedded
 	private ThumbnailDot thumbnailDot;
@@ -41,7 +54,7 @@ public class AnnotationModel implements Serializable {
 
 	public AnnotationModel(int pinId, String pinAttribute, int userId, int websiteId, String title, String text,
 			long timeStamp, String type, String pinX, String pinY, String emoji, StringBuffer userImage,
-			StringBuffer image, String rootDomain, String domainName, long imageH, long imageW, String comments,
+			StringBuffer image, String rootDomain, String domainName, long imageH, long imageW, Set<Comment> comments,
 			boolean privateStatus, ThumbnailDot thumbnailDot) {
 		super();
 		this.pinId = pinId;
@@ -202,11 +215,11 @@ public class AnnotationModel implements Serializable {
 		this.imageW = imageW;
 	}
 
-	public String getComments() {
+	public Set<Comment> getComments() {
 		return comments;
 	}
 
-	public void setComments(String comments) {
+	public void setComments(Set<Comment> comments) {
 		this.comments = comments;
 	}
 
@@ -224,16 +237,6 @@ public class AnnotationModel implements Serializable {
 
 	public void setThumbnailDot(ThumbnailDot thumbnailDot) {
 		this.thumbnailDot = thumbnailDot;
-	}
-
-	@Override
-	public String toString() {
-		return "AnnotationModel [pinId=" + pinId + ", pinAttribute=" + pinAttribute + ", userId=" + userId
-				+ ", websiteId=" + websiteId + ", title=" + title + ", text=" + text + ", timeStamp=" + timeStamp
-				+ ", type=" + type + ", pinX=" + pinX + ", pinY=" + pinY + ", emoji=" + emoji + ", userImage="
-				+ userImage + ", image=" + image + ", rootDomain=" + rootDomain + ", domainName=" + domainName
-				+ ", imageH=" + imageH + ", imageW=" + imageW + ", comments=" + comments + ", privateStatus="
-				+ privateStatus + ", thumbnailDot=" + thumbnailDot + "]";
 	}
 
 	@Override
@@ -354,7 +357,14 @@ public class AnnotationModel implements Serializable {
 		return true;
 	}
 
-	
+	@Override
+	public String toString() {
+		return "AnnotationModel [pinId=" + pinId + ", pinAttribute=" + pinAttribute + ", userId=" + userId
+				+ ", websiteId=" + websiteId + ", title=" + title + ", text=" + text + ", timeStamp=" + timeStamp
+				+ ", type=" + type + ", pinX=" + pinX + ", pinY=" + pinY + ", emoji=" + emoji + ", userImage="
+				+ userImage + ", image=" + image + ", rootDomain=" + rootDomain + ", domainName=" + domainName
+				+ ", imageH=" + imageH + ", imageW=" + imageW + ", comments=" + comments + ", privateStatus="
+				+ privateStatus + ", thumbnailDot=" + thumbnailDot + "]";
+	}
 
-	
 }
