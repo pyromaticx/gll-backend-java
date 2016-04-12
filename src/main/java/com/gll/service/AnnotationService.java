@@ -15,4 +15,5 @@ public interface AnnotationService {
 	public List<AnnotationModel> getAnnotationsByDomainName(String domainName);
 	public List<AnnotationModel> getAnnotationsByRootDomain(String rootDomain);
 	public List<AnnotationModel> getByTopicName(String topicName);
+	public List<AnnotationModel> getAnnotationsbyPinId(int pinId);
 }

@@ -66,7 +66,7 @@ public class AnnotationDaoImpl implements AnnotationDao {
 	@Override
 	public List<AnnotationModel> getAnnotationsByDomainName(String domainName) {
 		logger.debug("********************** :DaoImpl->getAnnotationsByDomainName()->domainName = " + domainName);
-		String hql = "FROM AnnotationModel A, WebsiteModel W FETCH ALL PROPERTIES WHERE A.websiteId = W.websiteId AND W.domainName = :domainName";
+		String hql = "FROM AnnotationModel A WHERE A.domainName = :domainName";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setString("domainName", domainName);
 		return (List<AnnotationModel>) query.list();
@@ -74,7 +74,7 @@ public class AnnotationDaoImpl implements AnnotationDao {
 
 	@Override
 	public List<AnnotationModel> getAnnotationsByRootDomain(String rootDomain) {
-		String hql = "FROM AnnotationModel A, WebsiteModel W FETCH ALL PROPERTIES WHERE A.websiteId = W.websiteId AND W.rootDomain = :rootDomain";
+		String hql = "FROM AnnotationModel A WHERE A.rootDomain = :rootDomain";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setString("rootDomain", rootDomain);
 		return (List<AnnotationModel>) query.list();
@@ -82,9 +82,15 @@ public class AnnotationDaoImpl implements AnnotationDao {
 
 	@Override
 	public List<AnnotationModel> getByTopicName(String topicName) {
-		String hql = "FROM AnnotationModel A WHERE :topicName in elements (A.topics)";
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<AnnotationModel> getAnnotationsbyPinId(int pinId) {
+		String hql = "FROM AnnotationModel A WHERE A.pinId = :pinId";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setString("topicName", topicName);
+		query.setInteger("pinId", pinId);
 		return (List<AnnotationModel>) query.list();
 	}
 

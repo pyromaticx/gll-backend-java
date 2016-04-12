@@ -86,6 +86,17 @@ public class AnnotationController {
 		return new ResponseEntity<List<AnnotationModel>>(annotationList, HttpStatus.OK);
 	}
 
+	// -------------------Retrieve Annotation by pinId -----------------------
+
+	@RequestMapping(value = "/annotations/pinId", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<AnnotationModel>> getAnnotationsByPinId(@RequestParam("pinId") int pinId) {
+		List<AnnotationModel> annotationList = annotationService.getAnnotationsbyPinId(pinId);
+		if (annotationList.isEmpty()) {
+			return new ResponseEntity<List<AnnotationModel>>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<AnnotationModel>>(annotationList, HttpStatus.OK);
+	}
+
 	// -------------------Retrieve All Annotations by Domain Name -----------------------
 
 		@RequestMapping(value = "/annotations/domainName", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -97,6 +108,7 @@ public class AnnotationController {
 			}
 			return new ResponseEntity<List<AnnotationModel>>(annotationList, HttpStatus.OK);
 		}
+
 		
 		// -------------------Retrieve All Annotations by Root Domain Name -----------------------
 

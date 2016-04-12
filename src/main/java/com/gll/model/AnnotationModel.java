@@ -1,24 +1,11 @@
 package com.gll.model;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.CollectionTable;
-import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OrderColumn;
-
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 @Entity
 public class AnnotationModel implements Serializable {
@@ -27,39 +14,35 @@ public class AnnotationModel implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int pinId;
-	private String pinAttribute;
-	private int userId;
-	private int websiteId;
-	private String title;
-	private String text;
-	private String timeStamp;
-	private String type;
-	private String pinX;
-	private String pinY;
-	private String emoji;
-	private StringBuffer image;
-	private long imageH;
-	private long imageW;
-	private String comments;
-	private boolean isPrivate;
+	private String pinAttribute;//
+	private int userId; //
+	private int websiteId; //
+	private String title; //
+	private String text; //
+	private long timeStamp; //
+	private String type;//
+	private String pinX; //
+	private String pinY; //
+	private String emoji; //
+	private StringBuffer userImage; //
+	private StringBuffer image; //
+	private String rootDomain; //
+	private String domainName; //
+	private long imageH;//
+	private long imageW;//
+	private String comments;//
+	private boolean privateStatus; //
 	@Embedded
 	private ThumbnailDot thumbnailDot;
-
-	@ElementCollection(fetch=FetchType.EAGER)
-	@CollectionTable(name = "SocialTopic", joinColumns = @JoinColumn(name = "pinId"))
-	@OrderColumn(name = "pinId_faster") // for faster processing
-//	@Enumerated(EnumType.STRING)
-//	@Fetch(FetchMode.SELECT)
-    protected Set<String> topics = new HashSet();
 
 	public AnnotationModel() {
 
 	}
 
-
 	public AnnotationModel(int pinId, String pinAttribute, int userId, int websiteId, String title, String text,
-			String timeStamp, String type, String pinX, String pinY, String emoji, StringBuffer image, long imageH,
-			long imageW, String comments, boolean isPrivate, ThumbnailDot thumbnailDot, Set<String> topics) {
+			long timeStamp, String type, String pinX, String pinY, String emoji, StringBuffer userImage,
+			StringBuffer image, String rootDomain, String domainName, long imageH, long imageW, String comments,
+			boolean privateStatus, ThumbnailDot thumbnailDot) {
 		super();
 		this.pinId = pinId;
 		this.pinAttribute = pinAttribute;
@@ -72,228 +55,213 @@ public class AnnotationModel implements Serializable {
 		this.pinX = pinX;
 		this.pinY = pinY;
 		this.emoji = emoji;
+		this.userImage = userImage;
 		this.image = image;
+		this.rootDomain = rootDomain;
+		this.domainName = domainName;
 		this.imageH = imageH;
 		this.imageW = imageW;
 		this.comments = comments;
-		this.isPrivate = isPrivate;
+		this.privateStatus = privateStatus;
 		this.thumbnailDot = thumbnailDot;
-		this.topics = topics;
 	}
-
 
 	public int getPinId() {
 		return pinId;
 	}
 
-
 	public void setPinId(int pinId) {
 		this.pinId = pinId;
 	}
-
 
 	public String getPinAttribute() {
 		return pinAttribute;
 	}
 
-
 	public void setPinAttribute(String pinAttribute) {
 		this.pinAttribute = pinAttribute;
 	}
-
 
 	public int getUserId() {
 		return userId;
 	}
 
-
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-
 
 	public int getWebsiteId() {
 		return websiteId;
 	}
 
-
 	public void setWebsiteId(int websiteId) {
 		this.websiteId = websiteId;
 	}
-
 
 	public String getTitle() {
 		return title;
 	}
 
-
 	public void setTitle(String title) {
 		this.title = title;
 	}
-
 
 	public String getText() {
 		return text;
 	}
 
-
 	public void setText(String text) {
 		this.text = text;
 	}
 
-
-	public String getTimeStamp() {
+	public long getTimeStamp() {
 		return timeStamp;
 	}
 
-
-	public void setTimeStamp(String timeStamp) {
+	public void setTimeStamp(long timeStamp) {
 		this.timeStamp = timeStamp;
 	}
-
 
 	public String getType() {
 		return type;
 	}
 
-
 	public void setType(String type) {
 		this.type = type;
 	}
-
 
 	public String getPinX() {
 		return pinX;
 	}
 
-
 	public void setPinX(String pinX) {
 		this.pinX = pinX;
 	}
-
 
 	public String getPinY() {
 		return pinY;
 	}
 
-
 	public void setPinY(String pinY) {
 		this.pinY = pinY;
 	}
-
 
 	public String getEmoji() {
 		return emoji;
 	}
 
-
 	public void setEmoji(String emoji) {
 		this.emoji = emoji;
 	}
 
+	public StringBuffer getUserImage() {
+		return userImage;
+	}
 
+	public void setUserImage(StringBuffer userImage) {
+		this.userImage = userImage;
+	}
 
 	public StringBuffer getImage() {
 		return image;
 	}
 
-
 	public void setImage(StringBuffer image) {
 		this.image = image;
 	}
 
-
-	public void setTopics(Set<String> topics) {
-		this.topics = topics;
+	public String getRootDomain() {
+		return rootDomain;
 	}
 
+	public void setRootDomain(String rootDomain) {
+		this.rootDomain = rootDomain;
+	}
+
+	public String getDomainName() {
+		return domainName;
+	}
+
+	public void setDomainName(String domainName) {
+		this.domainName = domainName;
+	}
 
 	public long getImageH() {
 		return imageH;
 	}
 
-
 	public void setImageH(long imageH) {
 		this.imageH = imageH;
 	}
-
 
 	public long getImageW() {
 		return imageW;
 	}
 
-
 	public void setImageW(long imageW) {
 		this.imageW = imageW;
 	}
-
 
 	public String getComments() {
 		return comments;
 	}
 
-
 	public void setComments(String comments) {
 		this.comments = comments;
 	}
 
-
-	public boolean isPrivate() {
-		return isPrivate;
+	public boolean isPrivateStatus() {
+		return privateStatus;
 	}
 
-
-	public void setPrivate(boolean isPrivate) {
-		this.isPrivate = isPrivate;
+	public void setPrivateStatus(boolean privateStatus) {
+		this.privateStatus = privateStatus;
 	}
-
 
 	public ThumbnailDot getThumbnailDot() {
 		return thumbnailDot;
 	}
 
-
 	public void setThumbnailDot(ThumbnailDot thumbnailDot) {
 		this.thumbnailDot = thumbnailDot;
 	}
-
-	
 
 	@Override
 	public String toString() {
 		return "AnnotationModel [pinId=" + pinId + ", pinAttribute=" + pinAttribute + ", userId=" + userId
 				+ ", websiteId=" + websiteId + ", title=" + title + ", text=" + text + ", timeStamp=" + timeStamp
-				+ ", type=" + type + ", pinX=" + pinX + ", pinY=" + pinY + ", emoji=" + emoji + ", image=" + image
-				+ ", imageH=" + imageH + ", imageW=" + imageW + ", comments=" + comments + ", isPrivate=" + isPrivate
-				+ ", thumbnailDot=" + thumbnailDot + ", topics=" + topics + "]";
+				+ ", type=" + type + ", pinX=" + pinX + ", pinY=" + pinY + ", emoji=" + emoji + ", userImage="
+				+ userImage + ", image=" + image + ", rootDomain=" + rootDomain + ", domainName=" + domainName
+				+ ", imageH=" + imageH + ", imageW=" + imageW + ", comments=" + comments + ", privateStatus="
+				+ privateStatus + ", thumbnailDot=" + thumbnailDot + "]";
 	}
-
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((comments == null) ? 0 : comments.hashCode());
+		result = prime * result + ((domainName == null) ? 0 : domainName.hashCode());
 		result = prime * result + ((emoji == null) ? 0 : emoji.hashCode());
 		result = prime * result + ((image == null) ? 0 : image.hashCode());
 		result = prime * result + (int) (imageH ^ (imageH >>> 32));
 		result = prime * result + (int) (imageW ^ (imageW >>> 32));
-		result = prime * result + (isPrivate ? 1231 : 1237);
 		result = prime * result + ((pinAttribute == null) ? 0 : pinAttribute.hashCode());
 		result = prime * result + pinId;
 		result = prime * result + ((pinX == null) ? 0 : pinX.hashCode());
 		result = prime * result + ((pinY == null) ? 0 : pinY.hashCode());
+		result = prime * result + (privateStatus ? 1231 : 1237);
+		result = prime * result + ((rootDomain == null) ? 0 : rootDomain.hashCode());
 		result = prime * result + ((text == null) ? 0 : text.hashCode());
 		result = prime * result + ((thumbnailDot == null) ? 0 : thumbnailDot.hashCode());
-		result = prime * result + ((timeStamp == null) ? 0 : timeStamp.hashCode());
+		result = prime * result + (int) (timeStamp ^ (timeStamp >>> 32));
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
-		result = prime * result + ((topics == null) ? 0 : topics.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		result = prime * result + userId;
+		result = prime * result + ((userImage == null) ? 0 : userImage.hashCode());
 		result = prime * result + websiteId;
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -309,6 +277,11 @@ public class AnnotationModel implements Serializable {
 				return false;
 		} else if (!comments.equals(other.comments))
 			return false;
+		if (domainName == null) {
+			if (other.domainName != null)
+				return false;
+		} else if (!domainName.equals(other.domainName))
+			return false;
 		if (emoji == null) {
 			if (other.emoji != null)
 				return false;
@@ -322,8 +295,6 @@ public class AnnotationModel implements Serializable {
 		if (imageH != other.imageH)
 			return false;
 		if (imageW != other.imageW)
-			return false;
-		if (isPrivate != other.isPrivate)
 			return false;
 		if (pinAttribute == null) {
 			if (other.pinAttribute != null)
@@ -342,6 +313,13 @@ public class AnnotationModel implements Serializable {
 				return false;
 		} else if (!pinY.equals(other.pinY))
 			return false;
+		if (privateStatus != other.privateStatus)
+			return false;
+		if (rootDomain == null) {
+			if (other.rootDomain != null)
+				return false;
+		} else if (!rootDomain.equals(other.rootDomain))
+			return false;
 		if (text == null) {
 			if (other.text != null)
 				return false;
@@ -352,20 +330,12 @@ public class AnnotationModel implements Serializable {
 				return false;
 		} else if (!thumbnailDot.equals(other.thumbnailDot))
 			return false;
-		if (timeStamp == null) {
-			if (other.timeStamp != null)
-				return false;
-		} else if (!timeStamp.equals(other.timeStamp))
+		if (timeStamp != other.timeStamp)
 			return false;
 		if (title == null) {
 			if (other.title != null)
 				return false;
 		} else if (!title.equals(other.title))
-			return false;
-		if (topics == null) {
-			if (other.topics != null)
-				return false;
-		} else if (!topics.equals(other.topics))
 			return false;
 		if (type == null) {
 			if (other.type != null)
@@ -374,12 +344,17 @@ public class AnnotationModel implements Serializable {
 			return false;
 		if (userId != other.userId)
 			return false;
+		if (userImage == null) {
+			if (other.userImage != null)
+				return false;
+		} else if (!userImage.equals(other.userImage))
+			return false;
 		if (websiteId != other.websiteId)
 			return false;
 		return true;
 	}
 
+	
 
-
-
+	
 }

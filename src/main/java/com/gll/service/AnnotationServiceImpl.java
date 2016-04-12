@@ -66,4 +66,9 @@ public class AnnotationServiceImpl implements AnnotationService {
 		return annotationDao.getByTopicName(topicName);
 	}
 
+	@Override
+	public List<AnnotationModel> getAnnotationsbyPinId(int pinId) {
+		return annotationDao.getAnnotationsbyPinId(pinId);
+	}
+
 }
