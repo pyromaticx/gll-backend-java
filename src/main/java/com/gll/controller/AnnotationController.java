@@ -31,10 +31,10 @@ public class AnnotationController {
 	@Autowired
 	AnnotationService annotationService;
 
-	// -------------------Retrieve by topic name -----------------------------------
-		@RequestMapping(value = "/annotations/topics/{topicName}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-		public ResponseEntity<List<AnnotationModel>> getByTopic(@PathVariable("topicName") String topicName) {
-			List<AnnotationModel> annotationList = annotationService.getByTopicName(topicName);
+	// -------------------Retrieve All Comments -----------------------------------
+		@RequestMapping(value = "/annotations/{pinId}/comments", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+		public ResponseEntity<List<AnnotationModel>> getAllComments(@PathVariable("pinId") int pinId) {
+			List<AnnotationModel> annotationList = annotationService.getAllComments(pinId);
 			if (annotationList.isEmpty()) {
 				return new ResponseEntity<List<AnnotationModel>>(HttpStatus.NO_CONTENT);
 			}

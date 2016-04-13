@@ -61,9 +61,10 @@ public class AnnotationServiceImpl implements AnnotationService {
 		return annotationDao.getAnnotationsByRootDomain(rootDomain);
 	}
 
+	@Transactional(propagation = Propagation.SUPPORTS)
 	@Override
-	public List<AnnotationModel> getByTopicName(String topicName) {
-		return annotationDao.getByTopicName(topicName);
+	public List<AnnotationModel> getAllComments(int pinId) {
+		return annotationDao.getAllComments(pinId);
 	}
 
 	@Override

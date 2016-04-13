@@ -13,6 +13,6 @@ public interface AnnotationDao {
 	public List<AnnotationModel> getAnnotationsByUserName(String userName);
 	public List<AnnotationModel> getAnnotationsByDomainName(String domainName);
 	public List<AnnotationModel> getAnnotationsByRootDomain(String rootDomain);
-	public List<AnnotationModel> getByTopicName(String topicName);
+	public List<AnnotationModel> getAllComments(int pinId);
 	public List<AnnotationModel> getAnnotationsbyPinId(int pinId);
 }

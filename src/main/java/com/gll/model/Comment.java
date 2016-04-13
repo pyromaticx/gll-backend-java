@@ -1,84 +1,98 @@
 package com.gll.model;
 
-import javax.persistence.Embeddable;
+import java.io.Serializable;
 
-@Embeddable
-public class Comment {
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
+import lombok.ToString;
+
+@ToString(exclude = "annotationModel")
+@Entity
+public class Comment implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int commentId;
 	private String userName;
 	private StringBuffer userComment;
 	private String timeStamp;
 	
+	@ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "pinId_commentId")
+	private AnnotationModel annotationModel;
+
+	
 	public Comment() {
 	}
+
+
+	public Comment(int commentId, String userName, StringBuffer userComment, String timeStamp,
+			AnnotationModel annotationModel) {
+		super();
+		this.commentId = commentId;
+		this.userName = userName;
+		this.userComment = userComment;
+		this.timeStamp = timeStamp;
+		this.annotationModel = annotationModel;
+	}
+
+
+	public int getCommentId() {
+		return commentId;
+	}
+
+
+	public void setCommentId(int commentId) {
+		this.commentId = commentId;
+	}
+
 
 	public String getUserName() {
 		return userName;
 	}
 
+
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+
 
 	public StringBuffer getUserComment() {
 		return userComment;
 	}
 
+
 	public void setUserComment(StringBuffer userComment) {
 		this.userComment = userComment;
 	}
+
 
 	public String getTimeStamp() {
 		return timeStamp;
 	}
 
+
 	public void setTimeStamp(String timeStamp) {
 		this.timeStamp = timeStamp;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((timeStamp == null) ? 0 : timeStamp.hashCode());
-		result = prime * result + ((userComment == null) ? 0 : userComment.hashCode());
-		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
-		return result;
+/*
+	public AnnotationModel getAnnotationModel() {
+		return annotationModel;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Comment other = (Comment) obj;
-		if (timeStamp == null) {
-			if (other.timeStamp != null)
-				return false;
-		} else if (!timeStamp.equals(other.timeStamp))
-			return false;
-		if (userComment == null) {
-			if (other.userComment != null)
-				return false;
-		} else if (!userComment.equals(other.userComment))
-			return false;
-		if (userName == null) {
-			if (other.userName != null)
-				return false;
-		} else if (!userName.equals(other.userName))
-			return false;
-		return true;
-	}
 
-	@Override
-	public String toString() {
-		return "Comment [userName=" + userName + ", userComment=" + userComment + ", timeStamp=" + timeStamp + "]";
-	}
+	public void setAnnotationModel(AnnotationModel annotationModel) {
+		this.annotationModel = annotationModel;
+	}*/
 
-	
-	
-	
+
 }

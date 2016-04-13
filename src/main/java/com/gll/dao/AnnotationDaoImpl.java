@@ -81,9 +81,11 @@ public class AnnotationDaoImpl implements AnnotationDao {
 	}
 
 	@Override
-	public List<AnnotationModel> getByTopicName(String topicName) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<AnnotationModel> getAllComments(int pinId) {
+		String hql = "select comments FROM AnnotationModel A WHERE A.pinId = :pinId";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setInteger("pinId", pinId);
+		return (List<AnnotationModel>) query.list();
 	}
 
 	@Override
