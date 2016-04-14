@@ -5,11 +5,12 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
+import org.hibernate.metadata.ClassMetadata;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.gll.model.AnnotationModel;
+import com.gll.model.Comment;
 
 @Repository("annotationDao")
 public class AnnotationDaoImpl implements AnnotationDao {
@@ -82,7 +83,7 @@ public class AnnotationDaoImpl implements AnnotationDao {
 
 	@Override
 	public List<AnnotationModel> getAllComments(int pinId) {
-		String hql = "select comments FROM AnnotationModel A WHERE A.pinId = :pinId";
+		String hql = "SELECT C FROM Comment C INNER JOIN C.annotationModel A WHERE C.commentId=:pinId";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setInteger("pinId", pinId);
 		return (List<AnnotationModel>) query.list();
@@ -94,6 +95,11 @@ public class AnnotationDaoImpl implements AnnotationDao {
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setInteger("pinId", pinId);
 		return (List<AnnotationModel>) query.list();
+	}
+
+	@Override
+	public void saveComment(Comment comment) {
+		sessionFactory.getCurrentSession().saveOrUpdate(comment);
 	}
 
 }

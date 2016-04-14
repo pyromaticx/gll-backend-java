@@ -3,6 +3,7 @@ package com.gll.service;
 import java.util.List;
 
 import com.gll.model.AnnotationModel;
+import com.gll.model.Comment;
 
 public interface AnnotationService {
 	public void save(AnnotationModel annotationModel);
@@ -16,4 +17,5 @@ public interface AnnotationService {
 	public List<AnnotationModel> getAnnotationsByRootDomain(String rootDomain);
 	public List<AnnotationModel> getAllComments(int pinId);
 	public List<AnnotationModel> getAnnotationsbyPinId(int pinId);
+	public void saveComment(Comment comment);
 }

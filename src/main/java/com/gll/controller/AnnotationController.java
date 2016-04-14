@@ -3,24 +3,26 @@ package com.gll.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.hibernate.metadata.CollectionMetadata;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.gll.model.AnnotationModel;
+import com.gll.model.Comment;
 import com.gll.service.AnnotationService;
 
 @RestController
@@ -31,7 +33,7 @@ public class AnnotationController {
 	@Autowired
 	AnnotationService annotationService;
 
-	// -------------------Retrieve All Comments -----------------------------------
+	// -------------------Retrieve Comments by pinId -----------------------------------
 		@RequestMapping(value = "/annotations/{pinId}/comments", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 		public ResponseEntity<List<AnnotationModel>> getAllComments(@PathVariable("pinId") int pinId) {
 			List<AnnotationModel> annotationList = annotationService.getAllComments(pinId);
@@ -40,6 +42,28 @@ public class AnnotationController {
 			}
 			return new ResponseEntity<List<AnnotationModel>>(annotationList, HttpStatus.OK);
 		}
+	
+		// -------------------Store Comment by pinId -----------------------
+
+		@RequestMapping(value = "/annotations/{pinId}/comments", method = RequestMethod.POST)
+		public ResponseEntity<Void> saveComment(@PathVariable("pinId") int pinId, @RequestBody Comment comment, UriComponentsBuilder ucBuilder) {
+		
+			if (annotationService.display(pinId) == null) {
+				logger.info("pinId does not exist! Can not give comment!");
+				return new ResponseEntity<Void>(HttpStatus.UNAUTHORIZED);
+			}
+			
+			annotationService.saveComment(comment);
+
+			HttpHeaders headers = new HttpHeaders();
+			Map<String,Integer> map = new HashMap<String,Integer>();
+			map.put("pinId", pinId);
+		
+			headers.setLocation(ucBuilder.path("/annotations/{pinId}/comments").buildAndExpand(map).toUri());
+			
+			return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+		}
+
 		
 	// -------------------Retrieve All userId and websiteId -----------------------------------
 

@@ -2,6 +2,7 @@ package com.gll.dao;
 
 import java.util.List;
 import com.gll.model.AnnotationModel;
+import com.gll.model.Comment;
 
 public interface AnnotationDao {
 	public void save(AnnotationModel annotationModel);
@@ -15,4 +16,5 @@ public interface AnnotationDao {
 	public List<AnnotationModel> getAnnotationsByRootDomain(String rootDomain);
 	public List<AnnotationModel> getAllComments(int pinId);
 	public List<AnnotationModel> getAnnotationsbyPinId(int pinId);
+	public void saveComment(Comment comment);
 }

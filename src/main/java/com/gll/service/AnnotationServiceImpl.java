@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.gll.dao.AnnotationDao;
 import com.gll.model.AnnotationModel;
+import com.gll.model.Comment;
 
 @Service("annotationService")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = false)
@@ -70,6 +71,12 @@ public class AnnotationServiceImpl implements AnnotationService {
 	@Override
 	public List<AnnotationModel> getAnnotationsbyPinId(int pinId) {
 		return annotationDao.getAnnotationsbyPinId(pinId);
+	}
+
+	@Override
+	public void saveComment(Comment comment) {
+		annotationDao.saveComment(comment);
+		
 	}
 
 }

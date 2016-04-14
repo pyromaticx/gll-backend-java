@@ -11,10 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
-
-import lombok.ToString;
-@ToString(exclude = "comments")
 @Entity
 public class AnnotationModel implements Serializable {
 
@@ -40,7 +38,7 @@ public class AnnotationModel implements Serializable {
 	private long imageW;//
 	
 	@OneToMany(fetch=FetchType.EAGER,  cascade = CascadeType.ALL)
-	@JoinColumn(name = "pinId_commentId")
+	@JoinTable(name = "AnnotationModel_Comment", joinColumns = { @JoinColumn(name = "pinId") }, inverseJoinColumns = { @JoinColumn(name = "commentId") })
 	private Set<Comment> comments;
 
 	private boolean privateStatus; //
@@ -49,33 +47,6 @@ public class AnnotationModel implements Serializable {
 
 	public AnnotationModel() {
 
-	}
-
-	public AnnotationModel(int pinId, String pinAttribute, int userId, int websiteId, String title, String text,
-			long timeStamp, String type, String pinX, String pinY, String emoji, StringBuffer userImage,
-			StringBuffer image, String rootDomain, String domainName, long imageH, long imageW, Set<Comment> comments,
-			boolean privateStatus, ThumbnailDot thumbnailDot) {
-		super();
-		this.pinId = pinId;
-		this.pinAttribute = pinAttribute;
-		this.userId = userId;
-		this.websiteId = websiteId;
-		this.title = title;
-		this.text = text;
-		this.timeStamp = timeStamp;
-		this.type = type;
-		this.pinX = pinX;
-		this.pinY = pinY;
-		this.emoji = emoji;
-		this.userImage = userImage;
-		this.image = image;
-		this.rootDomain = rootDomain;
-		this.domainName = domainName;
-		this.imageH = imageH;
-		this.imageW = imageW;
-		this.comments = comments;
-		this.privateStatus = privateStatus;
-		this.thumbnailDot = thumbnailDot;
 	}
 
 	public int getPinId() {
