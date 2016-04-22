@@ -33,49 +33,6 @@ public class AnnotationController {
 	@Autowired
 	AnnotationService annotationService;
 
-	// -------------------Retrieve Comments by pinId -----------------------------------
-		@RequestMapping(value = "/annotations/{pinId}/comments", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-		public ResponseEntity<List<AnnotationModel>> getAllComments(@PathVariable("pinId") int pinId) {
-			List<AnnotationModel> annotationList = annotationService.getAllComments(pinId);
-			if (annotationList.isEmpty()) {
-				return new ResponseEntity<List<AnnotationModel>>(HttpStatus.NO_CONTENT);
-			}
-			return new ResponseEntity<List<AnnotationModel>>(annotationList, HttpStatus.OK);
-		}
-	
-		// -------------------Store Comment by pinId -----------------------
-
-		@RequestMapping(value = "/annotations/{pinId}/comments", method = RequestMethod.POST)
-		public ResponseEntity<Void> saveComment(@PathVariable("pinId") int pinId, @RequestBody Comment comment, UriComponentsBuilder ucBuilder) {
-		
-			if (annotationService.display(pinId) == null) {
-				logger.info("pinId does not exist! Can not give comment!");
-				return new ResponseEntity<Void>(HttpStatus.UNAUTHORIZED);
-			}
-			
-			annotationService.saveComment(comment);
-
-			HttpHeaders headers = new HttpHeaders();
-			Map<String,Integer> map = new HashMap<String,Integer>();
-			map.put("pinId", pinId);
-		
-			headers.setLocation(ucBuilder.path("/annotations/{pinId}/comments").buildAndExpand(map).toUri());
-			
-			return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
-		}
-
-		
-	// -------------------Retrieve All userId and websiteId -----------------------------------
-
-	@RequestMapping(value = "/users/{userId}/websites/{websiteId}/annotations", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<AnnotationModel>> displayAll(@PathVariable("userId") int userId, @PathVariable("websiteId") int websiteId) {
-		List<AnnotationModel> annotationList = annotationService.displayAll();
-		if (annotationList.isEmpty()) {
-			return new ResponseEntity<List<AnnotationModel>>(HttpStatus.NO_CONTENT);
-		}
-		return new ResponseEntity<List<AnnotationModel>>(annotationList, HttpStatus.OK);
-	}
-	
 	// -------------------Retrieve All Annotations-----------------------------------
 	@RequestMapping(value = "/annotations", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<AnnotationModel>> displayAll() {
@@ -86,17 +43,15 @@ public class AnnotationController {
 		return new ResponseEntity<List<AnnotationModel>>(annotationList, HttpStatus.OK);
 	}
 
-	// -------------------Retrieve Single Record -----------------------
+	// -------------------Retrieve Annotation by annotationId -----------------------
 
-	@RequestMapping(value = "/users/{userId}/websites/{websiteId}/annotations/{pinId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<AnnotationModel> getSinglRecord(@PathVariable("userId") int userId, @PathVariable("websiteId") int websiteId, @PathVariable("pinId") int pinId) {
-		logger.info("********************: Fetching AnnotationModel with pinId " + pinId);
-		AnnotationModel annotationModel = annotationService.display(pinId);
-		if (annotationModel == null) {
-			logger.info("AnnotationModel with annotationId " + pinId + " not found");
-			return new ResponseEntity<AnnotationModel>(HttpStatus.NOT_FOUND);
+	@RequestMapping(value = "/annotations/{annotationId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<AnnotationModel>> getAnnotationsByannotationId(@RequestParam("annotationId") int annotationId) {
+		List<AnnotationModel> annotationList = annotationService.getAnnotationsbyannotationId(annotationId);
+		if (annotationList.isEmpty()) {
+			return new ResponseEntity<List<AnnotationModel>>(HttpStatus.NO_CONTENT);
 		}
-		return new ResponseEntity<AnnotationModel>(annotationModel, HttpStatus.OK);
+		return new ResponseEntity<List<AnnotationModel>>(annotationList, HttpStatus.OK);
 	}
 
 	// -------------------Retrieve Annotation by User Name -----------------------
@@ -110,16 +65,6 @@ public class AnnotationController {
 		return new ResponseEntity<List<AnnotationModel>>(annotationList, HttpStatus.OK);
 	}
 
-	// -------------------Retrieve Annotation by pinId -----------------------
-
-	@RequestMapping(value = "/annotations/pinId", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<AnnotationModel>> getAnnotationsByPinId(@RequestParam("pinId") int pinId) {
-		List<AnnotationModel> annotationList = annotationService.getAnnotationsbyPinId(pinId);
-		if (annotationList.isEmpty()) {
-			return new ResponseEntity<List<AnnotationModel>>(HttpStatus.NO_CONTENT);
-		}
-		return new ResponseEntity<List<AnnotationModel>>(annotationList, HttpStatus.OK);
-	}
 
 	// -------------------Retrieve All Annotations by Domain Name -----------------------
 
@@ -133,7 +78,6 @@ public class AnnotationController {
 			return new ResponseEntity<List<AnnotationModel>>(annotationList, HttpStatus.OK);
 		}
 
-		
 		// -------------------Retrieve All Annotations by Root Domain Name -----------------------
 
 		@RequestMapping(value = "/annotations/rootDomain", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -145,13 +89,12 @@ public class AnnotationController {
 			return new ResponseEntity<List<AnnotationModel>>(annotationList, HttpStatus.OK);
 		}
 
-		
-		// -------------------Create a Record -----------------------
+		// -------------------Create Annotation -----------------------
 
 	@RequestMapping(value = "/users/{userId}/websites/{websiteId}/annotations", method = RequestMethod.POST)
 	public ResponseEntity<Void> save(@PathVariable("userId") int userId, @PathVariable("websiteId") int websiteId, @RequestBody AnnotationModel annotationModel, UriComponentsBuilder ucBuilder) {
 	
-		if (annotationService.display(annotationModel.getPinId()) != null) {
+		if (annotationService.display(annotationModel.getannotationId()) != null) {
 			logger.info("A AnnotationModel with name " + annotationModel.getText() + " already exist");
 			return new ResponseEntity<Void>(HttpStatus.CONFLICT);
 		}
@@ -163,21 +106,105 @@ public class AnnotationController {
 		Map<String,Integer> map = new HashMap<String,Integer>();
 		map.put("userId", annotationModel.getUserId());
 		map.put("websiteId", annotationModel.getWebsiteId());
-		map.put("pinId", annotationModel.getPinId());
+		map.put("annotationId", annotationModel.getAnnotationId());
 
 		headers.setLocation(ucBuilder.path("/users/{userId}/websites/{websiteId}/annotations").buildAndExpand(map).toUri());
 		
 		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 	}
 
+	// -------------------Retrieve All Annotation by userId and websiteId -----------------------------------
+
+	@RequestMapping(value = "/users/{userId}/websites/{websiteId}/annotations", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<AnnotationModel>> displayAll(@PathVariable("userId") int userId, @PathVariable("websiteId") int websiteId) {
+		List<AnnotationModel> annotationList = annotationService.displayAll();
+		if (annotationList.isEmpty()) {
+			return new ResponseEntity<List<AnnotationModel>>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<AnnotationModel>>(annotationList, HttpStatus.OK);
+	}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	// -------------------Retrieve Comments by annotationId -----------------------------------
+		@RequestMapping(value = "/annotations/{annotationId}/comments", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+		public ResponseEntity<List<AnnotationModel>> getAllComments(@PathVariable("annotationId") int annotationId) {
+			List<AnnotationModel> annotationList = annotationService.getAllComments(annotationId);
+			if (annotationList.isEmpty()) {
+				return new ResponseEntity<List<AnnotationModel>>(HttpStatus.NO_CONTENT);
+			}
+			return new ResponseEntity<List<AnnotationModel>>(annotationList, HttpStatus.OK);
+		}
+	
+		// -------------------Store Comment by annotationId -----------------------
+
+		@RequestMapping(value = "/annotations/{annotationId}/comments", method = RequestMethod.POST)
+		public ResponseEntity<Void> saveComment(@PathVariable("annotationId") int annotationId, @RequestBody Comment comment, UriComponentsBuilder ucBuilder) {
+		
+			if (annotationService.display(annotationId) == null) {
+				logger.info("annotationId does not exist! Can not give comment!");
+				return new ResponseEntity<Void>(HttpStatus.UNAUTHORIZED);
+			}
+			
+			annotationService.saveComment(comment);
+
+			HttpHeaders headers = new HttpHeaders();
+			Map<String,Integer> map = new HashMap<String,Integer>();
+			map.put("annotationId", annotationId);
+		
+			headers.setLocation(ucBuilder.path("/annotations/{annotationId}/comments").buildAndExpand(map).toUri());
+			
+			return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+		}
+
+		
+
+
+	// -------------------Retrieve Single Record -----------------------
+
+	@RequestMapping(value = "/users/{userId}/websites/{websiteId}/annotations/{annotationId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<AnnotationModel> getSinglRecord(@PathVariable("userId") int userId, @PathVariable("websiteId") int websiteId, @PathVariable("annotationId") int annotationId) {
+		logger.info("********************: Fetching AnnotationModel with annotationId " + annotationId);
+		AnnotationModel annotationModel = annotationService.display(annotationId);
+		if (annotationModel == null) {
+			logger.info("AnnotationModel with annotationId " + annotationId + " not found");
+			return new ResponseEntity<AnnotationModel>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<AnnotationModel>(annotationModel, HttpStatus.OK);
+	}
+
 	// ------------------- Update a Record -------------------------------
 	@RequestMapping(value = "/users/{userId}/websites/{websiteId}/annotations/{annotationId}", method = RequestMethod.PUT)
-	public ResponseEntity<AnnotationModel> update(@PathVariable("userId") int userId,	@PathVariable("websiteId") int websiteId, @PathVariable("pinId") int pinId, @RequestBody AnnotationModel annotationModel) {
-		logger.info("Updating AnnotationModel " + pinId);
-		AnnotationModel currentAnnotationModel = annotationService.display(pinId);
+	public ResponseEntity<AnnotationModel> update(@PathVariable("userId") int userId,	@PathVariable("websiteId") int websiteId, @PathVariable("annotationId") int annotationId, @RequestBody AnnotationModel annotationModel) {
+		logger.info("Updating AnnotationModel " + annotationId);
+		AnnotationModel currentAnnotationModel = annotationService.display(annotationId);
 		logger.info("Going to update AnnotationModel : " + currentAnnotationModel);
 		if (currentAnnotationModel == null) {
-			logger.info("AnnotationModel with pinId " + pinId + " not found");
+			logger.info("AnnotationModel with annotationId " + annotationId + " not found");
 			return new ResponseEntity<AnnotationModel>(HttpStatus.NOT_FOUND);
 		}
 
@@ -187,15 +214,15 @@ public class AnnotationController {
 
 	// ------------------- Delete a Record ----------------
 
-	@RequestMapping(value = "/users/{userId}/websites/{websiteId}/annotations/{pinId}", method = RequestMethod.DELETE)
-	public ResponseEntity<AnnotationModel> delete(@PathVariable("userId") int userId, @PathVariable("websiteId") int websiteId, @PathVariable("pinId") int pinId) {
-		logger.info("Fetching & Deleting AnnotationModel with pinId " + pinId);
-		AnnotationModel annotationModel = annotationService.display(pinId);
+	@RequestMapping(value = "/users/{userId}/websites/{websiteId}/annotations/{annotationId}", method = RequestMethod.DELETE)
+	public ResponseEntity<AnnotationModel> delete(@PathVariable("userId") int userId, @PathVariable("websiteId") int websiteId, @PathVariable("annotationId") int annotationId) {
+		logger.info("Fetching & Deleting AnnotationModel with annotationId " + annotationId);
+		AnnotationModel annotationModel = annotationService.display(annotationId);
 		if (annotationModel == null) {
-			logger.info("Unable to delete. AnnotationModel with pinId " + pinId + " not found");
+			logger.info("Unable to delete. AnnotationModel with annotationId " + annotationId + " not found");
 			return new ResponseEntity<AnnotationModel>(HttpStatus.NOT_FOUND);
 		}
-		annotationService.delete(pinId);
+		annotationService.delete(annotationId);
 		return new ResponseEntity<AnnotationModel>(HttpStatus.NO_CONTENT);
 	}
 
