@@ -8,37 +8,50 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class User {
+public class UserRole {
 	/*
 	 * Auto generated Primary.
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int userId;
+	private int userRoleId;
+	private String userRoleDescription;
 	private boolean useStatus;
 	private String programId;
 	private String LocId;
 	private Date timeUpdated;
+	private int userId;
 	
-	public User() {
+	public UserRole() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(int userId, boolean useStatus, String programId, String locId, Date timeUpdated) {
+	public UserRole(int userRoleId, String userRoleDescription, boolean useStatus, String programId, String locId,
+			Date timeUpdated, int userId) {
 		super();
-		this.userId = userId;
+		this.userRoleId = userRoleId;
+		this.userRoleDescription = userRoleDescription;
 		this.useStatus = useStatus;
 		this.programId = programId;
 		LocId = locId;
 		this.timeUpdated = timeUpdated;
-	}
-
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+
+	public int getUserRoleId() {
+		return userRoleId;
+	}
+
+	public void setUserRoleId(int userRoleId) {
+		this.userRoleId = userRoleId;
+	}
+
+	public String getUserRoleDescription() {
+		return userRoleDescription;
+	}
+
+	public void setUserRoleDescription(String userRoleDescription) {
+		this.userRoleDescription = userRoleDescription;
 	}
 
 	public boolean isUseStatus() {
@@ -73,6 +86,14 @@ public class User {
 		this.timeUpdated = timeUpdated;
 	}
 
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -82,6 +103,8 @@ public class User {
 		result = prime * result + ((timeUpdated == null) ? 0 : timeUpdated.hashCode());
 		result = prime * result + (useStatus ? 1231 : 1237);
 		result = prime * result + userId;
+		result = prime * result + ((userRoleDescription == null) ? 0 : userRoleDescription.hashCode());
+		result = prime * result + userRoleId;
 		return result;
 	}
 
@@ -93,7 +116,7 @@ public class User {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		UserRole other = (UserRole) obj;
 		if (LocId == null) {
 			if (other.LocId != null)
 				return false;
@@ -113,14 +136,23 @@ public class User {
 			return false;
 		if (userId != other.userId)
 			return false;
+		if (userRoleDescription == null) {
+			if (other.userRoleDescription != null)
+				return false;
+		} else if (!userRoleDescription.equals(other.userRoleDescription))
+			return false;
+		if (userRoleId != other.userRoleId)
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", useStatus=" + useStatus + ", programId=" + programId + ", LocId=" + LocId
-				+ ", timeUpdated=" + timeUpdated + "]";
+		return "UserRole [userRoleId=" + userRoleId + ", userRoleDescription=" + userRoleDescription + ", useStatus="
+				+ useStatus + ", programId=" + programId + ", LocId=" + LocId + ", timeUpdated=" + timeUpdated
+				+ ", userId=" + userId + "]";
 	}
+	
 	
 	
 }

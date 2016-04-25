@@ -1,5 +1,6 @@
 package com.gll.model;
 
+import java.util.Arrays;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -8,25 +9,32 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class User {
+public class UserAccountSetting {
 	/*
 	 * Auto generated Primary.
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int userId;
+	private char[] userPassword[];
+	private int userTypeId;
+	private int userTierId;
 	private boolean useStatus;
 	private String programId;
 	private String LocId;
 	private Date timeUpdated;
-	
-	public User() {
+
+	public UserAccountSetting() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(int userId, boolean useStatus, String programId, String locId, Date timeUpdated) {
+	public UserAccountSetting(int userId, char[][] userPassword, int userTypeId, int userTierId, boolean useStatus,
+			String programId, String locId, Date timeUpdated) {
 		super();
 		this.userId = userId;
+		this.userPassword = userPassword;
+		this.userTypeId = userTypeId;
+		this.userTierId = userTierId;
 		this.useStatus = useStatus;
 		this.programId = programId;
 		LocId = locId;
@@ -39,6 +47,30 @@ public class User {
 
 	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+
+	public char[][] getUserPassword() {
+		return userPassword;
+	}
+
+	public void setUserPassword(char[][] userPassword) {
+		this.userPassword = userPassword;
+	}
+
+	public int getUserTypeId() {
+		return userTypeId;
+	}
+
+	public void setUserTypeId(int userTypeId) {
+		this.userTypeId = userTypeId;
+	}
+
+	public int getUserTierId() {
+		return userTierId;
+	}
+
+	public void setUserTierId(int userTierId) {
+		this.userTierId = userTierId;
 	}
 
 	public boolean isUseStatus() {
@@ -82,6 +114,9 @@ public class User {
 		result = prime * result + ((timeUpdated == null) ? 0 : timeUpdated.hashCode());
 		result = prime * result + (useStatus ? 1231 : 1237);
 		result = prime * result + userId;
+		result = prime * result + Arrays.deepHashCode(userPassword);
+		result = prime * result + userTierId;
+		result = prime * result + userTypeId;
 		return result;
 	}
 
@@ -93,7 +128,7 @@ public class User {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		UserAccountSetting other = (UserAccountSetting) obj;
 		if (LocId == null) {
 			if (other.LocId != null)
 				return false;
@@ -113,14 +148,20 @@ public class User {
 			return false;
 		if (userId != other.userId)
 			return false;
+		if (!Arrays.deepEquals(userPassword, other.userPassword))
+			return false;
+		if (userTierId != other.userTierId)
+			return false;
+		if (userTypeId != other.userTypeId)
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", useStatus=" + useStatus + ", programId=" + programId + ", LocId=" + LocId
-				+ ", timeUpdated=" + timeUpdated + "]";
+		return "UserAccountSetting [userId=" + userId + ", userPassword=" + Arrays.toString(userPassword)
+				+ ", userTypeId=" + userTypeId + ", userTierId=" + userTierId + ", useStatus=" + useStatus
+				+ ", programId=" + programId + ", LocId=" + LocId + ", timeUpdated=" + timeUpdated + "]";
 	}
-	
-	
+
 }

@@ -8,37 +8,60 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class User {
+public class UserType {
 	/*
 	 * Auto generated Primary.
 	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int userId;
+	@GeneratedValue(strategy = GenerationType.AUTO)	
+	private int userTypeId;
+	private String userTypeDescription;
+	private int userRoleId;
 	private boolean useStatus;
 	private String programId;
 	private String LocId;
 	private Date timeUpdated;
+	private int userId;
 	
-	public User() {
+	public UserType() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(int userId, boolean useStatus, String programId, String locId, Date timeUpdated) {
+	public UserType(int userTypeId, String userTypeDescription, int userRoleId, boolean useStatus, String programId,
+			String locId, Date timeUpdated, int userId) {
 		super();
-		this.userId = userId;
+		this.userTypeId = userTypeId;
+		this.userTypeDescription = userTypeDescription;
+		this.userRoleId = userRoleId;
 		this.useStatus = useStatus;
 		this.programId = programId;
 		LocId = locId;
 		this.timeUpdated = timeUpdated;
-	}
-
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+
+	public int getUserTypeId() {
+		return userTypeId;
+	}
+
+	public void setUserTypeId(int userTypeId) {
+		this.userTypeId = userTypeId;
+	}
+
+	public String getUserTypeDescription() {
+		return userTypeDescription;
+	}
+
+	public void setUserTypeDescription(String userTypeDescription) {
+		this.userTypeDescription = userTypeDescription;
+	}
+
+	public int getUserRoleId() {
+		return userRoleId;
+	}
+
+	public void setUserRoleId(int userRoleId) {
+		this.userRoleId = userRoleId;
 	}
 
 	public boolean isUseStatus() {
@@ -73,6 +96,14 @@ public class User {
 		this.timeUpdated = timeUpdated;
 	}
 
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -82,6 +113,9 @@ public class User {
 		result = prime * result + ((timeUpdated == null) ? 0 : timeUpdated.hashCode());
 		result = prime * result + (useStatus ? 1231 : 1237);
 		result = prime * result + userId;
+		result = prime * result + userRoleId;
+		result = prime * result + ((userTypeDescription == null) ? 0 : userTypeDescription.hashCode());
+		result = prime * result + userTypeId;
 		return result;
 	}
 
@@ -93,7 +127,7 @@ public class User {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		UserType other = (UserType) obj;
 		if (LocId == null) {
 			if (other.LocId != null)
 				return false;
@@ -113,13 +147,23 @@ public class User {
 			return false;
 		if (userId != other.userId)
 			return false;
+		if (userRoleId != other.userRoleId)
+			return false;
+		if (userTypeDescription == null) {
+			if (other.userTypeDescription != null)
+				return false;
+		} else if (!userTypeDescription.equals(other.userTypeDescription))
+			return false;
+		if (userTypeId != other.userTypeId)
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", useStatus=" + useStatus + ", programId=" + programId + ", LocId=" + LocId
-				+ ", timeUpdated=" + timeUpdated + "]";
+		return "UserType [userTypeId=" + userTypeId + ", userTypeDescription=" + userTypeDescription + ", userRoleId="
+				+ userRoleId + ", useStatus=" + useStatus + ", programId=" + programId + ", LocId=" + LocId
+				+ ", timeUpdated=" + timeUpdated + ", userId=" + userId + "]";
 	}
 	
 	

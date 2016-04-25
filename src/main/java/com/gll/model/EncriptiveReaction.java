@@ -6,39 +6,55 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
-public class User {
+public class EncriptiveReaction {
 	/*
 	 * Auto generated Primary.
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int userId;
+	private int encryptiveReactionTypeId;
+	@OneToOne
+	private int annotationId;
 	private boolean useStatus;
 	private String programId;
 	private String LocId;
 	private Date timeUpdated;
+	@OneToOne
+	private int userId;
 	
-	public User() {
+	public EncriptiveReaction() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(int userId, boolean useStatus, String programId, String locId, Date timeUpdated) {
+	public EncriptiveReaction(int encryptiveReactionTypeId, int annotationId, boolean useStatus, String programId,
+			String locId, Date timeUpdated, int userId) {
 		super();
-		this.userId = userId;
+		this.encryptiveReactionTypeId = encryptiveReactionTypeId;
+		this.annotationId = annotationId;
 		this.useStatus = useStatus;
 		this.programId = programId;
 		LocId = locId;
 		this.timeUpdated = timeUpdated;
-	}
-
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+
+	public int getEncryptiveReactionTypeId() {
+		return encryptiveReactionTypeId;
+	}
+
+	public void setEncryptiveReactionTypeId(int encryptiveReactionTypeId) {
+		this.encryptiveReactionTypeId = encryptiveReactionTypeId;
+	}
+
+	public int getAnnotationId() {
+		return annotationId;
+	}
+
+	public void setAnnotationId(int annotationId) {
+		this.annotationId = annotationId;
 	}
 
 	public boolean isUseStatus() {
@@ -73,11 +89,21 @@ public class User {
 		this.timeUpdated = timeUpdated;
 	}
 
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((LocId == null) ? 0 : LocId.hashCode());
+		result = prime * result + annotationId;
+		result = prime * result + encryptiveReactionTypeId;
 		result = prime * result + ((programId == null) ? 0 : programId.hashCode());
 		result = prime * result + ((timeUpdated == null) ? 0 : timeUpdated.hashCode());
 		result = prime * result + (useStatus ? 1231 : 1237);
@@ -93,11 +119,15 @@ public class User {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		EncriptiveReaction other = (EncriptiveReaction) obj;
 		if (LocId == null) {
 			if (other.LocId != null)
 				return false;
 		} else if (!LocId.equals(other.LocId))
+			return false;
+		if (annotationId != other.annotationId)
+			return false;
+		if (encryptiveReactionTypeId != other.encryptiveReactionTypeId)
 			return false;
 		if (programId == null) {
 			if (other.programId != null)
@@ -118,8 +148,9 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", useStatus=" + useStatus + ", programId=" + programId + ", LocId=" + LocId
-				+ ", timeUpdated=" + timeUpdated + "]";
+		return "EncriptiveReaction [encryptiveReactionTypeId=" + encryptiveReactionTypeId + ", annotationId="
+				+ annotationId + ", useStatus=" + useStatus + ", programId=" + programId + ", LocId=" + LocId
+				+ ", timeUpdated=" + timeUpdated + ", userId=" + userId + "]";
 	}
 	
 	

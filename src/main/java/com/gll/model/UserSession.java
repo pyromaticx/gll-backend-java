@@ -8,37 +8,50 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class User {
+public class UserSession {
 	/*
 	 * Auto generated Primary.
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int userId;
+	private int sessionId;
+	private String sessionDescription;
 	private boolean useStatus;
 	private String programId;
 	private String LocId;
 	private Date timeUpdated;
+	private int userId;
 	
-	public User() {
+	public UserSession() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(int userId, boolean useStatus, String programId, String locId, Date timeUpdated) {
+	public UserSession(int sessionId, String sessionDescription, boolean useStatus, String programId, String locId,
+			Date timeUpdated, int userId) {
 		super();
-		this.userId = userId;
+		this.sessionId = sessionId;
+		this.sessionDescription = sessionDescription;
 		this.useStatus = useStatus;
 		this.programId = programId;
 		LocId = locId;
 		this.timeUpdated = timeUpdated;
-	}
-
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+
+	public int getSessionId() {
+		return sessionId;
+	}
+
+	public void setSessionId(int sessionId) {
+		this.sessionId = sessionId;
+	}
+
+	public String getSessionDescription() {
+		return sessionDescription;
+	}
+
+	public void setSessionDescription(String sessionDescription) {
+		this.sessionDescription = sessionDescription;
 	}
 
 	public boolean isUseStatus() {
@@ -73,12 +86,22 @@ public class User {
 		this.timeUpdated = timeUpdated;
 	}
 
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((LocId == null) ? 0 : LocId.hashCode());
 		result = prime * result + ((programId == null) ? 0 : programId.hashCode());
+		result = prime * result + ((sessionDescription == null) ? 0 : sessionDescription.hashCode());
+		result = prime * result + sessionId;
 		result = prime * result + ((timeUpdated == null) ? 0 : timeUpdated.hashCode());
 		result = prime * result + (useStatus ? 1231 : 1237);
 		result = prime * result + userId;
@@ -93,7 +116,7 @@ public class User {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		UserSession other = (UserSession) obj;
 		if (LocId == null) {
 			if (other.LocId != null)
 				return false;
@@ -103,6 +126,13 @@ public class User {
 			if (other.programId != null)
 				return false;
 		} else if (!programId.equals(other.programId))
+			return false;
+		if (sessionDescription == null) {
+			if (other.sessionDescription != null)
+				return false;
+		} else if (!sessionDescription.equals(other.sessionDescription))
+			return false;
+		if (sessionId != other.sessionId)
 			return false;
 		if (timeUpdated == null) {
 			if (other.timeUpdated != null)
@@ -118,8 +148,9 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", useStatus=" + useStatus + ", programId=" + programId + ", LocId=" + LocId
-				+ ", timeUpdated=" + timeUpdated + "]";
+		return "UserSession [sessionId=" + sessionId + ", sessionDescription=" + sessionDescription + ", useStatus="
+				+ useStatus + ", programId=" + programId + ", LocId=" + LocId + ", timeUpdated=" + timeUpdated
+				+ ", userId=" + userId + "]";
 	}
 	
 	

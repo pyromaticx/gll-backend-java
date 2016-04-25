@@ -6,39 +6,53 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.OneToOne;
 @Entity
-public class User {
+public class UserActivityLog {
 	/*
 	 * Auto generated Primary.
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int userId;
+	private int activeUserId;
+	private Date lastLogin;
 	private boolean useStatus;
 	private String programId;
 	private String LocId;
 	private Date timeUpdated;
+	@OneToOne
+	private int userId;
 	
-	public User() {
-		// TODO Auto-generated constructor stub
+	public UserActivityLog() {
+		
 	}
 
-	public User(int userId, boolean useStatus, String programId, String locId, Date timeUpdated) {
+	public UserActivityLog(int activeUserId, Date lastLogin, boolean useStatus, String programId, String locId,
+			Date timeUpdated, int userId) {
 		super();
-		this.userId = userId;
+		this.activeUserId = activeUserId;
+		this.lastLogin = lastLogin;
 		this.useStatus = useStatus;
 		this.programId = programId;
 		LocId = locId;
 		this.timeUpdated = timeUpdated;
-	}
-
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+
+	public int getActiveUserId() {
+		return activeUserId;
+	}
+
+	public void setActiveUserId(int activeUserId) {
+		this.activeUserId = activeUserId;
+	}
+
+	public Date getLastLogin() {
+		return lastLogin;
+	}
+
+	public void setLastLogin(Date lastLogin) {
+		this.lastLogin = lastLogin;
 	}
 
 	public boolean isUseStatus() {
@@ -73,11 +87,21 @@ public class User {
 		this.timeUpdated = timeUpdated;
 	}
 
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((LocId == null) ? 0 : LocId.hashCode());
+		result = prime * result + activeUserId;
+		result = prime * result + ((lastLogin == null) ? 0 : lastLogin.hashCode());
 		result = prime * result + ((programId == null) ? 0 : programId.hashCode());
 		result = prime * result + ((timeUpdated == null) ? 0 : timeUpdated.hashCode());
 		result = prime * result + (useStatus ? 1231 : 1237);
@@ -93,11 +117,18 @@ public class User {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		UserActivityLog other = (UserActivityLog) obj;
 		if (LocId == null) {
 			if (other.LocId != null)
 				return false;
 		} else if (!LocId.equals(other.LocId))
+			return false;
+		if (activeUserId != other.activeUserId)
+			return false;
+		if (lastLogin == null) {
+			if (other.lastLogin != null)
+				return false;
+		} else if (!lastLogin.equals(other.lastLogin))
 			return false;
 		if (programId == null) {
 			if (other.programId != null)
@@ -118,9 +149,11 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", useStatus=" + useStatus + ", programId=" + programId + ", LocId=" + LocId
-				+ ", timeUpdated=" + timeUpdated + "]";
+		return "UserActivityLog [activeUserId=" + activeUserId + ", lastLogin=" + lastLogin + ", useStatus=" + useStatus
+				+ ", programId=" + programId + ", LocId=" + LocId + ", timeUpdated=" + timeUpdated + ", userId="
+				+ userId + "]";
 	}
+	
 	
 	
 }

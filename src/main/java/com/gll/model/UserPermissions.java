@@ -6,39 +6,68 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
+/**
+ * @author umesh
+ *
+ */
 @Entity
-public class User {
+public class UserPermissions {
 	/*
 	 * Auto generated Primary.
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int userId;
+	private int userPermissionId;
+	private int userRoleId;
+	private String userPermissionDescription;
 	private boolean useStatus;
 	private String programId;
 	private String LocId;
 	private Date timeUpdated;
+	@OneToOne
+	private int userId;
 	
-	public User() {
+	public UserPermissions() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(int userId, boolean useStatus, String programId, String locId, Date timeUpdated) {
+	public UserPermissions(int userPermissionId, int userRoleId, String userPermissionDescription, boolean useStatus,
+			String programId, String locId, Date timeUpdated, int userId) {
 		super();
-		this.userId = userId;
+		this.userPermissionId = userPermissionId;
+		this.userRoleId = userRoleId;
+		this.userPermissionDescription = userPermissionDescription;
 		this.useStatus = useStatus;
 		this.programId = programId;
 		LocId = locId;
 		this.timeUpdated = timeUpdated;
-	}
-
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+
+	public int getUserPermissionId() {
+		return userPermissionId;
+	}
+
+	public void setUserPermissionId(int userPermissionId) {
+		this.userPermissionId = userPermissionId;
+	}
+
+	public int getUserRoleId() {
+		return userRoleId;
+	}
+
+	public void setUserRoleId(int userRoleId) {
+		this.userRoleId = userRoleId;
+	}
+
+	public String getUserPermissionDescription() {
+		return userPermissionDescription;
+	}
+
+	public void setUserPermissionDescription(String userPermissionDescription) {
+		this.userPermissionDescription = userPermissionDescription;
 	}
 
 	public boolean isUseStatus() {
@@ -73,6 +102,14 @@ public class User {
 		this.timeUpdated = timeUpdated;
 	}
 
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -82,6 +119,9 @@ public class User {
 		result = prime * result + ((timeUpdated == null) ? 0 : timeUpdated.hashCode());
 		result = prime * result + (useStatus ? 1231 : 1237);
 		result = prime * result + userId;
+		result = prime * result + ((userPermissionDescription == null) ? 0 : userPermissionDescription.hashCode());
+		result = prime * result + userPermissionId;
+		result = prime * result + userRoleId;
 		return result;
 	}
 
@@ -93,7 +133,7 @@ public class User {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		UserPermissions other = (UserPermissions) obj;
 		if (LocId == null) {
 			if (other.LocId != null)
 				return false;
@@ -113,13 +153,24 @@ public class User {
 			return false;
 		if (userId != other.userId)
 			return false;
+		if (userPermissionDescription == null) {
+			if (other.userPermissionDescription != null)
+				return false;
+		} else if (!userPermissionDescription.equals(other.userPermissionDescription))
+			return false;
+		if (userPermissionId != other.userPermissionId)
+			return false;
+		if (userRoleId != other.userRoleId)
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", useStatus=" + useStatus + ", programId=" + programId + ", LocId=" + LocId
-				+ ", timeUpdated=" + timeUpdated + "]";
+		return "UserPermissions [userPermissionId=" + userPermissionId + ", userRoleId=" + userRoleId
+				+ ", userPermissionDescription=" + userPermissionDescription + ", useStatus=" + useStatus
+				+ ", programId=" + programId + ", LocId=" + LocId + ", timeUpdated=" + timeUpdated + ", userId="
+				+ userId + "]";
 	}
 	
 	

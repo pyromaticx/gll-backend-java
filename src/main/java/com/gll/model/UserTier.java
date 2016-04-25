@@ -1,44 +1,57 @@
 package com.gll.model;
 
 import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class User {
+public class UserTier {
+
 	/*
 	 * Auto generated Primary.
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int userId;
+	private int userTierId;
+	private String userTierDescription;
 	private boolean useStatus;
 	private String programId;
 	private String LocId;
 	private Date timeUpdated;
+	private int userId;
 	
-	public User() {
+	public UserTier() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(int userId, boolean useStatus, String programId, String locId, Date timeUpdated) {
+	public UserTier(int userTierId, String userTierDescription, boolean useStatus, String programId, String locId,
+			Date timeUpdated, int userId) {
 		super();
-		this.userId = userId;
+		this.userTierId = userTierId;
+		this.userTierDescription = userTierDescription;
 		this.useStatus = useStatus;
 		this.programId = programId;
 		LocId = locId;
 		this.timeUpdated = timeUpdated;
-	}
-
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+
+	public int getUserTierId() {
+		return userTierId;
+	}
+
+	public void setUserTierId(int userTierId) {
+		this.userTierId = userTierId;
+	}
+
+	public String getUserTierDescription() {
+		return userTierDescription;
+	}
+
+	public void setUserTierDescription(String userTierDescription) {
+		this.userTierDescription = userTierDescription;
 	}
 
 	public boolean isUseStatus() {
@@ -73,6 +86,14 @@ public class User {
 		this.timeUpdated = timeUpdated;
 	}
 
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -82,6 +103,8 @@ public class User {
 		result = prime * result + ((timeUpdated == null) ? 0 : timeUpdated.hashCode());
 		result = prime * result + (useStatus ? 1231 : 1237);
 		result = prime * result + userId;
+		result = prime * result + ((userTierDescription == null) ? 0 : userTierDescription.hashCode());
+		result = prime * result + userTierId;
 		return result;
 	}
 
@@ -93,7 +116,7 @@ public class User {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		UserTier other = (UserTier) obj;
 		if (LocId == null) {
 			if (other.LocId != null)
 				return false;
@@ -113,13 +136,21 @@ public class User {
 			return false;
 		if (userId != other.userId)
 			return false;
+		if (userTierDescription == null) {
+			if (other.userTierDescription != null)
+				return false;
+		} else if (!userTierDescription.equals(other.userTierDescription))
+			return false;
+		if (userTierId != other.userTierId)
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", useStatus=" + useStatus + ", programId=" + programId + ", LocId=" + LocId
-				+ ", timeUpdated=" + timeUpdated + "]";
+		return "UserTier [userTierId=" + userTierId + ", userTierDescription=" + userTierDescription + ", useStatus="
+				+ useStatus + ", programId=" + programId + ", LocId=" + LocId + ", timeUpdated=" + timeUpdated
+				+ ", userId=" + userId + "]";
 	}
 	
 	

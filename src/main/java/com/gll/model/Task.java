@@ -16,7 +16,7 @@ public class Task {
 	private int taskId;
 	
 	/* What type of task it is? Is it UX Designer task or Content Writer task? etc */
-	private UserPin taskType;
+	private PinType taskType;
 	
 	/*
 	 * The Person who will assign task to the team, should explain the needful

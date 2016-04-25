@@ -6,31 +6,44 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
-public class User {
+public class UserExpertise {
 	/*
 	 * Auto generated Primary.
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int userExpertiseId;
+	@OneToOne
 	private int userId;
 	private boolean useStatus;
-	private String programId;
+	private int programId;
 	private String LocId;
 	private Date timeUpdated;
-	
-	public User() {
+
+	public UserExpertise() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(int userId, boolean useStatus, String programId, String locId, Date timeUpdated) {
+	public UserExpertise(int userExpertiseId, int userId, boolean useStatus, int programId, String locId,
+			Date timeUpdated) {
 		super();
+		this.userExpertiseId = userExpertiseId;
 		this.userId = userId;
 		this.useStatus = useStatus;
 		this.programId = programId;
 		LocId = locId;
 		this.timeUpdated = timeUpdated;
+	}
+
+	public int getUserExpertiseId() {
+		return userExpertiseId;
+	}
+
+	public void setUserExpertiseId(int userExpertiseId) {
+		this.userExpertiseId = userExpertiseId;
 	}
 
 	public int getUserId() {
@@ -49,11 +62,11 @@ public class User {
 		this.useStatus = useStatus;
 	}
 
-	public String getProgramId() {
+	public int getProgramId() {
 		return programId;
 	}
 
-	public void setProgramId(String programId) {
+	public void setProgramId(int programId) {
 		this.programId = programId;
 	}
 
@@ -78,9 +91,10 @@ public class User {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((LocId == null) ? 0 : LocId.hashCode());
-		result = prime * result + ((programId == null) ? 0 : programId.hashCode());
+		result = prime * result + programId;
 		result = prime * result + ((timeUpdated == null) ? 0 : timeUpdated.hashCode());
 		result = prime * result + (useStatus ? 1231 : 1237);
+		result = prime * result + userExpertiseId;
 		result = prime * result + userId;
 		return result;
 	}
@@ -93,16 +107,13 @@ public class User {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		UserExpertise other = (UserExpertise) obj;
 		if (LocId == null) {
 			if (other.LocId != null)
 				return false;
 		} else if (!LocId.equals(other.LocId))
 			return false;
-		if (programId == null) {
-			if (other.programId != null)
-				return false;
-		} else if (!programId.equals(other.programId))
+		if (programId != other.programId)
 			return false;
 		if (timeUpdated == null) {
 			if (other.timeUpdated != null)
@@ -111,6 +122,8 @@ public class User {
 			return false;
 		if (useStatus != other.useStatus)
 			return false;
+		if (userExpertiseId != other.userExpertiseId)
+			return false;
 		if (userId != other.userId)
 			return false;
 		return true;
@@ -118,9 +131,8 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", useStatus=" + useStatus + ", programId=" + programId + ", LocId=" + LocId
-				+ ", timeUpdated=" + timeUpdated + "]";
+		return "UserExpertise [userExpertiseId=" + userExpertiseId + ", userId=" + userId + ", useStatus=" + useStatus
+				+ ", programId=" + programId + ", LocId=" + LocId + ", timeUpdated=" + timeUpdated + "]";
 	}
-	
-	
+
 }

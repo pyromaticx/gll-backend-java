@@ -6,39 +6,54 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
-public class User {
+public class Follower {
 	/*
 	 * Auto generated Primary.
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int userId;
+	private int userFollowing;
+	private int userFollowed;
 	private boolean useStatus;
 	private String programId;
 	private String LocId;
 	private Date timeUpdated;
+	@OneToOne
+	private int userId;
 	
-	public User() {
+	public Follower() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(int userId, boolean useStatus, String programId, String locId, Date timeUpdated) {
+	public Follower(int userFollowing, int userFollowed, boolean useStatus, String programId, String locId,
+			Date timeUpdated, int userId) {
 		super();
-		this.userId = userId;
+		this.userFollowing = userFollowing;
+		this.userFollowed = userFollowed;
 		this.useStatus = useStatus;
 		this.programId = programId;
 		LocId = locId;
 		this.timeUpdated = timeUpdated;
-	}
-
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+
+	public int getUserFollowing() {
+		return userFollowing;
+	}
+
+	public void setUserFollowing(int userFollowing) {
+		this.userFollowing = userFollowing;
+	}
+
+	public int getUserFollowed() {
+		return userFollowed;
+	}
+
+	public void setUserFollowed(int userFollowed) {
+		this.userFollowed = userFollowed;
 	}
 
 	public boolean isUseStatus() {
@@ -73,6 +88,14 @@ public class User {
 		this.timeUpdated = timeUpdated;
 	}
 
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -81,6 +104,8 @@ public class User {
 		result = prime * result + ((programId == null) ? 0 : programId.hashCode());
 		result = prime * result + ((timeUpdated == null) ? 0 : timeUpdated.hashCode());
 		result = prime * result + (useStatus ? 1231 : 1237);
+		result = prime * result + userFollowed;
+		result = prime * result + userFollowing;
 		result = prime * result + userId;
 		return result;
 	}
@@ -93,7 +118,7 @@ public class User {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		Follower other = (Follower) obj;
 		if (LocId == null) {
 			if (other.LocId != null)
 				return false;
@@ -111,6 +136,10 @@ public class User {
 			return false;
 		if (useStatus != other.useStatus)
 			return false;
+		if (userFollowed != other.userFollowed)
+			return false;
+		if (userFollowing != other.userFollowing)
+			return false;
 		if (userId != other.userId)
 			return false;
 		return true;
@@ -118,8 +147,9 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", useStatus=" + useStatus + ", programId=" + programId + ", LocId=" + LocId
-				+ ", timeUpdated=" + timeUpdated + "]";
+		return "Follower [userFollowing=" + userFollowing + ", userFollowed=" + userFollowed + ", useStatus="
+				+ useStatus + ", programId=" + programId + ", LocId=" + LocId + ", timeUpdated=" + timeUpdated
+				+ ", userId=" + userId + "]";
 	}
 	
 	
