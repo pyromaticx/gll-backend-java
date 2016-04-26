@@ -13,9 +13,8 @@ public class AnnotationType {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int annotationTypeId;
-	
 	private String annotationTypeDescription;
-	private boolean useStatus;
+	private char useStatus;
 	private String programId;
 	private String LocId;
 	private Date timeUpdated;
@@ -23,12 +22,15 @@ public class AnnotationType {
 	
 	
 	
-	public AnnotationType() {
-		super();
-		// TODO Auto-generated constructor stub
+	
+	@Override
+	public String toString() {
+		return "AnnotationType [annotationTypeId=" + annotationTypeId + ", annotationTypeDescription="
+				+ annotationTypeDescription + ", useStatus=" + useStatus + ", programId=" + programId + ", LocId="
+				+ LocId + ", timeUpdated=" + timeUpdated + ", updatedBy=" + updatedBy + "]";
 	}
-	public AnnotationType(int annotationTypeId, String annotationTypeDescription, boolean useStatus, String programId,
-			String locId, Date timeUpdated, int userId) {
+	public AnnotationType(int annotationTypeId, String annotationTypeDescription, char useStatus, String programId,
+			String locId, Date timeUpdated, int updatedBy) {
 		super();
 		this.annotationTypeId = annotationTypeId;
 		this.annotationTypeDescription = annotationTypeDescription;
@@ -36,7 +38,7 @@ public class AnnotationType {
 		this.programId = programId;
 		LocId = locId;
 		this.timeUpdated = timeUpdated;
-		this.userId = userId;
+		this.updatedBy = updatedBy;
 	}
 	public int getAnnotationTypeId() {
 		return annotationTypeId;
@@ -50,10 +52,10 @@ public class AnnotationType {
 	public void setAnnotationTypeDescription(String annotationTypeDescription) {
 		this.annotationTypeDescription = annotationTypeDescription;
 	}
-	public boolean isUseStatus() {
+	public char getUseStatus() {
 		return useStatus;
 	}
-	public void setUseStatus(boolean useStatus) {
+	public void setUseStatus(char useStatus) {
 		this.useStatus = useStatus;
 	}
 	public String getProgramId() {
@@ -74,18 +76,11 @@ public class AnnotationType {
 	public void setTimeUpdated(Date timeUpdated) {
 		this.timeUpdated = timeUpdated;
 	}
-	
 	public int getUpdatedBy() {
 		return updatedBy;
 	}
 	public void setUpdatedBy(int updatedBy) {
 		this.updatedBy = updatedBy;
-	}
-	@Override
-	public String toString() {
-		return "AnnotationType [annotationTypeId=" + annotationTypeId + ", annotationTypeDescription="
-				+ annotationTypeDescription + ", useStatus=" + useStatus + ", programId=" + programId + ", LocId="
-				+ LocId + ", timeUpdated=" + timeUpdated + ", userId=" + userId + "]";
 	}
 	@Override
 	public int hashCode() {
@@ -96,8 +91,8 @@ public class AnnotationType {
 		result = prime * result + annotationTypeId;
 		result = prime * result + ((programId == null) ? 0 : programId.hashCode());
 		result = prime * result + ((timeUpdated == null) ? 0 : timeUpdated.hashCode());
-		result = prime * result + (useStatus ? 1231 : 1237);
-		result = prime * result + userId;
+		result = prime * result + updatedBy;
+		result = prime * result + useStatus;
 		return result;
 	}
 	@Override
@@ -131,12 +126,13 @@ public class AnnotationType {
 				return false;
 		} else if (!timeUpdated.equals(other.timeUpdated))
 			return false;
-		if (useStatus != other.useStatus)
+		if (updatedBy != other.updatedBy)
 			return false;
-		if (userId != other.userId)
+		if (useStatus != other.useStatus)
 			return false;
 		return true;
 	}
+	
 	
 	
 }

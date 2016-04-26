@@ -13,7 +13,6 @@ public class PinType {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int pinId;
 	
 	/* It could be:
 	 * 1. Visual Designer
@@ -33,130 +32,122 @@ public class PinType {
 	private String LocId;
 	private Date timeUpdated;
 	private int updatedBy;
-	@OneToOne
-	private int userId;
 	
 	public PinType() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public PinType(int pinId, String pinDescription, String pinColor, boolean useStatus, String programId, String locId,
-			Date timeUpdated, int userId) {
+	
+
+	public PinType(int pinTypeId, String pinTypeDescription, String pinTypeColor, char useStatus, String programId,
+			String locId, Date timeUpdated, int updatedBy) {
 		super();
-		this.pinId = pinId;
-		this.pinDescription = pinDescription;
-		this.pinColor = pinColor;
+		this.pinTypeId = pinTypeId;
+		this.pinTypeDescription = pinTypeDescription;
+		this.pinTypeColor = pinTypeColor;
 		this.useStatus = useStatus;
 		this.programId = programId;
 		LocId = locId;
 		this.timeUpdated = timeUpdated;
-		this.userId = userId;
+		this.updatedBy = updatedBy;
 	}
 
-	public int getPinId() {
-		return pinId;
-	}
-
-	public void setPinId(int pinId) {
-		this.pinId = pinId;
-	}
-
-	public String getPinDescription() {
-		return pinDescription;
-	}
-
-	public void setPinDescription(String pinDescription) {
-		this.pinDescription = pinDescription;
-	}
-
-	public String getPinColor() {
-		return pinColor;
-	}
-
-	public void setPinColor(String pinColor) {
-		this.pinColor = pinColor;
-	}
-
-	public boolean isUseStatus() {
-		return useStatus;
-	}
-
-	public void setUseStatus(boolean useStatus) {
-		this.useStatus = useStatus;
-	}
-
-	public String getProgramId() {
-		return programId;
-	}
-
-	public void setProgramId(String programId) {
-		this.programId = programId;
-	}
-
-	public String getLocId() {
-		return LocId;
-	}
-
-	public void setLocId(String locId) {
-		LocId = locId;
-	}
-
-	public Date getTimeUpdated() {
-		return timeUpdated;
-	}
-
-	public void setTimeUpdated(Date timeUpdated) {
-		this.timeUpdated = timeUpdated;
-	}
-
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
 
 	public int getPinTypeId() {
 		return pinTypeId;
 	}
 
+
+
 	public void setPinTypeId(int pinTypeId) {
 		this.pinTypeId = pinTypeId;
 	}
 
-	
-	public int getUpdatedBy() {
-		return updatedBy;
-	}
 
-	public void setUpdatedBy(int updatedBy) {
-		this.updatedBy = updatedBy;
-	}
 
 	public String getPinTypeDescription() {
 		return pinTypeDescription;
 	}
 
+
+
 	public void setPinTypeDescription(String pinTypeDescription) {
 		this.pinTypeDescription = pinTypeDescription;
 	}
+
+
 
 	public String getPinTypeColor() {
 		return pinTypeColor;
 	}
 
+
+
 	public void setPinTypeColor(String pinTypeColor) {
 		this.pinTypeColor = pinTypeColor;
 	}
+
+
 
 	public char getUseStatus() {
 		return useStatus;
 	}
 
+
+
 	public void setUseStatus(char useStatus) {
 		this.useStatus = useStatus;
 	}
+
+
+
+	public String getProgramId() {
+		return programId;
+	}
+
+
+
+	public void setProgramId(String programId) {
+		this.programId = programId;
+	}
+
+
+
+	public String getLocId() {
+		return LocId;
+	}
+
+
+
+	public void setLocId(String locId) {
+		LocId = locId;
+	}
+
+
+
+	public Date getTimeUpdated() {
+		return timeUpdated;
+	}
+
+
+
+	public void setTimeUpdated(Date timeUpdated) {
+		this.timeUpdated = timeUpdated;
+	}
+
+
+
+	public int getUpdatedBy() {
+		return updatedBy;
+	}
+
+
+
+	public void setUpdatedBy(int updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+
 
 	@Override
 	public int hashCode() {
@@ -216,12 +207,16 @@ public class PinType {
 		return true;
 	}
 
+
+
 	@Override
 	public String toString() {
-		return "PinType [pinId=" + pinId + ", pinDescription=" + pinDescription + ", pinColor=" + pinColor
-				+ ", useStatus=" + useStatus + ", programId=" + programId + ", LocId=" + LocId + ", timeUpdated="
-				+ timeUpdated + ", userId=" + userId + "]";
+		return "PinType [pinTypeId=" + pinTypeId + ", pinTypeDescription=" + pinTypeDescription + ", pinTypeColor="
+				+ pinTypeColor + ", useStatus=" + useStatus + ", programId=" + programId + ", LocId=" + LocId
+				+ ", timeUpdated=" + timeUpdated + ", updatedBy=" + updatedBy + "]";
 	}
+
+	
 	
 	
 }

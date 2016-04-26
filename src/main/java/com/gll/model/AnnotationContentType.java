@@ -17,6 +17,17 @@ public class AnnotationContentType {
 	private Date timeUpdated;
 	private int updatedBy;
 	
+	public AnnotationContentType(int annotationContentTypeId, String annotationContentTypeDescription, char useStatus,
+			String programId, String locId, Date timeUpdated, int updatedBy) {
+		super();
+		this.annotationContentTypeId = annotationContentTypeId;
+		this.annotationContentTypeDescription = annotationContentTypeDescription;
+		this.useStatus = useStatus;
+		this.programId = programId;
+		LocId = locId;
+		this.timeUpdated = timeUpdated;
+		this.updatedBy = updatedBy;
+	}
 	public int getAnnotationContentTypeId() {
 		return annotationContentTypeId;
 	}

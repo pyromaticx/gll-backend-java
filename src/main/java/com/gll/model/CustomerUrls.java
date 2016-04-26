@@ -2,65 +2,61 @@ package com.gll.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class ParentUrl {
-	/*
-	 * Auto generated Primary.
-	 */
+public class CustomerUrls {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int parentURLId;
-	private String parentURLDomain;
-	private boolean useStatus;
+	private int customerId;
+	private String customerURL;
+	private char useStatus;
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private String programId;
 	private String LocId;
 	private Date timeUpdated;
-	@OneToOne
-	private int userId;
-
-	public ParentUrl() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public ParentUrl(int parentURLId, String parentURLDomain, boolean useStatus, String programId, String locId,
-			Date timeUpdated, int userId) {
+	private int updatedBy;
+	
+	public CustomerUrls(int customerId, String customerURL, char useStatus, String programId, String locId,
+			Date timeUpdated, int updatedBy) {
 		super();
-		this.parentURLId = parentURLId;
-		this.parentURLDomain = parentURLDomain;
+		this.customerId = customerId;
+		this.customerURL = customerURL;
 		this.useStatus = useStatus;
 		this.programId = programId;
 		LocId = locId;
 		this.timeUpdated = timeUpdated;
-		this.userId = userId;
+		this.updatedBy = updatedBy;
 	}
 
-	public int getParentURLId() {
-		return parentURLId;
+	public int getCustomerId() {
+		return customerId;
 	}
 
-	public void setParentURLId(int parentURLId) {
-		this.parentURLId = parentURLId;
+	public void setCustomerId(int customerId) {
+		this.customerId = customerId;
 	}
 
-	public String getParentURLDomain() {
-		return parentURLDomain;
+	public String getCustomerURL() {
+		return customerURL;
 	}
 
-	public void setParentURLDomain(String parentURLDomain) {
-		this.parentURLDomain = parentURLDomain;
+	public void setCustomerURL(String customerURL) {
+		this.customerURL = customerURL;
 	}
 
-	public boolean isUseStatus() {
+	public char getUseStatus() {
 		return useStatus;
 	}
 
-	public void setUseStatus(boolean useStatus) {
+	public void setUseStatus(char useStatus) {
 		this.useStatus = useStatus;
 	}
 
@@ -88,12 +84,12 @@ public class ParentUrl {
 		this.timeUpdated = timeUpdated;
 	}
 
-	public int getUserId() {
-		return userId;
+	public int getUpdatedBy() {
+		return updatedBy;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setUpdatedBy(int updatedBy) {
+		this.updatedBy = updatedBy;
 	}
 
 	@Override
@@ -101,12 +97,12 @@ public class ParentUrl {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((LocId == null) ? 0 : LocId.hashCode());
-		result = prime * result + ((parentURLDomain == null) ? 0 : parentURLDomain.hashCode());
-		result = prime * result + parentURLId;
+		result = prime * result + customerId;
+		result = prime * result + ((customerURL == null) ? 0 : customerURL.hashCode());
 		result = prime * result + ((programId == null) ? 0 : programId.hashCode());
 		result = prime * result + ((timeUpdated == null) ? 0 : timeUpdated.hashCode());
-		result = prime * result + (useStatus ? 1231 : 1237);
-		result = prime * result + userId;
+		result = prime * result + updatedBy;
+		result = prime * result + useStatus;
 		return result;
 	}
 
@@ -118,18 +114,18 @@ public class ParentUrl {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ParentUrl other = (ParentUrl) obj;
+		CustomerUrls other = (CustomerUrls) obj;
 		if (LocId == null) {
 			if (other.LocId != null)
 				return false;
 		} else if (!LocId.equals(other.LocId))
 			return false;
-		if (parentURLDomain == null) {
-			if (other.parentURLDomain != null)
-				return false;
-		} else if (!parentURLDomain.equals(other.parentURLDomain))
+		if (customerId != other.customerId)
 			return false;
-		if (parentURLId != other.parentURLId)
+		if (customerURL == null) {
+			if (other.customerURL != null)
+				return false;
+		} else if (!customerURL.equals(other.customerURL))
 			return false;
 		if (programId == null) {
 			if (other.programId != null)
@@ -141,18 +137,20 @@ public class ParentUrl {
 				return false;
 		} else if (!timeUpdated.equals(other.timeUpdated))
 			return false;
-		if (useStatus != other.useStatus)
+		if (updatedBy != other.updatedBy)
 			return false;
-		if (userId != other.userId)
+		if (useStatus != other.useStatus)
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "ParentUrl [parentURLId=" + parentURLId + ", parentURLDomain=" + parentURLDomain + ", useStatus="
-				+ useStatus + ", programId=" + programId + ", LocId=" + LocId + ", timeUpdated=" + timeUpdated
-				+ ", userId=" + userId + "]";
+		return "CustomerUrls [customerId=" + customerId + ", customerURL=" + customerURL + ", useStatus=" + useStatus
+				+ ", programId=" + programId + ", LocId=" + LocId + ", timeUpdated=" + timeUpdated + ", updatedBy="
+				+ updatedBy + "]";
 	}
-
+	
+	
+	
 }

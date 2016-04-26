@@ -22,6 +22,20 @@ public class CustomerLicense {
 	private Date timeupdated;
 	private int updatedBy;
 	
+	public CustomerLicense(int customerLicenseId, Date dateEffectiveFrom, Date dateEffectiveThru, int customerId,
+			int paymentId, char useStatus, String programId, String locId, Date timeupdated, int updatedBy) {
+		super();
+		this.customerLicenseId = customerLicenseId;
+		this.dateEffectiveFrom = dateEffectiveFrom;
+		this.dateEffectiveThru = dateEffectiveThru;
+		this.customerId = customerId;
+		this.paymentId = paymentId;
+		this.useStatus = useStatus;
+		this.programId = programId;
+		LocId = locId;
+		this.timeupdated = timeupdated;
+		this.updatedBy = updatedBy;
+	}
 	public int getCustomerLicenseId() {
 		return customerLicenseId;
 	}
@@ -81,5 +95,74 @@ public class CustomerLicense {
 	}
 	public void setUpdatedBy(int updatedBy) {
 		this.updatedBy = updatedBy;
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((LocId == null) ? 0 : LocId.hashCode());
+		result = prime * result + customerId;
+		result = prime * result + customerLicenseId;
+		result = prime * result + ((dateEffectiveFrom == null) ? 0 : dateEffectiveFrom.hashCode());
+		result = prime * result + ((dateEffectiveThru == null) ? 0 : dateEffectiveThru.hashCode());
+		result = prime * result + paymentId;
+		result = prime * result + ((programId == null) ? 0 : programId.hashCode());
+		result = prime * result + ((timeupdated == null) ? 0 : timeupdated.hashCode());
+		result = prime * result + updatedBy;
+		result = prime * result + useStatus;
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CustomerLicense other = (CustomerLicense) obj;
+		if (LocId == null) {
+			if (other.LocId != null)
+				return false;
+		} else if (!LocId.equals(other.LocId))
+			return false;
+		if (customerId != other.customerId)
+			return false;
+		if (customerLicenseId != other.customerLicenseId)
+			return false;
+		if (dateEffectiveFrom == null) {
+			if (other.dateEffectiveFrom != null)
+				return false;
+		} else if (!dateEffectiveFrom.equals(other.dateEffectiveFrom))
+			return false;
+		if (dateEffectiveThru == null) {
+			if (other.dateEffectiveThru != null)
+				return false;
+		} else if (!dateEffectiveThru.equals(other.dateEffectiveThru))
+			return false;
+		if (paymentId != other.paymentId)
+			return false;
+		if (programId == null) {
+			if (other.programId != null)
+				return false;
+		} else if (!programId.equals(other.programId))
+			return false;
+		if (timeupdated == null) {
+			if (other.timeupdated != null)
+				return false;
+		} else if (!timeupdated.equals(other.timeupdated))
+			return false;
+		if (updatedBy != other.updatedBy)
+			return false;
+		if (useStatus != other.useStatus)
+			return false;
+		return true;
+	}
+	@Override
+	public String toString() {
+		return "CustomerLicense [customerLicenseId=" + customerLicenseId + ", dateEffectiveFrom=" + dateEffectiveFrom
+				+ ", dateEffectiveThru=" + dateEffectiveThru + ", customerId=" + customerId + ", paymentId=" + paymentId
+				+ ", useStatus=" + useStatus + ", programId=" + programId + ", LocId=" + LocId + ", timeupdated="
+				+ timeupdated + ", updatedBy=" + updatedBy + "]";
 	}
 }

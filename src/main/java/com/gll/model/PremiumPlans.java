@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 @Entity
-public class PremiumPlan {
+public class PremiumPlans {
 	/*
 	 * Auto generated Primary.
 	 */
@@ -28,135 +28,102 @@ public class PremiumPlan {
 	private Date timeUpdated;
 	@OneToOne
 	private int updatedBy;
-	
-	public PremiumPlan() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public PremiumPlan(int premiumPlanId, String premiumPlanDescription, double premiumPlanCost,
-			String premiumPlanCurrency, int maxURLsAllowed, int planEffectiveDays, char useStatus, String programId,
-			String locId, Date timeUpdated, int updatedBy) {
+	public PremiumPlans(int premiumPlanId, String premiumPlanDescription, double premiumPlanCost,
+			String premiumPlanCurrency, String planConstraints, int planEffectiveDays, boolean planAutoRenewal,
+			char useStatus, String programId, String locId, Date timeUpdated, int updatedBy) {
 		super();
 		this.premiumPlanId = premiumPlanId;
 		this.premiumPlanDescription = premiumPlanDescription;
 		this.premiumPlanCost = premiumPlanCost;
 		this.premiumPlanCurrency = premiumPlanCurrency;
+		this.planConstraints = planConstraints;
 		this.planEffectiveDays = planEffectiveDays;
+		this.planAutoRenewal = planAutoRenewal;
 		this.useStatus = useStatus;
 		this.programId = programId;
 		LocId = locId;
 		this.timeUpdated = timeUpdated;
 		this.updatedBy = updatedBy;
 	}
-
-	
-	
 	public int getPremiumPlanId() {
 		return premiumPlanId;
 	}
-
 	public void setPremiumPlanId(int premiumPlanId) {
 		this.premiumPlanId = premiumPlanId;
 	}
-
 	public String getPremiumPlanDescription() {
 		return premiumPlanDescription;
 	}
-
 	public void setPremiumPlanDescription(String premiumPlanDescription) {
 		this.premiumPlanDescription = premiumPlanDescription;
 	}
-
 	public double getPremiumPlanCost() {
 		return premiumPlanCost;
 	}
-
 	public void setPremiumPlanCost(double premiumPlanCost) {
 		this.premiumPlanCost = premiumPlanCost;
 	}
-
 	public String getPremiumPlanCurrency() {
 		return premiumPlanCurrency;
 	}
-
 	public void setPremiumPlanCurrency(String premiumPlanCurrency) {
 		this.premiumPlanCurrency = premiumPlanCurrency;
 	}
-
-	public int getPlanEffectiveDays() {
-		return planEffectiveDays;
-	}
-
-	public void setPlanEffectiveDays(int planEffectiveDays) {
-		this.planEffectiveDays = planEffectiveDays;
-	}
-
-	public char isUseStatus() {
-		return useStatus;
-	}
-
-	public void setUseStatus(char useStatus) {
-		this.useStatus = useStatus;
-	}
-
-	public String getProgramId() {
-		return programId;
-	}
-
-	public void setProgramId(String programId) {
-		this.programId = programId;
-	}
-
-	public String getLocId() {
-		return LocId;
-	}
-
-	public void setLocId(String locId) {
-		LocId = locId;
-	}
-
-	public Date getTimeUpdated() {
-		return timeUpdated;
-	}
-
-	public void setTimeUpdated(Date timeUpdated) {
-		this.timeUpdated = timeUpdated;
-	}
-
-
 	public String getPlanConstraints() {
 		return planConstraints;
 	}
-
 	public void setPlanConstraints(String planConstraints) {
 		this.planConstraints = planConstraints;
 	}
-
+	public int getPlanEffectiveDays() {
+		return planEffectiveDays;
+	}
+	public void setPlanEffectiveDays(int planEffectiveDays) {
+		this.planEffectiveDays = planEffectiveDays;
+	}
 	public boolean isPlanAutoRenewal() {
 		return planAutoRenewal;
 	}
-
 	public void setPlanAutoRenewal(boolean planAutoRenewal) {
 		this.planAutoRenewal = planAutoRenewal;
 	}
-
-	public int getUpdatedBy() {
-		return updatedBy;
-	}
-
-	public void setUpdatedBy(int updatedBy) {
-		this.updatedBy = updatedBy;
-	}
-
 	public char getUseStatus() {
 		return useStatus;
 	}
-
+	public void setUseStatus(char useStatus) {
+		this.useStatus = useStatus;
+	}
+	public String getProgramId() {
+		return programId;
+	}
+	public void setProgramId(String programId) {
+		this.programId = programId;
+	}
+	public String getLocId() {
+		return LocId;
+	}
+	public void setLocId(String locId) {
+		LocId = locId;
+	}
+	public Date getTimeUpdated() {
+		return timeUpdated;
+	}
+	public void setTimeUpdated(Date timeUpdated) {
+		this.timeUpdated = timeUpdated;
+	}
+	public int getUpdatedBy() {
+		return updatedBy;
+	}
+	public void setUpdatedBy(int updatedBy) {
+		this.updatedBy = updatedBy;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((LocId == null) ? 0 : LocId.hashCode());
+		result = prime * result + (planAutoRenewal ? 1231 : 1237);
+		result = prime * result + ((planConstraints == null) ? 0 : planConstraints.hashCode());
 		result = prime * result + planEffectiveDays;
 		long temp;
 		temp = Double.doubleToLongBits(premiumPlanCost);
@@ -166,11 +133,10 @@ public class PremiumPlan {
 		result = prime * result + premiumPlanId;
 		result = prime * result + ((programId == null) ? 0 : programId.hashCode());
 		result = prime * result + ((timeUpdated == null) ? 0 : timeUpdated.hashCode());
-		result = prime * result + (useStatus ? 1231 : 1237);
-		result = prime * result + userId;
+		result = prime * result + updatedBy;
+		result = prime * result + useStatus;
 		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -179,11 +145,18 @@ public class PremiumPlan {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		PremiumPlan other = (PremiumPlan) obj;
+		PremiumPlans other = (PremiumPlans) obj;
 		if (LocId == null) {
 			if (other.LocId != null)
 				return false;
 		} else if (!LocId.equals(other.LocId))
+			return false;
+		if (planAutoRenewal != other.planAutoRenewal)
+			return false;
+		if (planConstraints == null) {
+			if (other.planConstraints != null)
+				return false;
+		} else if (!planConstraints.equals(other.planConstraints))
 			return false;
 		if (planEffectiveDays != other.planEffectiveDays)
 			return false;
@@ -211,21 +184,21 @@ public class PremiumPlan {
 				return false;
 		} else if (!timeUpdated.equals(other.timeUpdated))
 			return false;
-		if (useStatus != other.useStatus)
-			return false;
 		if (updatedBy != other.updatedBy)
+			return false;
+		if (useStatus != other.useStatus)
 			return false;
 		return true;
 	}
-
 	@Override
 	public String toString() {
-		return "PremiumPlan [premiumPlanId=" + premiumPlanId + ", premiumPlanDescription=" + premiumPlanDescription
+		return "PremiumPlans [premiumPlanId=" + premiumPlanId + ", premiumPlanDescription=" + premiumPlanDescription
 				+ ", premiumPlanCost=" + premiumPlanCost + ", premiumPlanCurrency=" + premiumPlanCurrency
-				+ ", maxURLsAllowed=" + maxURLsAllowed + ", planEffectiveDays=" + planEffectiveDays + ", useStatus="
-				+ useStatus + ", programId=" + programId + ", LocId=" + LocId + ", timeUpdated=" + timeUpdated
-				+ ", userId=" + userId + "]";
+				+ ", planConstraints=" + planConstraints + ", planEffectiveDays=" + planEffectiveDays
+				+ ", planAutoRenewal=" + planAutoRenewal + ", useStatus=" + useStatus + ", programId=" + programId
+				+ ", LocId=" + LocId + ", timeUpdated=" + timeUpdated + ", updatedBy=" + updatedBy + "]";
 	}
+	
 	
 	
 }
