@@ -16,18 +16,19 @@ public class UserActivityLog {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int activeUserId;
 	private Date lastLogin;
-	private boolean useStatus;
+	private String activityDescription;
+	private char useStatus;
 	private String programId;
 	private String LocId;
 	private Date timeUpdated;
 	@OneToOne
-	private int userId;
+	private int updatedBy;
 	
 	public UserActivityLog() {
 		
 	}
 
-	public UserActivityLog(int activeUserId, Date lastLogin, boolean useStatus, String programId, String locId,
+	public UserActivityLog(int activeUserId, Date lastLogin, char useStatus, String programId, String locId,
 			Date timeUpdated, int userId) {
 		super();
 		this.activeUserId = activeUserId;
@@ -36,7 +37,7 @@ public class UserActivityLog {
 		this.programId = programId;
 		LocId = locId;
 		this.timeUpdated = timeUpdated;
-		this.userId = userId;
+		this.updatedBy = updatedBy;
 	}
 
 	public int getActiveUserId() {
@@ -55,11 +56,11 @@ public class UserActivityLog {
 		this.lastLogin = lastLogin;
 	}
 
-	public boolean isUseStatus() {
+	public char isUseStatus() {
 		return useStatus;
 	}
 
-	public void setUseStatus(boolean useStatus) {
+	public void setUseStatus(char useStatus) {
 		this.useStatus = useStatus;
 	}
 
@@ -87,12 +88,24 @@ public class UserActivityLog {
 		this.timeUpdated = timeUpdated;
 	}
 
-	public int getUserId() {
-		return userId;
+	public int getUpdatedBy() {
+		return updatedBy;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setUpdatedBy(int userId) {
+		this.updatedBy = userId;
+	}
+
+	public String getActivityDescription() {
+		return activityDescription;
+	}
+
+	public void setActivityDescription(String activityDescription) {
+		this.activityDescription = activityDescription;
+	}
+
+	public char getUseStatus() {
+		return useStatus;
 	}
 
 	@Override
@@ -105,7 +118,7 @@ public class UserActivityLog {
 		result = prime * result + ((programId == null) ? 0 : programId.hashCode());
 		result = prime * result + ((timeUpdated == null) ? 0 : timeUpdated.hashCode());
 		result = prime * result + (useStatus ? 1231 : 1237);
-		result = prime * result + userId;
+		result = prime * result + updatedBy;
 		return result;
 	}
 
@@ -142,7 +155,7 @@ public class UserActivityLog {
 			return false;
 		if (useStatus != other.useStatus)
 			return false;
-		if (userId != other.userId)
+		if (updatedBy != other.updatedBy)
 			return false;
 		return true;
 	}
@@ -151,7 +164,7 @@ public class UserActivityLog {
 	public String toString() {
 		return "UserActivityLog [activeUserId=" + activeUserId + ", lastLogin=" + lastLogin + ", useStatus=" + useStatus
 				+ ", programId=" + programId + ", LocId=" + LocId + ", timeUpdated=" + timeUpdated + ", userId="
-				+ userId + "]";
+				+ updatedBy + "]";
 	}
 	
 	

@@ -19,34 +19,34 @@ public class PremiumPlan {
 	private String premiumPlanDescription;
 	private double premiumPlanCost;
 	private String premiumPlanCurrency;
-	private int maxURLsAllowed;
+	private String planConstraints;
 	private int planEffectiveDays; // 30[monthly], 365 [yearly]
-	private boolean useStatus;
+	private boolean planAutoRenewal;
+	private char useStatus;
 	private String programId;
 	private String LocId;
 	private Date timeUpdated;
 	@OneToOne
-	private int userId;
+	private int updatedBy;
 	
 	public PremiumPlan() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public PremiumPlan(int premiumPlanId, String premiumPlanDescription, double premiumPlanCost,
-			String premiumPlanCurrency, int maxURLsAllowed, int planEffectiveDays, boolean useStatus, String programId,
-			String locId, Date timeUpdated, int userId) {
+			String premiumPlanCurrency, int maxURLsAllowed, int planEffectiveDays, char useStatus, String programId,
+			String locId, Date timeUpdated, int updatedBy) {
 		super();
 		this.premiumPlanId = premiumPlanId;
 		this.premiumPlanDescription = premiumPlanDescription;
 		this.premiumPlanCost = premiumPlanCost;
 		this.premiumPlanCurrency = premiumPlanCurrency;
-		this.maxURLsAllowed = maxURLsAllowed;
 		this.planEffectiveDays = planEffectiveDays;
 		this.useStatus = useStatus;
 		this.programId = programId;
 		LocId = locId;
 		this.timeUpdated = timeUpdated;
-		this.userId = userId;
+		this.updatedBy = updatedBy;
 	}
 
 	
@@ -83,14 +83,6 @@ public class PremiumPlan {
 		this.premiumPlanCurrency = premiumPlanCurrency;
 	}
 
-	public int getMaxURLsAllowed() {
-		return maxURLsAllowed;
-	}
-
-	public void setMaxURLsAllowed(int maxURLsAllowed) {
-		this.maxURLsAllowed = maxURLsAllowed;
-	}
-
 	public int getPlanEffectiveDays() {
 		return planEffectiveDays;
 	}
@@ -99,11 +91,11 @@ public class PremiumPlan {
 		this.planEffectiveDays = planEffectiveDays;
 	}
 
-	public boolean isUseStatus() {
+	public char isUseStatus() {
 		return useStatus;
 	}
 
-	public void setUseStatus(boolean useStatus) {
+	public void setUseStatus(char useStatus) {
 		this.useStatus = useStatus;
 	}
 
@@ -131,12 +123,33 @@ public class PremiumPlan {
 		this.timeUpdated = timeUpdated;
 	}
 
-	public int getUserId() {
-		return userId;
+
+	public String getPlanConstraints() {
+		return planConstraints;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setPlanConstraints(String planConstraints) {
+		this.planConstraints = planConstraints;
+	}
+
+	public boolean isPlanAutoRenewal() {
+		return planAutoRenewal;
+	}
+
+	public void setPlanAutoRenewal(boolean planAutoRenewal) {
+		this.planAutoRenewal = planAutoRenewal;
+	}
+
+	public int getUpdatedBy() {
+		return updatedBy;
+	}
+
+	public void setUpdatedBy(int updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+	public char getUseStatus() {
+		return useStatus;
 	}
 
 	@Override
@@ -144,7 +157,6 @@ public class PremiumPlan {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((LocId == null) ? 0 : LocId.hashCode());
-		result = prime * result + maxURLsAllowed;
 		result = prime * result + planEffectiveDays;
 		long temp;
 		temp = Double.doubleToLongBits(premiumPlanCost);
@@ -172,8 +184,6 @@ public class PremiumPlan {
 			if (other.LocId != null)
 				return false;
 		} else if (!LocId.equals(other.LocId))
-			return false;
-		if (maxURLsAllowed != other.maxURLsAllowed)
 			return false;
 		if (planEffectiveDays != other.planEffectiveDays)
 			return false;
@@ -203,7 +213,7 @@ public class PremiumPlan {
 			return false;
 		if (useStatus != other.useStatus)
 			return false;
-		if (userId != other.userId)
+		if (updatedBy != other.updatedBy)
 			return false;
 		return true;
 	}

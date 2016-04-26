@@ -12,34 +12,34 @@ public class Annotation {
 
 	@Id
 	private int annotationId;
-	
 	private String annotationTitle;
-	private String annotationDescription;
-	private StringBuffer annotationMedia;
+	private String annotationText;
 	private StringBuffer annotationScreenshot;
 	private int annotationScreenshotHeight;
 	private int annotationScreenshotWidth;
 	private String annotationScreenshotPinXCoordinate;
 	private String annotationScreenshotPinYCoordinate;
-	
+	private String annotationAudioURL;
+	private String annotationAttachmentURL;
 	@OneToOne
 	private int emojiId;
 	
 	@OneToMany
 	private int pinId;
-	
+	private int pinTypeId;
+	private int annotationContentTypeId;
 	private int pinContentId;
 	private int annotationTypeId;
 	private int annotationHashtagId;
-	private int parentURLId;
-	private int specificURL;
+	private int parentDomainId;
+	private long specificURL;
 	private String pinXCoordinate;
 	private String pinYCoordinate;
-	private boolean useStatus;
+	private char useStatus;
 	private String programId;
 	private String LocId;
 	private Date timeUpdated;
-	private int userId;
+	private int updatedBy;
 	
 	
 	public Annotation() {
@@ -53,12 +53,10 @@ public class Annotation {
 			int annotationScreenshotWidth, String annotationScreenshotPinXCoordinate,
 			String annotationScreenshotPinYCoordinate, int emojiId, int pinId, int pinContentId, int annotationTypeId,
 			int annotationHashtagId, int parentURLId, int specificURL, String pinXCoordinate, String pinYCoordinate,
-			boolean useStatus, String programId, String locId, Date timeUpdated, int userId) {
+			char useStatus, String programId, String locId, Date timeUpdated, int userId) {
 		super();
 		this.annotationId = annotationId;
 		this.annotationTitle = annotationTitle;
-		this.annotationDescription = annotationDescription;
-		this.annotationMedia = annotationMedia;
 		this.annotationScreenshot = annotationScreenshot;
 		this.annotationScreenshotHeight = annotationScreenshotHeight;
 		this.annotationScreenshotWidth = annotationScreenshotWidth;
@@ -69,7 +67,7 @@ public class Annotation {
 		this.pinContentId = pinContentId;
 		this.annotationTypeId = annotationTypeId;
 		this.annotationHashtagId = annotationHashtagId;
-		this.parentURLId = parentURLId;
+		this.parentDomainId = parentURLId;
 		this.specificURL = specificURL;
 		this.pinXCoordinate = pinXCoordinate;
 		this.pinYCoordinate = pinYCoordinate;
@@ -77,7 +75,7 @@ public class Annotation {
 		this.programId = programId;
 		LocId = locId;
 		this.timeUpdated = timeUpdated;
-		this.userId = userId;
+		this.updatedBy = updatedBy;
 	}
 
 
@@ -99,26 +97,6 @@ public class Annotation {
 
 	public void setAnnotationTitle(String annotationTitle) {
 		this.annotationTitle = annotationTitle;
-	}
-
-
-	public String getAnnotationDescription() {
-		return annotationDescription;
-	}
-
-
-	public void setAnnotationDescription(String annotationDescription) {
-		this.annotationDescription = annotationDescription;
-	}
-
-
-	public StringBuffer getAnnotationMedia() {
-		return annotationMedia;
-	}
-
-
-	public void setAnnotationMedia(StringBuffer annotationMedia) {
-		this.annotationMedia = annotationMedia;
 	}
 
 
@@ -222,17 +200,17 @@ public class Annotation {
 	}
 
 
-	public int getParentURLId() {
-		return parentURLId;
+	public int getParentDomainId() {
+		return parentDomainId;
 	}
 
 
-	public void setParentURLId(int parentURLId) {
-		this.parentURLId = parentURLId;
+	public void setParentDomainId(int parentURLId) {
+		this.parentDomainId = parentURLId;
 	}
 
 
-	public int getSpecificURL() {
+	public long getSpecificURL() {
 		return specificURL;
 	}
 
@@ -262,12 +240,12 @@ public class Annotation {
 	}
 
 
-	public boolean isUseStatus() {
+	public char isUseStatus() {
 		return useStatus;
 	}
 
 
-	public void setUseStatus(boolean useStatus) {
+	public void setUseStatus(char useStatus) {
 		this.useStatus = useStatus;
 	}
 
@@ -303,13 +281,97 @@ public class Annotation {
 
 
 	public int getUserId() {
-		return userId;
+		return updatedBy;
 	}
 
 
 	public void setUserId(int userId) {
-		this.userId = userId;
+		this.updatedBy = userId;
 	}
+
+
+	public String getAnnotationText() {
+		return annotationText;
+	}
+
+
+
+	public void setAnnotationText(String annotationText) {
+		this.annotationText = annotationText;
+	}
+
+
+
+	public String getAnnotationAudioURL() {
+		return annotationAudioURL;
+	}
+
+
+
+	public void setAnnotationAudioURL(String annotationAudioURL) {
+		this.annotationAudioURL = annotationAudioURL;
+	}
+
+
+
+	public String getAnnotationAttachmentURL() {
+		return annotationAttachmentURL;
+	}
+
+
+
+	public void setAnnotationAttachmentURL(String annotationAttachmentURL) {
+		this.annotationAttachmentURL = annotationAttachmentURL;
+	}
+
+
+
+	public int getPinTypeId() {
+		return pinTypeId;
+	}
+
+
+
+	public void setPinTypeId(int pinTypeId) {
+		this.pinTypeId = pinTypeId;
+	}
+
+
+
+	public int getAnnotationContentTypeId() {
+		return annotationContentTypeId;
+	}
+
+
+
+	public void setAnnotationContentTypeId(int annotationContentTypeId) {
+		this.annotationContentTypeId = annotationContentTypeId;
+	}
+
+
+
+	public int getUpdatedBy() {
+		return updatedBy;
+	}
+
+
+
+	public void setUpdatedBy(int updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+
+
+	public char getUseStatus() {
+		return useStatus;
+	}
+
+
+
+	public void setSpecificURL(long specificURL) {
+		this.specificURL = specificURL;
+	}
+
 
 
 	@Override
@@ -317,10 +379,8 @@ public class Annotation {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((LocId == null) ? 0 : LocId.hashCode());
-		result = prime * result + ((annotationDescription == null) ? 0 : annotationDescription.hashCode());
 		result = prime * result + annotationHashtagId;
 		result = prime * result + annotationId;
-		result = prime * result + ((annotationMedia == null) ? 0 : annotationMedia.hashCode());
 		result = prime * result + ((annotationScreenshot == null) ? 0 : annotationScreenshot.hashCode());
 		result = prime * result + annotationScreenshotHeight;
 		result = prime * result
@@ -331,7 +391,7 @@ public class Annotation {
 		result = prime * result + ((annotationTitle == null) ? 0 : annotationTitle.hashCode());
 		result = prime * result + annotationTypeId;
 		result = prime * result + emojiId;
-		result = prime * result + parentURLId;
+		result = prime * result + parentDomainId;
 		result = prime * result + pinContentId;
 		result = prime * result + pinId;
 		result = prime * result + ((pinXCoordinate == null) ? 0 : pinXCoordinate.hashCode());
@@ -340,7 +400,7 @@ public class Annotation {
 		result = prime * result + specificURL;
 		result = prime * result + ((timeUpdated == null) ? 0 : timeUpdated.hashCode());
 		result = prime * result + (useStatus ? 1231 : 1237);
-		result = prime * result + userId;
+		result = prime * result + updatedBy;
 		return result;
 	}
 

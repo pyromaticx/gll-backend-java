@@ -21,19 +21,20 @@ public class UserPermissions {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int userPermissionId;
 	private int userRoleId;
+	private String userPermissionCode;
 	private String userPermissionDescription;
-	private boolean useStatus;
+	private char useStatus;
 	private String programId;
 	private String LocId;
 	private Date timeUpdated;
 	@OneToOne
-	private int userId;
+	private int updatedBy;
 	
 	public UserPermissions() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public UserPermissions(int userPermissionId, int userRoleId, String userPermissionDescription, boolean useStatus,
+	public UserPermissions(int userPermissionId, int userRoleId, String userPermissionDescription, char useStatus,
 			String programId, String locId, Date timeUpdated, int userId) {
 		super();
 		this.userPermissionId = userPermissionId;
@@ -43,7 +44,7 @@ public class UserPermissions {
 		this.programId = programId;
 		LocId = locId;
 		this.timeUpdated = timeUpdated;
-		this.userId = userId;
+		this.updatedBy = updatedBy;
 	}
 
 	public int getUserPermissionId() {
@@ -70,11 +71,11 @@ public class UserPermissions {
 		this.userPermissionDescription = userPermissionDescription;
 	}
 
-	public boolean isUseStatus() {
+	public char isUseStatus() {
 		return useStatus;
 	}
 
-	public void setUseStatus(boolean useStatus) {
+	public void setUseStatus(char useStatus) {
 		this.useStatus = useStatus;
 	}
 
@@ -103,11 +104,31 @@ public class UserPermissions {
 	}
 
 	public int getUserId() {
-		return userId;
+		return updatedBy;
 	}
 
 	public void setUserId(int userId) {
-		this.userId = userId;
+		this.updatedBy = updatedBy;
+	}
+
+	public String getUserPermissionCode() {
+		return userPermissionCode;
+	}
+
+	public void setUserPermissionCode(String userPermissionCode) {
+		this.userPermissionCode = userPermissionCode;
+	}
+
+	public int getUpdatedBy() {
+		return updatedBy;
+	}
+
+	public void setUpdatedBy(int updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+	public char getUseStatus() {
+		return useStatus;
 	}
 
 	@Override
@@ -118,7 +139,7 @@ public class UserPermissions {
 		result = prime * result + ((programId == null) ? 0 : programId.hashCode());
 		result = prime * result + ((timeUpdated == null) ? 0 : timeUpdated.hashCode());
 		result = prime * result + (useStatus ? 1231 : 1237);
-		result = prime * result + userId;
+		result = prime * result + updatedBy;
 		result = prime * result + ((userPermissionDescription == null) ? 0 : userPermissionDescription.hashCode());
 		result = prime * result + userPermissionId;
 		result = prime * result + userRoleId;
@@ -151,7 +172,7 @@ public class UserPermissions {
 			return false;
 		if (useStatus != other.useStatus)
 			return false;
-		if (userId != other.userId)
+		if (updatedBy != other.updatedBy)
 			return false;
 		if (userPermissionDescription == null) {
 			if (other.userPermissionDescription != null)
@@ -170,7 +191,7 @@ public class UserPermissions {
 		return "UserPermissions [userPermissionId=" + userPermissionId + ", userRoleId=" + userRoleId
 				+ ", userPermissionDescription=" + userPermissionDescription + ", useStatus=" + useStatus
 				+ ", programId=" + programId + ", LocId=" + LocId + ", timeUpdated=" + timeUpdated + ", userId="
-				+ userId + "]";
+				+ updatedBy + "]";
 	}
 	
 	

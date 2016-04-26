@@ -10,29 +10,28 @@ import javax.persistence.OneToOne;
 public class AnnotationHashTag {
 
 	@Id
+	private int annotationId;
 	private int annotationHashtagId;
-	private String annotationHashtagDescription;
-	private boolean useStatus;
+	private char useStatus;
 	@OneToOne
 	private String programId;
 	private String LocId;
 	private Date timeUpdated;
-	private int userId;
+	private int updatedBy;
 	
 	public AnnotationHashTag() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public AnnotationHashTag(int annotationHashtagId, String annotationHashtagDescription, boolean useStatus,
-			String programId, String locId, Date timeUpdated, int userId) {
+	public AnnotationHashTag(int annotationHashtagId, String annotationHashtagDescription, char useStatus,
+			String programId, String locId, Date timeUpdated, int updatedBy) {
 		super();
 		this.annotationHashtagId = annotationHashtagId;
-		this.annotationHashtagDescription = annotationHashtagDescription;
 		this.useStatus = useStatus;
 		this.programId = programId;
 		LocId = locId;
 		this.timeUpdated = timeUpdated;
-		this.userId = userId;
+		this.updatedBy = updatedBy;
 	}
 
 	public int getAnnotationHashtagId() {
@@ -43,19 +42,12 @@ public class AnnotationHashTag {
 		this.annotationHashtagId = annotationHashtagId;
 	}
 
-	public String getAnnotationHashtagDescription() {
-		return annotationHashtagDescription;
-	}
 
-	public void setAnnotationHashtagDescription(String annotationHashtagDescription) {
-		this.annotationHashtagDescription = annotationHashtagDescription;
-	}
-
-	public boolean isUseStatus() {
+	public char isUseStatus() {
 		return useStatus;
 	}
 
-	public void setUseStatus(boolean useStatus) {
+	public void setUseStatus(char useStatus) {
 		this.useStatus = useStatus;
 	}
 
@@ -83,12 +75,26 @@ public class AnnotationHashTag {
 		this.timeUpdated = timeUpdated;
 	}
 
-	public int getUserId() {
-		return userId;
+
+
+	public int getAnnotationId() {
+		return annotationId;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setAnnotationId(int annotationId) {
+		this.annotationId = annotationId;
+	}
+
+	public int getUpdatedBy() {
+		return updatedBy;
+	}
+
+	public void setUpdatedBy(int updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+	public char getUseStatus() {
+		return useStatus;
 	}
 
 	@Override

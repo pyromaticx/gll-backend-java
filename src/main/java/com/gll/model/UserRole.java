@@ -16,17 +16,17 @@ public class UserRole {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int userRoleId;
 	private String userRoleDescription;
-	private boolean useStatus;
+	private char useStatus;
 	private String programId;
 	private String LocId;
 	private Date timeUpdated;
-	private int userId;
+	private int updatedBy;
 	
 	public UserRole() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public UserRole(int userRoleId, String userRoleDescription, boolean useStatus, String programId, String locId,
+	public UserRole(int userRoleId, String userRoleDescription, char useStatus, String programId, String locId,
 			Date timeUpdated, int userId) {
 		super();
 		this.userRoleId = userRoleId;
@@ -35,7 +35,7 @@ public class UserRole {
 		this.programId = programId;
 		LocId = locId;
 		this.timeUpdated = timeUpdated;
-		this.userId = userId;
+		this.updatedBy = updatedBy;
 	}
 
 	public int getUserRoleId() {
@@ -54,11 +54,11 @@ public class UserRole {
 		this.userRoleDescription = userRoleDescription;
 	}
 
-	public boolean isUseStatus() {
+	public char isUseStatus() {
 		return useStatus;
 	}
 
-	public void setUseStatus(boolean useStatus) {
+	public void setUseStatus(char useStatus) {
 		this.useStatus = useStatus;
 	}
 
@@ -86,12 +86,17 @@ public class UserRole {
 		this.timeUpdated = timeUpdated;
 	}
 
-	public int getUserId() {
-		return userId;
+
+	public int getUpdatedBy() {
+		return updatedBy;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setUpdatedBy(int updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+	public char getUseStatus() {
+		return useStatus;
 	}
 
 	@Override

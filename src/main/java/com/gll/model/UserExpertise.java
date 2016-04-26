@@ -15,22 +15,24 @@ public class UserExpertise {
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int userExpertiseId;
+	
 	@OneToOne
 	private int userId;
-	private boolean useStatus;
+	private int pinTypeId;
+	private char useStatus;
 	private int programId;
 	private String LocId;
 	private Date timeUpdated;
+	private int updatedBy;
 
 	public UserExpertise() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public UserExpertise(int userExpertiseId, int userId, boolean useStatus, int programId, String locId,
+	public UserExpertise(int userExpertiseId, int userId, char useStatus, int programId, String locId,
 			Date timeUpdated) {
 		super();
-		this.userExpertiseId = userExpertiseId;
+		this.pinTypeId = pinTypeId;
 		this.userId = userId;
 		this.useStatus = useStatus;
 		this.programId = programId;
@@ -54,12 +56,8 @@ public class UserExpertise {
 		this.userId = userId;
 	}
 
-	public boolean isUseStatus() {
+	public char isUseStatus() {
 		return useStatus;
-	}
-
-	public void setUseStatus(boolean useStatus) {
-		this.useStatus = useStatus;
 	}
 
 	public int getProgramId() {
@@ -84,6 +82,30 @@ public class UserExpertise {
 
 	public void setTimeUpdated(Date timeUpdated) {
 		this.timeUpdated = timeUpdated;
+	}
+
+	public int getPinTypeId() {
+		return pinTypeId;
+	}
+
+	public void setPinTypeId(int pinTypeId) {
+		this.pinTypeId = pinTypeId;
+	}
+
+	public char getUseStatus() {
+		return useStatus;
+	}
+
+	public void setUseStatus(char useStatus) {
+		this.useStatus = useStatus;
+	}
+
+	public int getUpdatedBy() {
+		return updatedBy;
+	}
+
+	public void setUpdatedBy(int updatedBy) {
+		this.updatedBy = updatedBy;
 	}
 
 	@Override

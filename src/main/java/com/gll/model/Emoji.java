@@ -28,14 +28,15 @@ public class Emoji {
 	 * liked!
 	 */
 	@ManyToOne
-	private int annotationId;
-
 	private String emojiDescription;
-	private StringBuffer emojiPic;
-	private Boolean useStatus;
+	private String emojiCode;
+	private String emojiURI;
+	private char useStatus;
 	private String programId;
 	private String LocId;
 	private Date timeUpdated;
+	private int updatedBy;
+	
 	/*
 	 * It will depict who is liking.
 	 */
@@ -53,6 +54,18 @@ public class Emoji {
 	}
 	public void setAnnotationId(int annotationId) {
 		this.annotationId = annotationId;
+	}
+	public String getEmojiCode() {
+		return emojiCode;
+	}
+	public void setEmojiCode(String emojiCode) {
+		this.emojiCode = emojiCode;
+	}
+	public String getEmojiURI() {
+		return emojiURI;
+	}
+	public void setEmojiURI(String emojiURI) {
+		this.emojiURI = emojiURI;
 	}
 	public String getEmojiDescription() {
 		return emojiDescription;
@@ -95,6 +108,15 @@ public class Emoji {
 	}
 	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+	public int getUpdatedBy() {
+		return updatedBy;
+	}
+	public void setUpdatedBy(int updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+	public void setUseStatus(char useStatus) {
+		this.useStatus = useStatus;
 	}
 	@Override
 	public String toString() {

@@ -15,41 +15,38 @@ public class Customer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int customerId;
-	private Date dateEffectiveFrom;
-	private Date dateEffectiveThru;
 	private int customerProfileId;
-	@OneToMany
-	private int premiumPlanId;
+	private String customerPhoneNumber;
+	private String customerCompanyName;
+	private String customerCompany;
+	
 	@OneToMany
 	private int paymentId;
-	private boolean useStatus;
+	private char useStatus;
 	@OneToOne
 	private String programId;
 	@OneToOne
 	private String LocId;
 	private Date timeUpdated;
 	@OneToOne
-	private int userId;
+	private int updatedBy;
 	
 	public Customer() {
 		
 	}
 
 	public Customer(int customerId, Date dateEffectiveFrom, Date dateEffectiveThru, int customerProfileId,
-			int premiumPlanId, int paymentId, boolean useStatus, String programId, String locId, Date timeUpdated,
-			int userId) {
+			int premiumPlanId, int paymentId, char useStatus, String programId, String locId, Date timeUpdated,
+			int updatedby) {
 		super();
 		this.customerId = customerId;
-		this.dateEffectiveFrom = dateEffectiveFrom;
-		this.dateEffectiveThru = dateEffectiveThru;
 		this.customerProfileId = customerProfileId;
-		this.premiumPlanId = premiumPlanId;
 		this.paymentId = paymentId;
 		this.useStatus = useStatus;
 		this.programId = programId;
 		LocId = locId;
 		this.timeUpdated = timeUpdated;
-		this.userId = userId;
+		this.updatedby = updatedby;
 	}
 
 	public int getCustomerId() {
@@ -60,36 +57,12 @@ public class Customer {
 		this.customerId = customerId;
 	}
 
-	public Date getDateEffectiveFrom() {
-		return dateEffectiveFrom;
-	}
-
-	public void setDateEffectiveFrom(Date dateEffectiveFrom) {
-		this.dateEffectiveFrom = dateEffectiveFrom;
-	}
-
-	public Date getDateEffectiveThru() {
-		return dateEffectiveThru;
-	}
-
-	public void setDateEffectiveThru(Date dateEffectiveThru) {
-		this.dateEffectiveThru = dateEffectiveThru;
-	}
-
 	public int getCustomerProfileId() {
 		return customerProfileId;
 	}
 
 	public void setCustomerProfileId(int customerProfileId) {
 		this.customerProfileId = customerProfileId;
-	}
-
-	public int getPremiumPlanId() {
-		return premiumPlanId;
-	}
-
-	public void setPremiumPlanId(int premiumPlanId) {
-		this.premiumPlanId = premiumPlanId;
 	}
 
 	public int getPaymentId() {
@@ -100,11 +73,11 @@ public class Customer {
 		this.paymentId = paymentId;
 	}
 
-	public boolean isUseStatus() {
+	public char isUseStatus() {
 		return useStatus;
 	}
 
-	public void setUseStatus(boolean useStatus) {
+	public void setUseStatus(char useStatus) {
 		this.useStatus = useStatus;
 	}
 
@@ -132,12 +105,41 @@ public class Customer {
 		this.timeUpdated = timeUpdated;
 	}
 
-	public int getUserId() {
-		return userId;
+	
+	public String getCustomerPhoneNumber() {
+		return customerPhoneNumber;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setCustomerPhoneNumber(String customerPhoneNumber) {
+		this.customerPhoneNumber = customerPhoneNumber;
+	}
+
+	public String getCustomerCompanyName() {
+		return customerCompanyName;
+	}
+
+	public void setCustomerCompanyName(String customerCompanyName) {
+		this.customerCompanyName = customerCompanyName;
+	}
+
+	public String getCustomerCompany() {
+		return customerCompany;
+	}
+
+	public void setCustomerCompany(String customerCompany) {
+		this.customerCompany = customerCompany;
+	}
+
+	public int getUpdatedBy() {
+		return updatedBy;
+	}
+
+	public void setUpdatedBy(int updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+	public char getUseStatus() {
+		return useStatus;
 	}
 
 	@Override

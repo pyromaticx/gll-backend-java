@@ -18,26 +18,30 @@ public class Payment {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int paymentId;
 	@OneToOne
-	private int customerId;
+	private String paymentCurrency;
+	private String paymentGateway;
+	private String paymentStatus;
+	private String paymentReferenceToken;
+	private int premiumPlanId;
+	
 	private Date paymentDate;
 	private int paymentCardTypeId;
 	private double paymentAmount;
-	private boolean useStatus;
+	private char useStatus;
 	private String programId;
 	private String LocId;
 	private Date timeUpdated;
 	@OneToOne
-	private int userId;
+	private int updatedBy;
 
 	public Payment() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public Payment(int paymentId, int customerId, Date paymentDate, int paymentCardTypeId, double paymentAmount,
-			boolean useStatus, String programId, String locId, Date timeUpdated, int userId) {
+			char useStatus, String programId, String locId, Date timeUpdated, int updatedBy) {
 		super();
 		this.paymentId = paymentId;
-		this.customerId = customerId;
 		this.paymentDate = paymentDate;
 		this.paymentCardTypeId = paymentCardTypeId;
 		this.paymentAmount = paymentAmount;
@@ -45,7 +49,7 @@ public class Payment {
 		this.programId = programId;
 		LocId = locId;
 		this.timeUpdated = timeUpdated;
-		this.userId = userId;
+		this.updatedBy = updatedBy;
 	}
 
 	public int getPaymentId() {
@@ -56,13 +60,6 @@ public class Payment {
 		this.paymentId = paymentId;
 	}
 
-	public int getCustomerId() {
-		return customerId;
-	}
-
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
-	}
 
 	public Date getPaymentDate() {
 		return paymentDate;
@@ -88,11 +85,11 @@ public class Payment {
 		this.paymentAmount = paymentAmount;
 	}
 
-	public boolean isUseStatus() {
+	public char isUseStatus() {
 		return useStatus;
 	}
 
-	public void setUseStatus(boolean useStatus) {
+	public void setUseStatus(char useStatus) {
 		this.useStatus = useStatus;
 	}
 
@@ -120,12 +117,58 @@ public class Payment {
 		this.timeUpdated = timeUpdated;
 	}
 
-	public int getUserId() {
-		return userId;
+	
+
+	public String getPaymentCurrency() {
+		return paymentCurrency;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setPaymentCurrency(String paymentCurrency) {
+		this.paymentCurrency = paymentCurrency;
+	}
+
+	public String getPaymentGateway() {
+		return paymentGateway;
+	}
+
+	public void setPaymentGateway(String paymentGateway) {
+		this.paymentGateway = paymentGateway;
+	}
+
+	public String getPaymentStatus() {
+		return paymentStatus;
+	}
+
+	public void setPaymentStatus(String paymentStatus) {
+		this.paymentStatus = paymentStatus;
+	}
+
+	public String getPaymentReferenceToken() {
+		return paymentReferenceToken;
+	}
+
+	public void setPaymentReferenceToken(String paymentReferenceToken) {
+		this.paymentReferenceToken = paymentReferenceToken;
+	}
+
+	public int getPremiumPlanId() {
+		return premiumPlanId;
+	}
+
+	public void setPremiumPlanId(int premiumPlanId) {
+		this.premiumPlanId = premiumPlanId;
+	}
+
+	public int getUpdatedBy() {
+		return updatedBy;
+	}
+
+	public void setUpdatedBy(int updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+	public char getUseStatus() {
+		return useStatus;
 	}
 
 	@Override

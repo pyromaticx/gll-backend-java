@@ -18,16 +18,17 @@ public class UserProfile {
 	private String userName;
 	private String userFirstName;
 	private String userLastName;
-	private StringBuffer userMedia;
+	private StringBuffer userPicURL;
 	private String userEmail;
 	private String userEmployer;
 	private String userDesignation;
 	private String userCity;
 	private String userState;
-	private boolean useStatus;
+	private char useStatus;
 	private String programId;
 	private String LocId;
 	private Date timeUpdated;
+	private int updatedBy; 
 
 	public UserProfile() {
 		// TODO Auto-generated constructor stub
@@ -163,6 +164,30 @@ public class UserProfile {
 
 	public void setTimeUpdated(Date timeUpdated) {
 		this.timeUpdated = timeUpdated;
+	}
+
+	public StringBuffer getUserPicURL() {
+		return userPicURL;
+	}
+
+	public void setUserPicURL(StringBuffer userPicURL) {
+		this.userPicURL = userPicURL;
+	}
+
+	public char getUseStatus() {
+		return useStatus;
+	}
+
+	public void setUseStatus(char useStatus) {
+		this.useStatus = useStatus;
+	}
+
+	public int getUpdatedBy() {
+		return updatedBy;
+	}
+
+	public void setUpdatedBy(int updatedBy) {
+		this.updatedBy = updatedBy;
 	}
 
 	@Override

@@ -19,7 +19,7 @@ public class AnnotationType {
 	private String programId;
 	private String LocId;
 	private Date timeUpdated;
-	private int userId;
+	private int updatedBy;
 	
 	
 	
@@ -74,11 +74,12 @@ public class AnnotationType {
 	public void setTimeUpdated(Date timeUpdated) {
 		this.timeUpdated = timeUpdated;
 	}
-	public int getUserId() {
-		return userId;
+	
+	public int getUpdatedBy() {
+		return updatedBy;
 	}
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setUpdatedBy(int updatedBy) {
+		this.updatedBy = updatedBy;
 	}
 	@Override
 	public String toString() {

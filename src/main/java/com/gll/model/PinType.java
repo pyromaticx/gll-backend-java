@@ -25,12 +25,14 @@ public class PinType {
 	 * 7. Content Writer etc
 	 * 
 	 * */
-	private String pinDescription;
-	private String pinColor;
-	private boolean useStatus;
+	private int pinTypeId;
+	private String pinTypeDescription;
+	private String pinTypeColor;
+	private char useStatus;
 	private String programId;
 	private String LocId;
 	private Date timeUpdated;
+	private int updatedBy;
 	@OneToOne
 	private int userId;
 	
@@ -113,6 +115,47 @@ public class PinType {
 
 	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+
+	public int getPinTypeId() {
+		return pinTypeId;
+	}
+
+	public void setPinTypeId(int pinTypeId) {
+		this.pinTypeId = pinTypeId;
+	}
+
+	
+	public int getUpdatedBy() {
+		return updatedBy;
+	}
+
+	public void setUpdatedBy(int updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+	public String getPinTypeDescription() {
+		return pinTypeDescription;
+	}
+
+	public void setPinTypeDescription(String pinTypeDescription) {
+		this.pinTypeDescription = pinTypeDescription;
+	}
+
+	public String getPinTypeColor() {
+		return pinTypeColor;
+	}
+
+	public void setPinTypeColor(String pinTypeColor) {
+		this.pinTypeColor = pinTypeColor;
+	}
+
+	public char getUseStatus() {
+		return useStatus;
+	}
+
+	public void setUseStatus(char useStatus) {
+		this.useStatus = useStatus;
 	}
 
 	@Override

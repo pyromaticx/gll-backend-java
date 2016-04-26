@@ -16,25 +16,22 @@ public class UserAccountSetting {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int userId;
-	private char[] userPassword[];
-	private int userTypeId;
-	private int userTierId;
-	private boolean useStatus;
+	private String userPassword;
+	private char useStatus;
 	private String programId;
 	private String LocId;
 	private Date timeUpdated;
+	private int updatedBy;
 
 	public UserAccountSetting() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public UserAccountSetting(int userId, char[][] userPassword, int userTypeId, int userTierId, boolean useStatus,
+	public UserAccountSetting(int userId, String userPassword, int userTypeId, int userTierId, char useStatus,
 			String programId, String locId, Date timeUpdated) {
 		super();
 		this.userId = userId;
 		this.userPassword = userPassword;
-		this.userTypeId = userTypeId;
-		this.userTierId = userTierId;
 		this.useStatus = useStatus;
 		this.programId = programId;
 		LocId = locId;
@@ -49,35 +46,19 @@ public class UserAccountSetting {
 		this.userId = userId;
 	}
 
-	public char[][] getUserPassword() {
+	public String getUserPassword() {
 		return userPassword;
 	}
 
-	public void setUserPassword(char[][] userPassword) {
+	public void setUserPassword(String userPassword) {
 		this.userPassword = userPassword;
 	}
 
-	public int getUserTypeId() {
-		return userTypeId;
-	}
-
-	public void setUserTypeId(int userTypeId) {
-		this.userTypeId = userTypeId;
-	}
-
-	public int getUserTierId() {
-		return userTierId;
-	}
-
-	public void setUserTierId(int userTierId) {
-		this.userTierId = userTierId;
-	}
-
-	public boolean isUseStatus() {
+	public char isUseStatus() {
 		return useStatus;
 	}
 
-	public void setUseStatus(boolean useStatus) {
+	public void setUseStatus(char useStatus) {
 		this.useStatus = useStatus;
 	}
 
@@ -105,6 +86,18 @@ public class UserAccountSetting {
 		this.timeUpdated = timeUpdated;
 	}
 
+	public int getUpdatedBy() {
+		return updatedBy;
+	}
+
+	public void setUpdatedBy(int updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+	public char getUseStatus() {
+		return useStatus;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -115,8 +108,6 @@ public class UserAccountSetting {
 		result = prime * result + (useStatus ? 1231 : 1237);
 		result = prime * result + userId;
 		result = prime * result + Arrays.deepHashCode(userPassword);
-		result = prime * result + userTierId;
-		result = prime * result + userTypeId;
 		return result;
 	}
 
@@ -150,18 +141,14 @@ public class UserAccountSetting {
 			return false;
 		if (!Arrays.deepEquals(userPassword, other.userPassword))
 			return false;
-		if (userTierId != other.userTierId)
-			return false;
-		if (userTypeId != other.userTypeId)
-			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
 		return "UserAccountSetting [userId=" + userId + ", userPassword=" + Arrays.toString(userPassword)
-				+ ", userTypeId=" + userTypeId + ", userTierId=" + userTierId + ", useStatus=" + useStatus
-				+ ", programId=" + programId + ", LocId=" + LocId + ", timeUpdated=" + timeUpdated + "]";
+				+ ", useStatus=" + useStatus + ", programId=" + programId + ", LocId=" + LocId 
+				+ ", timeUpdated=" + timeUpdated + "]";
 	}
 
 }
